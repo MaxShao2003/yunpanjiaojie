@@ -485,6 +485,34 @@
                 margin-bottom: 10px;
             }
         }
+
+        /* ========= 竖屏模式强制单列布局 ========== */
+        @media (orientation: portrait) {
+            .container {
+                max-width: 100%;
+                width: 100%;
+                padding: 16px;
+                box-sizing: border-box;
+            }
+
+            .email-wrapper {
+                grid-template-columns: 1fr !important;
+                gap: 16px;
+            }
+
+            .email-header,
+            .email-body,
+            .card,
+            .sidebar {
+                max-width: 100%;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .email-meta {
+                flex-wrap: wrap;
+            }
+        }
     </style>
 </head>
 <body>

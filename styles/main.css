@@ -20,12 +20,16 @@ html, body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
     background: var(--gray-bg);
     color: var(--gray-dark);
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 .container {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    max-width: 100%;
+    width: 100%;
 }
 
 /* 顶部栏 */
