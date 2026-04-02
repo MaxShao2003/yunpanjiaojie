@@ -562,6 +562,22 @@ body.admin-mode {
     }
 }
 
+/* ========== 横屏专用优化 ========== */
+@media (orientation: landscape) {
+    /* 横屏时重置所有内容容器的宽度限制 */
+    .admin-content {
+        max-width: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .admin-card {
+        max-width: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+}
+
 /* ========== 竖屏专用适配 ========== */
 @media (orientation: portrait) {
     .admin-container {

@@ -514,6 +514,7 @@
             }
         }
     </style>
+  <script src="scripts/protection.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -668,7 +669,7 @@
         function updateProgress() {
             try {
                 const history = VisitHistory.getHistory();
-                const totalPages = 42;  // 总共42个内容页
+                const totalPages = 46;  // 总共46个内容页（50个HTML - 4个排除文件：index、login、admin_login、not_found）
                 const visitedCount = history.length;
                 const percentage = Math.round((visitedCount / totalPages) * 100);
 

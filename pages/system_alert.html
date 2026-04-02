@@ -66,6 +66,7 @@
     <script src="../scripts/history.js"></script>
     <link rel="stylesheet" href="../styles/responsive.css">
     <link rel="stylesheet" href="../styles/mobile.css">
+  <script src="../scripts/protection.js" defer></script>
 </head>
 <body>
     <div class="progress-bar">
@@ -86,7 +87,7 @@
     <script src="../scripts/app.js"></script>
     <script src="../scripts/puzzle.js"></script>
     <script>
-        // 禁止关闭窗口
+        // 禁止关闭窗口（稍后在跳转前会临时移除）
         window.onbeforeunload = function() {
             return false;
         };
@@ -109,15 +110,16 @@
             }
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            Puzzle.recordVisit('p33');
+        // 立即执行跳转逻辑（脚本已在body末尾，DOM已加载）
+        Puzzle.recordVisit('p33');
 
-            // 3-5秒后自动跳转
-            const delay = 3500 + Math.random() * 2000; // 3.5-5.5秒
-            setTimeout(() => {
-                window.location.href = 'hr_message.html';
-            }, delay);
-        });
+        // 3-5秒后自动跳转
+        const delay = 3500 + Math.random() * 2000; // 3.5-5.5秒
+        setTimeout(() => {
+            // 移除onbeforeunload限制，允许跳转
+            window.onbeforeunload = null;
+            window.location.href = 'hr_message.html';
+        }, delay);
     </script>
 </body>
 </html>

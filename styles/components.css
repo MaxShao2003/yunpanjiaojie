@@ -487,13 +487,32 @@ audio {
     transform: translateX(-2px);
 }
 
-/* ========== 页面页脚统一样式 ========== */
-.page-footer {
-    text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid #e0e0e0;
-    color: #999;
-    font-size: 12px;
-    line-height: 1.6;
+
+/* ========== 横屏模式专用优化 ========== */
+@media (orientation: landscape) {
+    /* 重置所有内容容器在横屏时的max-width限制，确保充分利用屏幕宽度 */
+    .image-viewer {
+        max-width: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .log-viewer {
+        max-width: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .audio-player {
+        max-width: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .document-viewer {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
 }
+

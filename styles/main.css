@@ -654,7 +654,16 @@ html, body {
     }
 }
 
-/* 响应式 - 横屏优化 */
+/* 响应式 - 通用横屏优化 */
+@media (orientation: landscape) {
+    /* 重置模态框在横屏时的max-width限制 */
+    .modal-content {
+        max-width: none !important;
+        width: 90%;
+    }
+}
+
+/* 响应式 - 横屏优化（小屏幕） */
 @media (orientation: landscape) and (max-height: 600px) {
     .header {
         height: auto;
