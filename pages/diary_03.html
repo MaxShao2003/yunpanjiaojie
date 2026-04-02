@@ -6,6 +6,23 @@
     <title>diary_03.txt</title>
     <link rel="stylesheet" href="../styles/main.css">
     <style>
+        html, body {
+            height: auto;
+            min-height: 100%;
+            overflow-y: auto;
+        }
+        .container {
+            min-height: 100vh;
+            height: auto;
+        }
+        .main-wrapper {
+            flex: 1;
+            overflow: visible;
+        }
+        .main-content {
+            overflow: visible;
+            padding-bottom: 40px;
+        }
         .text-viewer { background: var(--white); max-width: 800px; margin: 0 auto; border: 1px solid var(--border-color); border-radius: 4px; overflow: visible; }
         .text-toolbar { background: var(--gray-bg); padding: 12px 16px; border-bottom: 1px solid var(--border-color); font-size: 13px; }
         .text-content { padding: 40px; color: #333; font-size: 14px; line-height: 2; font-family: "Georgia", serif; white-space: pre-wrap; word-wrap: break-word; overflow: visible; }
@@ -20,8 +37,8 @@
         .clickable-hint:hover { color: var(--primary-blue); font-weight: 600; }
         .hint-tooltip { position: absolute; bottom: 100%; left: 0; background: rgba(0,0,0,0.9); color: #fff; padding: 8px 12px; border-radius: 3px; white-space: nowrap; font-size: 12px; margin-bottom: 8px; pointer-events: none; opacity: 0; transition: opacity 0.3s; z-index: 1000; }
         .clickable-hint:hover .hint-tooltip { opacity: 1; }
-        #secretHints { transition: opacity 0.8s ease-in, max-height 0.8s ease-out; max-height: 0; opacity: 0; overflow: visible; }
-        #secretHints.visible { display: block !important; opacity: 1; max-height: 2000px; }
+        #secretHints { transition: opacity 0.8s ease-in; opacity: 0; overflow: visible; }
+        #secretHints.visible { display: block !important; opacity: 1; }
         </style>
     <script src="../scripts/history.js"></script>
     <link rel="stylesheet" href="../styles/responsive.css">
