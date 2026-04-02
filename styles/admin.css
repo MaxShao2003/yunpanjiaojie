@@ -347,7 +347,58 @@ body.admin-mode {
 
 /* ========== 管理后台响应式设计 ========== */
 
-/* 平板及以下设备 */
+/* 平板及竖屏 (1023px以下) */
+@media (max-width: 1023px) {
+    .admin-main {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--admin-border);
+        padding: 0;
+        min-height: auto;
+    }
+
+    .admin-sidebar-nav {
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .admin-sidebar-nav li {
+        flex: 0 0 auto;
+        min-width: 80px;
+        border-right: 1px solid var(--admin-border);
+    }
+
+    .admin-sidebar-nav li:last-child {
+        border-right: none;
+    }
+
+    .admin-nav-link {
+        padding: 12px 8px;
+        font-size: 12px;
+        justify-content: center;
+        flex-direction: column;
+        gap: 4px;
+        min-height: 56px;
+        text-align: center;
+    }
+
+    .admin-content {
+        flex: 1;
+        width: 100%;
+        padding: 16px;
+        box-sizing: border-box;
+    }
+}
+
+/* 平板及以下设备 - 额外优化 */
 @media (max-width: 768px) {
     .admin-header {
         height: auto;
@@ -370,42 +421,14 @@ body.admin-mode {
         font-size: 14px;
     }
 
-    .admin-main {
-        flex-direction: column;
-    }
-
-    .admin-sidebar {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid var(--admin-border);
-        padding: 0;
-        min-height: auto;
-    }
-
-    .admin-sidebar-nav {
-        display: flex;
-        gap: 0;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
     .admin-sidebar-nav li {
         flex: 1;
-        min-width: 80px;
-        border-right: 1px solid var(--admin-border);
-    }
-
-    .admin-sidebar-nav li:last-child {
-        border-right: none;
     }
 
     .admin-nav-link {
         padding: 12px 6px;
         font-size: 11px;
-        flex-direction: column;
         gap: 2px;
-        justify-content: center;
         align-items: center;
         min-height: 50px;
     }
@@ -416,7 +439,6 @@ body.admin-mode {
 
     .admin-content {
         padding: 14px;
-        max-width: 100%;
     }
 
     .admin-card {
