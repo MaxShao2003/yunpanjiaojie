@@ -1,0 +1,483 @@
+/* ========================================
+   《交接云盘》页面内容竖屏适配
+   ========================================
+
+   为各个内容页面的inline styles提供竖屏支持
+   ======================================== */
+
+/* ========== 文本查看器/日记竖屏适配 ========== */
+@media (max-width: 768px) {
+    .text-viewer {
+        max-width: 100%;
+        margin: 0;
+        border: none;
+        border-radius: 0;
+    }
+
+    .text-content {
+        padding: 20px;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .text-toolbar {
+        padding: 10px 12px;
+        font-size: 11px;
+    }
+
+    .diary-date {
+        font-size: 11px;
+    }
+
+    .next-button,
+    .prev-button {
+        padding: 12px 16px;
+        font-size: 13px;
+        min-height: 44px;
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    .back-btn a {
+        display: inline-block;
+        padding: 10px 12px;
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+}
+
+/* ========== 图片查看器竖屏适配 ========== */
+@media (max-width: 768px) {
+    .image-viewer-container {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .image-preview {
+        max-width: 100%;
+        max-height: 400px;
+        padding: 12px;
+    }
+
+    .image-preview img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .image-details {
+        padding: 12px;
+        font-size: 12px;
+    }
+}
+
+/* ========== 音频播放器竖屏适配 ========== */
+@media (max-width: 768px) {
+    .audio-container {
+        max-width: 100%;
+        margin: 0;
+        padding: 14px;
+        border-radius: 0;
+    }
+
+    .audio-player-control {
+        width: 100%;
+    }
+
+    audio {
+        width: 100%;
+        height: 44px;
+    }
+
+    .audio-info {
+        padding: 12px 0;
+        font-size: 12px;
+    }
+}
+
+/* ========== 表格竖屏适配 ========== */
+@media (max-width: 768px) {
+    .attendance-table,
+    .data-table {
+        font-size: 11px;
+    }
+
+    .attendance-table th,
+    .attendance-table td,
+    .data-table th,
+    .data-table td {
+        padding: 8px 6px;
+        font-size: 10px;
+    }
+
+    .attendance-table thead,
+    .data-table thead {
+        position: relative;
+    }
+
+    /* 表格容器需要横向滚动 */
+    .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -12px;
+        padding: 0 12px;
+    }
+
+    .table-wrapper table {
+        min-width: 100%;
+    }
+}
+
+/* ========== 搜索引擎结果竖屏适配 ========== */
+@media (max-width: 768px) {
+    .search-results-container {
+        max-width: 100%;
+        padding: 12px;
+    }
+
+    .search-result-item {
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+
+    .search-result-title {
+        font-size: 13px;
+    }
+
+    .search-result-link {
+        font-size: 11px;
+    }
+
+    .search-result-description {
+        font-size: 12px;
+    }
+}
+
+/* ========== 聊天界面竖屏适配 ========== */
+@media (max-width: 768px) {
+    .chat-container {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .message-item {
+        padding: 10px 12px;
+        margin: 8px 0;
+        font-size: 12px;
+    }
+
+    .message-time {
+        font-size: 10px;
+    }
+
+    .message-sender {
+        font-size: 11px;
+        font-weight: 600;
+    }
+}
+
+/* ========== 加载进度竖屏适配 ========== */
+@media (max-width: 768px) {
+    .progress-container {
+        max-width: 100%;
+        padding: 20px 12px;
+    }
+
+    .progress-text {
+        font-size: 12px;
+    }
+
+    .progress-bar {
+        height: 4px;
+        margin-top: 12px;
+    }
+}
+
+/* ========== 模态框竖屏适配 ========== */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+        padding: 16px;
+        margin: 0 auto;
+        border-radius: 4px;
+    }
+
+    .modal-title {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+
+    .modal-body {
+        font-size: 12px;
+        max-height: calc(90vh - 120px);
+        overflow-y: auto;
+    }
+
+    .modal-footer {
+        margin-top: 12px;
+        gap: 8px;
+        flex-direction: column;
+    }
+
+    .modal-footer button {
+        width: 100%;
+        min-height: 40px;
+    }
+}
+
+/* ========== 菜单树竖屏适配 ========== */
+@media (max-width: 768px) {
+    .file-tree {
+        max-width: 100%;
+        font-size: 12px;
+    }
+
+    .file-tree-item {
+        padding: 10px 12px;
+        margin: 2px 0;
+    }
+
+    .file-tree-toggle {
+        font-size: 16px;
+        min-width: 20px;
+    }
+}
+
+/* ========== 统计信息竖屏适配 ========== */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .stat-item {
+        padding: 12px;
+    }
+
+    .stat-value {
+        font-size: 20px;
+    }
+
+    .stat-label {
+        font-size: 11px;
+    }
+}
+
+/* ========== 导航Tabs竖屏适配 ========== */
+@media (max-width: 768px) {
+    .tabs-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .tab-item {
+        padding: 10px 12px;
+        font-size: 12px;
+        white-space: nowrap;
+        flex: 0 0 auto;
+    }
+}
+
+/* ========== 按钮组竖屏适配 ========== */
+@media (max-width: 768px) {
+    .button-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .button-group button {
+        width: 100%;
+        min-height: 44px;
+    }
+
+    .button-group.horizontal {
+        flex-direction: row;
+    }
+
+    .button-group.horizontal button {
+        flex: 1;
+    }
+}
+
+/* ========== 时间线竖屏适配 ========== */
+@media (max-width: 768px) {
+    .timeline {
+        padding-left: 12px;
+    }
+
+    .timeline-item {
+        padding: 10px 0;
+        margin-bottom: 8px;
+        font-size: 12px;
+    }
+
+    .timeline-marker {
+        font-size: 16px;
+    }
+}
+
+/* ========== 超小屏(320px+)优化 ========== */
+@media (max-width: 359px) {
+    .text-content {
+        padding: 12px;
+        font-size: 11px;
+    }
+
+    .next-button,
+    .prev-button {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    .admin-table th,
+    .admin-table td,
+    .data-table th,
+    .data-table td {
+        padding: 6px 4px;
+        font-size: 9px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========== 触屏友好的交互 ========== */
+@media (hover: none) and (max-width: 768px) {
+    /* 在触屏设备上，移除hover效果，使用active状态 */
+    button:hover,
+    a:hover,
+    .nav-link:hover {
+        background: auto;
+        color: inherit;
+    }
+
+    button:active,
+    a:active,
+    .nav-link:active {
+        opacity: 0.8;
+    }
+}
+
+/* ========== 竖屏高度优化 ========== */
+@media (orientation: portrait) and (max-height: 600px) {
+    .header {
+        padding: 10px 12px;
+        height: auto;
+    }
+
+    .main-content {
+        padding: 10px;
+    }
+
+    .document-content,
+    .log-content {
+        max-height: 300px;
+    }
+
+    .card,
+    .admin-card {
+        margin-bottom: 8px;
+    }
+}
+
+/* ========== 打印样式 ========== */
+@media print {
+    .header,
+    .sidebar,
+    .admin-sidebar,
+    .back-btn,
+    .action-button,
+    .next-button,
+    .prev-button,
+    .logout-btn {
+        display: none;
+    }
+
+    .main-content,
+    .admin-content {
+        padding: 0;
+        margin: 0;
+    }
+
+    .container,
+    .document-viewer,
+    .image-viewer,
+    .text-viewer {
+        max-width: 100%;
+        margin: 0;
+        box-shadow: none;
+    }
+}
+
+/* ========== 竖屏模式下内容布局(768px+) ========== */
+@media (orientation: portrait) and (min-width: 768px) {
+    /* 竖屏模式下强制应用窄屏样式 */
+
+    .text-viewer {
+        max-width: 100%;
+        margin: 0;
+        border: none;
+        border-radius: 0;
+    }
+
+    .text-content {
+        padding: 20px;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .image-viewer-container {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .image-preview {
+        max-width: 100%;
+        max-height: 400px;
+        padding: 12px;
+    }
+
+    .image-preview img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .audio-container {
+        max-width: 100%;
+        margin: 0;
+        padding: 14px;
+        border-radius: 0;
+    }
+
+    audio {
+        width: 100%;
+        height: 44px;
+    }
+
+    .chat-container {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    /* 单列布局强制 */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .stats-grid.col-1 {
+        grid-template-columns: 1fr !important;
+    }
+
+    .timeline {
+        padding-left: 12px;
+    }
+
+    .timeline-item {
+        padding: 10px 0;
+        margin-bottom: 8px;
+        font-size: 12px;
+    }
+}

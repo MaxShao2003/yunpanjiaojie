@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03月报销清单.xlsx</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .excel-viewer {
+            background: var(--white);
+            max-width: 1000px;
+            margin: 0 auto;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .excel-toolbar {
+            background: var(--gray-bg);
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 13px;
+            color: var(--gray-medium);
+        }
+
+        .excel-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .excel-table thead {
+            background: #d9d9d9;
+        }
+
+        .excel-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border: 1px solid #bfbfbf;
+            font-size: 14px;
+        }
+
+        .excel-table td {
+            padding: 12px;
+            border: 1px solid #d9d9d9;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .excel-table tbody tr:nth-child(odd) {
+            background: #fff;
+        }
+
+        .excel-table tbody tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        .excel-table tbody tr:hover {
+            background: #e8f0ff;
+        }
+
+        .date-highlight {
+            font-weight: 600;
+            color: #ff4d4f;
+            background: #fff2f0;
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+
+        .item-warning {
+            color: #ff7a45;
+            font-weight: 500;
+        }
+
+        .amount-highlight {
+            font-weight: 600;
+            color: #ff4d4f;
+        }
+
+        .remarks {
+            background: var(--white);
+            padding: 20px 16px;
+            border-top: 1px solid var(--border-color);
+            font-size: 13px;
+            color: var(--gray-dark);
+            line-height: 1.8;
+        }
+
+        .remarks p {
+            margin-bottom: 8px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .back-btn a {
+            padding: 8px 16px;
+            background: var(--gray-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            color: var(--primary-blue);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .back-btn a:hover {
+            background: var(--light-blue);
+        }
+        </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- 顶部栏 -->
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">文件预览</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="main-wrapper">
+            <!-- 侧边栏 -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                    <li><a href="projects_folder.html" class="nav-link"><span class="sidebar-icon">📦</span> 交接项目</a></li>
+                    <li><a href="#" class="nav-link"><span class="sidebar-icon">🗑️</span> 回收站</a></li>
+                </nav>
+            </aside>
+
+            <!-- 主内容 -->
+            <main class="main-content">
+                <!-- 返回按钮 -->
+                <div class="back-btn">
+                    <a href="projects_folder.html">← 返回项目文件夹</a>
+                </div>
+
+                <!-- Excel预览 -->
+                <div class="excel-viewer">
+                    <div class="excel-toolbar">
+                        💳 03月报销清单.xlsx
+                    </div>
+
+                    <table class="excel-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%;">日期</th>
+                                <th style="width: 20%;">品名</th>
+                                <th style="width: 15%;">金额</th>
+                                <th style="width: 25%;">事由</th>
+                                <th style="width: 25%;">审批状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>03/11</td>
+                                <td>隔音海绵</span></td>
+                                <td><span class="amount-highlight">¥500</span></td>
+                                <td>编辑间降噪</td>
+                                <td><span class="tag tag-green">已通过</span></td>
+                            </tr>
+                            <tr>
+                                <td>03/12</td>
+                                <td>强酸洗涤剂</span></td>
+                                <td><span class="amount-highlight">¥200</span></td>
+                                <td>夜间清理</td>
+                                <td><span class="tag tag-green">已通过</span></td>
+                            </tr>
+                            <tr>
+                                <td>03/13</td>
+                                <td>大型冰柜维修费</span></td>
+                                <td><span class="amount-highlight">¥800</span></td>
+                                <td>茶水间设备维护</td>
+                                <td><span class="tag tag-green">已通过</span></td>
+                            </tr>
+                            <tr>
+                                <td>03/14</span></td>
+                                <td>降噪耳机</td>
+                                <td><span class="amount-highlight">¥399</span></td>
+                                <td>加班使用</td>
+                                <td><span class="tag tag-green">已通过</span></td>
+                            </tr>
+                            <tr>
+                                <td>03/15</td>
+                                <td>办公用品补充</td>
+                                <td><span class="amount-highlight">¥120</span></td>
+                                <td>日常消耗</td>
+                                <td><span class="tag tag-green">已通过</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="remarks">
+                        <p><strong>备注：</strong>夜间耗材由 13 层统一领用。</p>
+                        <p><strong>备注：</strong>特殊清洁用品请勿在白天拆封。</p>
+                    </div>
+                </div>
+
+                <!-- 页脚 -->
+                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--gray-light); font-size: 13px;">
+                    总计：¥2,019 | 已全部审批
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p13');
+            localStorage.setItem('viewedReimbursementSheet', 'true');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鼎铭饲养场 - 第4号槽位</title>
+    <link rel="stylesheet" href="../styles/admin.css">
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body style="background: #0a0a0a;">
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <div class="admin-header-left">
+                <div class="admin-logo" data-version="v1.0">鼎铭</div>
+                <div class="admin-title">第4号饲养舱管理后台</div>
+            </div>
+            <div class="admin-header-right">
+                <div class="admin-user-info" id="adminInfo">系统用户</div>
+                <button class="admin-logout-btn" onclick="localStorage.removeItem('adminLoggedIn'); App.navigateTo('home.html');">登出后台</button>
+            </div>
+        </div>
+
+        <div class="admin-main">
+        
+
+            <main class="admin-content">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <div class="admin-card-title">⚙️ 监控面板 / 第4号饲养舱</div>
+                        <div style="font-size: 11px; color: #666; font-weight: 400;">[2026-03-30 | STATUS: ONLINE]</div>
+                    </div>
+                    <div class="admin-card-content">
+                        <div style="background: #0a0a0a; border: 1px solid #333; border-radius: 3px; padding: 16px; margin-bottom: 16px;">
+                            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+                                <div class="admin-stat-box" style="border-color: #ff7a45; box-shadow: 0 0 8px rgba(255, 122, 69, 0.2);">
+                                    <div class="admin-stat-label">今日加工</div>
+                                    <div class="admin-stat-value" style="color: #ff7a45;">87%</div>
+                                    <div style="font-size: 10px; color: #666; margin-top: 8px;">│████████░│</div>
+                                </div>
+
+                                <div class="admin-stat-box" style="border-color: #d9534f;">
+                                    <div class="admin-stat-label">情感产出</div>
+                                    <div class="admin-stat-value" style="color: #d9534f;">↑↑ 高</div>
+                                    <div style="font-size: 10px; color: #ff7a45; margin-top: 8px;">⚠ 监测中</div>
+                                </div>
+
+                                <div class="admin-stat-box">
+                                    <div class="admin-stat-label">维护队状态</div>
+                                    <div class="admin-stat-value" style="color: #5cb85c;">READY</div>
+                                    <div style="font-size: 10px; color: #5cb85c; margin-top: 8px;">● 就绪</div>
+                                </div>
+
+                                <div class="admin-stat-box">
+                                    <div class="admin-stat-label">系统耗能</div>
+                                    <div class="admin-stat-value">68W</div>
+                                    <div style="font-size: 10px; color: #999; margin-top: 8px;">正常范围</div>
+                                </div>
+
+                                <div class="admin-stat-box" style="border-color: #ffc107;">
+                                    <div class="admin-stat-label">对象稳定度</div>
+                                    <div class="admin-stat-value" style="font-size: 28px;">62</div>
+                                    <div style="font-size: 10px; color: #ffc107; margin-top: 8px;">⚠ 下降趋势</div>
+                                </div>
+
+                                <div class="admin-stat-box" style="border-color: #ff7a45; box-shadow: 0 0 8px rgba(255, 122, 69, 0.2);">
+                                    <div class="admin-stat-label">应激指数</div>
+                                    <div class="admin-stat-value" style="color: #ff7a45;">91</div>
+                                    <div style="font-size: 10px; color: #ff7a45; margin-top: 8px;">⚠ 持续上升</div>
+                                </div>
+
+                                <div class="admin-stat-box">
+                                    <div class="admin-stat-label">生物特征-高</div>
+                                    <div class="admin-stat-value">182</div>
+                                    <div style="font-size: 10px; color: #999; margin-top: 8px;">cm / 标准</div>
+                                </div>
+
+                                <div class="admin-stat-box">
+                                    <div class="admin-stat-label">等级评分</div>
+                                    <div class="admin-stat-value" style="color: #5cb85c;">A</div>
+                                    <div style="font-size: 10px; color: #5cb85c; margin-top: 8px;">✓ 优秀</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <div class="admin-card-title">系统日志</div>
+                    </div>
+                    <div class="admin-card-content">
+                        <div class="admin-log">
+                            <div class="admin-log-line" style="border-left: 3px solid #ff7a45; padding-left: 12px; background: rgba(255, 122, 69, 0.05);"><span class="admin-log-time" style="color: #ff7a45; font-weight: bold;">[03:14:22]</span> <span style="font-weight: bold;">投喂完成</span></div>
+                            <div class="admin-log-line"><span class="admin-log-time">[03:17:45]</span> 异常阅读行为记录</div>
+                            <div class="admin-log-line"><span class="admin-log-time">[03:19:33]</span> 待收割对象焦虑值升高</div>
+                            <div class="admin-log-line" style="color: #ff7a45;"><span class="admin-log-time">[03:21:11]</span> 警告：对象已获得后台凭证</div>
+                            <div class="admin-log-line" style="color: #d9534f;"><span class="admin-log-time">[03:22:00]</span> 对象已进入维护终端，清理程序待命</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <div class="admin-card-title">管理功能</div>
+                    </div>
+                    <div class="admin-card-content">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                            <!-- P29: 真实名单 - 需要密码 -->
+                            <div id="btn-roster" onclick="handleP29Click()" style="padding: 16px; background: rgba(217, 83, 79, 0.1); border: 1px solid #333; border-radius: 4px; color: #d9534f; text-decoration: none; text-align: center; transition: all 0.3s; cursor: pointer; opacity: 0.5;">
+                                <div style="font-size: 20px; margin-bottom: 8px;">📋</div>
+                                <div style="font-size: 14px; font-weight: 600;">真实名单</div>
+                                <div style="font-size: 12px; color: #999; margin-top: 4px;" id="roster-status">需要密码验证</div>
+                            </div>
+
+                            <!-- P30: 茶水间监控 - 10秒后自动激活 -->
+                            <a id="btn-pantry" href="#" style="padding: 16px; background: rgba(217, 83, 79, 0.1); border: 1px solid #333; border-radius: 4px; color: #d9534f; text-decoration: none; text-align: center; transition: all 0.3s; cursor: not-allowed; opacity: 0.5;" onclick="return false;">
+                                <div style="font-size: 20px; margin-bottom: 8px;">📹</div>
+                                <div style="font-size: 14px; font-weight: 600;">茶水间监控</div>
+                                <div style="font-size: 12px; color: #999; margin-top: 4px;" id="pantry-status">权限同步中...</div>
+                            </a>
+
+                            <!-- P31: 编辑区监控 - 始终可访问 -->
+                            <a id="btn-desk" href="camera_your_desk.html" style="padding: 16px; background: rgba(217, 83, 79, 0.1); border: 1px solid #333; border-radius: 4px; color: #d9534f; text-decoration: none; text-align: center; transition: all 0.3s;">
+                                <div style="font-size: 20px; margin-bottom: 8px;">📹</div>
+                                <div style="font-size: 14px; font-weight: 600;">编辑区监控</div>
+                                <div style="font-size: 12px; color: #999; margin-top: 4px;">对象工位追踪</div>
+                            </a>
+
+                            <!-- P32: 样本档案 - 倒计时触发激活 -->
+                            <a id="btn-profile" href="#" style="padding: 16px; background: rgba(217, 83, 79, 0.1); border: 1px solid #333; border-radius: 4px; color: #d9534f; text-decoration: none; text-align: center; transition: all 0.3s; cursor: not-allowed; opacity: 0.3;" onclick="return false;">
+                                <div style="font-size: 20px; margin-bottom: 8px;">👤</div>
+                                <div style="font-size: 14px; font-weight: 600;">样本档案</div>
+                                <div style="font-size: 12px; color: #999; margin-top: 4px;" id="profile-status">未授权访问</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; color: #666; font-size: 12px;">
+                    维护终端 v3.2.1 | 系统初始化时间：03:14:22 | 所有数据实时追踪中
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        // P29密码处理函数
+        function handleP29Click() {
+            const password = prompt('输入档案库访问密码（一切的开始）:');
+            if (password === '031422') {
+                localStorage.setItem('rosterPasswordVerified', 'true');
+                window.location.href = 'roster_real.html';
+            } else if (password !== null) {
+                alert('密码错误');
+            }
+        }
+
+        // 权限检查和UI更新函数
+        function checkPermissions() {
+            // 检查P30权限 (10秒延迟激活)
+            if (localStorage.getItem('adminViewedSystemLogs') === 'true') {
+                const pantryBtn = document.getElementById('btn-pantry');
+                if (pantryBtn) {
+                    pantryBtn.href = 'camera_pantry.html';
+                    pantryBtn.style.opacity = '1';
+                    pantryBtn.style.cursor = 'pointer';
+                    pantryBtn.style.pointerEvents = 'auto';
+                    pantryBtn.onclick = null;
+                    document.getElementById('pantry-status').textContent = '实时视图';
+                    localStorage.setItem('adminCanViewPantry', 'true');
+                }
+            }
+
+            // 检查P32权限 (倒计时触发)
+            if (localStorage.getItem('systemCountdownWarning') === 'true') {
+                const profileBtn = document.getElementById('btn-profile');
+                if (profileBtn) {
+                    profileBtn.href = 'your_profile.html';
+                    profileBtn.style.opacity = '1';
+                    profileBtn.style.cursor = 'pointer';
+                    profileBtn.style.pointerEvents = 'auto';
+                    profileBtn.onclick = null;
+                    document.getElementById('profile-status').textContent = '已解锁';
+                    localStorage.setItem('adminCanViewProfile', 'true');
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 检查后台登录状态
+            if (localStorage.getItem('adminLoggedIn') !== 'true') {
+                window.location.href = 'admin_login.html';
+                return;
+            }
+
+            Puzzle.recordVisit('p28');
+            const adminAccount = localStorage.getItem('adminAccount') || '系统用户';
+            document.getElementById('adminInfo').textContent = adminAccount + ' (后台)';
+
+            // 10秒后自动激活P30
+            setTimeout(() => {
+                localStorage.setItem('adminViewedSystemLogs', 'true');
+                checkPermissions();
+            }, 10000);
+
+            // 每5秒检查一次权限变化
+            setInterval(checkPermissions, 5000);
+
+            // 初始检查
+            checkPermissions();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最终处理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Courier New', monospace;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 背景扫描线 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 0, 0, 0.03) 2px,
+                rgba(255, 0, 0, 0.03) 4px
+            );
+            pointer-events: none;
+            z-index: 998;
+        }
+
+        .choice-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #000 0%, #1a0a0a 50%, #0a0a0a 100%);
+            padding-top: 80px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .choice-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            text-align: center;
+            line-height: 1.3;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+            letter-spacing: 1px;
+        }
+
+        .choice-text {
+            font-size: 16px;
+            text-align: center;
+            max-width: 680px;
+            line-height: 2.2;
+            margin-bottom: 48px;
+            color: #ddd;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .choice-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 880px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .choice-btn {
+            padding: 28px 20px;
+            background: linear-gradient(135deg, rgba(217, 83, 79, 0.15) 0%, rgba(217, 83, 79, 0.05) 100%);
+            border: 2px solid #d9534f;
+            color: #ff8888;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', monospace;
+            transition: all 0.3s ease;
+            line-height: 1.6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .choice-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .choice-btn:hover::before {
+            left: 100%;
+        }
+
+        .choice-btn:hover {
+            background: linear-gradient(135deg, rgba(217, 83, 79, 0.25) 0%, rgba(217, 83, 79, 0.15) 100%);
+            box-shadow: 0 0 24px rgba(217, 83, 79, 0.4), inset 0 0 12px rgba(217, 83, 79, 0.2);
+            transform: translateY(-2px);
+            border-color: #ff8888;
+        }
+
+        .choice-btn:active {
+            transform: scale(0.98) translateY(0);
+        }
+
+        /* 倒计时呈现 */
+        .countdown {
+            font-size: 20px;
+            color: #ff6666;
+            margin-top: 44px;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+            animation: pulse-warning 1s infinite;
+        }
+
+        @keyframes pulse-warning {
+            0%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+            }
+            50% {
+                opacity: 0.7;
+                text-shadow: 0 0 20px rgba(255, 68, 68, 0.8);
+            }
+        }
+
+        /* 时间不足时更强的提示 */
+        .countdown.critical {
+            animation: pulse-critical 0.5s infinite;
+            color: #ff4444;
+            font-size: 24px;
+        }
+
+        @keyframes pulse-critical {
+            0%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 16px rgba(255, 68, 68, 0.8);
+            }
+            50% {
+                opacity: 0.4;
+                text-shadow: 0 0 30px rgba(255, 68, 68, 1);
+            }
+        }
+
+        /* 维护输入区 */
+        .maint-input-area {
+            margin-top: 48px;
+            text-align: center;
+            opacity: 0.25;
+            transition: opacity 0.3s ease;
+            position: relative;
+        }
+
+        .maint-input-area:hover {
+            opacity: 0.5;
+        }
+
+        .maint-label {
+            font-size: 10px;
+            color: #555;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .maint-input {
+            padding: 10px 14px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #334;
+            border-radius: 2px;
+            color: #777;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            width: 240px;
+            text-align: center;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .maint-input:focus {
+            outline: none;
+            border-color: #666;
+            background: rgba(0, 0, 0, 0.8);
+            color: #bbb;
+            box-shadow: 0 0 8px rgba(255, 68, 68, 0.2);
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .choice-buttons {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+
+            .choice-title {
+                font-size: 28px;
+                margin-bottom: 24px;
+            }
+
+            .choice-text {
+                font-size: 15px;
+            }
+
+            .choice-btn {
+                padding: 24px 16px;
+                font-size: 14px;
+            }
+
+            .countdown {
+                font-size: 18px;
+                margin-top: 32px;
+            }
+        }
+    </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+  
+
+    <div class="choice-container">
+        <div class="choice-title">门外传来了敲门声</div>
+
+        <div class="choice-text">
+            走廊尽头的灯亮了。<br>
+            有人在外面轻轻敲了三下门。<br>
+            你只剩很短的时间。
+        </div>
+
+        <div class="choice-buttons">
+            <button class="choice-btn" onclick="App.navigateTo('bad_end.html');">
+                前往HR办公室
+            </button>
+            <button class="choice-btn" onclick="App.navigateTo('normal_end.html');">
+                拔掉网线，砸碎窗户逃跑
+            </button>
+        </div>
+
+        <div class="countdown">
+            倒计时：<span id="countdown">00:02:00</span>
+        </div>
+
+        <div class="maint-input-area">
+            <div class="maint-label">维护操作 / Maintenance</div>
+            <input type="password" class="maint-input" id="maintInput" placeholder="输入指令" />
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        let pageTimeout = null;
+        let countdownTimer = null;
+        let knockSoundPlayed = false;
+        let pageOpenTime = Date.now();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p35');
+
+            // 倒计时逻辑（120秒）
+            let seconds = 120;
+            const countdownEl = document.getElementById('countdown');
+
+            countdownTimer = setInterval(() => {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                countdownEl.textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+
+                // 60秒时播放敲门声
+                if (seconds === 60 && !knockSoundPlayed) {
+                    playKnockSound();
+                    knockSoundPlayed = true;
+                }
+
+                if (seconds > 0) {
+                    seconds--;
+                } else {
+                    clearInterval(countdownTimer);
+                    // 强制跳转到坏结局
+                    forceTowardsBadEnd();
+                }
+            }, 1000);
+
+            // 维护输入处理
+            const maintInput = document.getElementById('maintInput');
+            maintInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const value = maintInput.value.trim().toUpperCase();
+                    // 只有进入后台登录页面（P27）才允许输入DESTROY命令
+                    if (value === 'DESTROY' && localStorage.getItem('adminLoggedIn') === 'true') {
+                        // 清除倒计时
+                        clearInterval(countdownTimer);
+                        clearTimeout(pageTimeout);
+                        // 跳转到真结局
+                        window.location.href = 'true_end.html';
+                    }
+                    maintInput.value = '';
+                }
+            });
+
+            // 设置强制跳转超时
+            pageTimeout = setTimeout(forceTowardsBadEnd, 120000);
+        });
+
+        function playKnockSound() {
+            // 使用 Web Audio API 创建敲门声
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+            // 创建三次敲击
+            for (let i = 0; i < 3; i++) {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+
+                osc.connect(gain);
+                gain.connect(audioContext.destination);
+
+                const startTime = audioContext.currentTime + (i * 0.4);
+
+                osc.frequency.setValueAtTime(60, startTime);
+                osc.frequency.exponentialRampToValueAtTime(40, startTime + 0.15);
+
+                gain.gain.setValueAtTime(0.3, startTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.15);
+
+                osc.start(startTime);
+                osc.stop(startTime + 0.15);
+            }
+        }
+
+        function forceTowardsBadEnd() {
+            clearInterval(countdownTimer);
+            playKnockSound();
+            setTimeout(() => {
+                window.location.href = 'bad_end.html';
+            }, 500);
+        }
+
+        // 禁止标签页关闭
+        window.onbeforeunload = function() {
+            return false;
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMG_0315.jpg</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .image-viewer { background: #000; max-width: 900px; margin: 0 auto; border-radius: 4px; overflow: hidden; }
+        .image-display { width: 100%; aspect-ratio: 16 / 9; background: #111; position: relative; overflow: hidden; }
+        .real-photo { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.1s ease; }
+        @keyframes ventilationShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(1.5px); }
+            75% { transform: translateX(-1.5px); }
+        }
+        .real-photo.ventilating { animation: ventilationShake 1.5s ease-in-out infinite; }
+        .photo-fallback { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; color: #ccc; font-size: 14px; background: linear-gradient(135deg, #1a1a1a 0%, #3a3a3a 100%); text-align: center; padding: 16px; }
+        .image-info-box { background: var(--white); padding: 20px; border-top: 1px solid var(--border-color); }
+        .info-row { display: flex; margin-bottom: 12px; font-size: 14px; }
+        .info-label { font-weight: 600; color: #333; min-width: 120px; }
+        .info-value { color: var(--gray-dark); }
+        .memo-box { background: #f9f9f9; border: 1px solid var(--border-color); border-radius: 4px; padding: 16px; margin-top: 20px; }
+        .memo-title { font-size: 13px; font-weight: 600; color: #666; margin-bottom: 8px; }
+        .memo-content { font-size: 13px; color: var(--gray-dark); line-height: 1.8; }
+        .hint-box { background: #fff3cd; border-left: 3px solid #ffc107; padding: 12px 16px; margin-top: 20px; font-size: 13px; color: #856404; border-radius: 3px; }
+        .back-btn { display: inline-block; margin-bottom: 20px; }
+        .back-btn a { padding: 8px 16px; background: var(--gray-bg); border: 1px solid var(--border-color); border-radius: 3px; color: var(--primary-blue); font-size: 14px; cursor: pointer; }
+        .back-btn a:hover { background: var(--light-blue); }
+        .return-button { display: inline-block; margin-top: 20px; padding: 12px 24px; background: var(--primary-blue); color: white; border: none; border-radius: 3px; font-size: 14px; font-weight: 600; cursor: pointer; }
+        .return-button:hover { background: #0052a3; }
+        </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">图片预览</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                    <li><a href="projects_folder.html" class="nav-link"><span class="sidebar-icon">📦</span> 交接项目</a></li>
+                    <li><a href="#" class="nav-link"><span class="sidebar-icon">🗑️</span> 回收站</a></li>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div class="back-btn">
+                    <a href="projects_folder.html">← 返回项目文件夹</a>
+                </div>
+
+                <div class="image-viewer">
+                    <div class="image-display">
+                        <img class="real-photo" src="../media/hidden_vent_0315.png" alt="13F排风井外侧红色布料线索" onerror="this.style.display='none'; document.getElementById('photoFallback').style.display='flex';">
+                        <div class="photo-fallback" id="photoFallback">
+                            图片未找到<br>请将图片放入 ../media/hidden_vent_0315.jpg
+                        </div>
+                    </div>
+
+                    <div class="image-info-box">
+                        <div style="background: rgba(0,0,0,0.2); padding: 12px; border-radius: 4px; margin-bottom: 15px; font-size: 12px; color: #999;">
+                            <div style="margin-bottom: 8px;">📸 文件名：DM_B2_Ventilation_20240315_0312.jpg</div>
+                            <div style="margin-bottom: 8px;">📅 时间戳：2024-03-15 03:12:47 AM</div>
+                            <div style="margin-bottom: 8px;">📍 地点：B2层排风口</div>
+                            <div>⚠️ 该通风图在3月15日凌晨被发现异常。声源不明。</div>
+                        </div>
+
+                        <div style="text-align: center; margin-bottom: 15px;">
+                            <button id="playVentSound" style="padding: 10px 16px; background: #4a90e2; color: white; border: none; border-radius: 3px; cursor: pointer; font-size: 14px; transition: all 0.3s;">
+                                🔊 播放通风管音频
+                            </button>
+                            <div id="soundStatus" style="margin-top: 8px; font-size: 12px; color: #666; min-height: 20px; transition: all 0.3s;"></div>
+                        </div>
+
+                        <div class="info-row">
+                            <div class="info-label">文件名：</div>
+                            <div class="info-value">IMG_0315.jpg</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">拍摄地点：</div>
+                            <div class="info-value">13F 排风井外侧</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">拍摄时间：</div>
+                            <div class="info-value">03:15</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">文件大小：</div>
+                            <div class="info-value">1.8 MB</div>
+                        </div>
+
+                        <div class="memo-box">
+                            <div class="memo-title">赵宇的临时备注</div>
+                            <div class="memo-content">
+                                布料颜色和采访那天玻璃里的人一样。<br>
+                                风扇里面一直有拖东西的声音。
+                            </div>
+                        </div>
+
+                        <div class="hint-box">
+                            <strong>系统提示：</strong>这些隐藏素材可能提示了更多关于赵宇的线索。你可能需要访问他的私密文件夹…
+                        </div>
+
+                        <button class="return-button" onclick="App.navigateTo('home.html')">返回主界面</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Puzzle.recordVisit('p18');
+            localStorage.setItem('hasSeenVentPic', 'true');
+
+            // 图片悬停时的通风振动效果
+            const realPhoto = document.querySelector('.real-photo');
+            const imageDisplay = document.querySelector('.image-display');
+
+            imageDisplay.addEventListener('mouseenter', function() {
+                realPhoto.classList.add('ventilating');
+            });
+
+            imageDisplay.addEventListener('mouseleave', function() {
+                realPhoto.classList.remove('ventilating');
+            });
+
+            // 音频播放按钮
+            const playBtn = document.getElementById('playVentSound');
+            const soundStatus = document.getElementById('soundStatus');
+            let isPlaying = false;
+
+            playBtn.addEventListener('click', function() {
+                if (!isPlaying) {
+                    // 创建诡异的通风管声音效果
+                    playVentilationSound();
+                    isPlaying = true;
+                    playBtn.textContent = '🔊 正在播放... (3s)';
+                    playBtn.style.opacity = '0.6';
+                    playBtn.disabled = true;
+
+                    soundStatus.textContent = '听到了什么...';
+                    soundStatus.style.color = '#ff7a45';
+
+                    setTimeout(() => {
+                        isPlaying = false;
+                        playBtn.textContent = '🔊 播放通风管音频';
+                        playBtn.style.opacity = '1';
+                        playBtn.disabled = false;
+                        soundStatus.textContent = '...声音停止了';
+                        soundStatus.style.color = '#999';
+
+                        setTimeout(() => {
+                            soundStatus.textContent = '';
+                        }, 1500);
+                    }, 3000);
+                }
+            });
+
+            // 模拟通风管声音（使用Web Audio API）
+            function playVentilationSound() {
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const now = audioContext.currentTime;
+                    const duration = 3;
+
+                    // 创建低频噪音（通风声）
+                    const noiseBuffer = audioContext.createBufferSource();
+                    const buffer = audioContext.createBuffer(1, audioContext.sampleRate * duration, audioContext.sampleRate);
+                    const data = buffer.getChannelData(0);
+
+                    for (let i = 0; i < buffer.length; i++) {
+                        data[i] = Math.random() * 2 - 1;
+                    }
+
+                    const noiseOscillator = audioContext.createBiquadFilter();
+                    noiseOscillator.type = 'highpass';
+                    noiseOscillator.frequency.value = 200;
+
+                    const oscillator = audioContext.createOscillator();
+                    oscillator.frequency.value = 60; // 低频基调
+                    oscillator.frequency.setTargetAtTime(55, now, 0.5);
+
+                    const gainNode = audioContext.createGain();
+                    gainNode.gain.setValueAtTime(0.1, now);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, now + duration);
+
+                    // 连接
+                    noiseBuffer.connect(noiseOscillator);
+                    oscillator.connect(gainNode);
+                    noiseOscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+
+                    oscillator.start(now);
+                    oscillator.stop(now + duration);
+
+                } catch(e) {
+                    // 浏览器不支持Web Audio API，显示文字反馈
+                    soundStatus.textContent = '⚠️ 无法播放音频 - 可能需要浏览器权限';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

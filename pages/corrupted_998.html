@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>损坏的备份文件</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        body { background: #000; }
+        .code-container { max-width: 900px; margin: 40px auto; }
+        .code-viewer { background: #1a1a1a; border: 2px solid #d9534f; border-radius: 4px; overflow: hidden; box-shadow: 0 0 20px rgba(217, 83, 79, 0.3); display: grid; grid-template-columns: 1fr 1fr; }
+        .code-section { border-right: 1px solid #d9534f; padding: 0; }
+        .code-section:last-child { border-right: none; }
+        .code-toolbar { background: #2a2a2a; padding: 12px 16px; border-bottom: 1px solid #333; font-size: 13px; color: #d9534f; }
+        .code-content { padding: 24px; font-family: "Courier New", monospace; font-size: 13px; line-height: 1.8; color: #ccc; white-space: pre-wrap; word-wrap: break-word; }
+        .code-line { margin-bottom: 8px; }
+        .code-text { color: #ccc; }
+        .code-admin { color: #ff7a45; font-weight: 700; background: rgba(255, 122, 69, 0.2); padding: 2px 6px; border-radius: 2px; }
+        .code-warning { color: #d9534f; }
+        .log-status { color: #d9534f; }
+        .log-failed { color: #ff7a45; }
+        .back-btn { display: inline-block; margin-bottom: 20px; }
+        .back-btn a { padding: 8px 16px; background: rgba(217, 83, 79, 0.2); border: 1px solid #d9534f; border-radius: 3px; color: #d9534f; font-size: 14px; cursor: pointer; }
+        .back-btn a:hover { background: #d9534f; color: #000; }
+        .mobile-fix { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+        @media (max-width: 768px) {
+            .code-viewer { grid-template-columns: 1fr; }
+            .code-section { border-right: none; border-bottom: 1px solid #d9534f; }
+        }
+        </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container" style="background: #0a0a0a;">
+        <div class="header" style="background: #1a1a1a; border-bottom: 2px solid #d9534f;">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0" style="color: #d9534f;">鼎铭</div>
+                <div class="header-title" style="color: #ccc;">损坏的数据</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info" style="color: #999;">系统用户</div>
+                <button class="logout-btn" style="background: rgba(217, 83, 79, 0.2); border: 1px solid #d9534f; color: #d9534f;" onclick="window.history.back()">返回</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper" style="background: #0a0a0a;">
+            <main class="main-content" style="max-width: 1000px; margin: 0 auto;">
+                <div class="back-btn">
+                    <a href="home.html">返回前台系统</a>
+                </div>
+
+                <div class="code-container">
+                    <div class="code-viewer">
+                        <div class="code-section">
+                            <div class="code-toolbar">key.txt (恢复副本)</div>
+                            <div class="code-content">
+如果你看到了这里，
+证明你还没被转化。
+
+管理员覆写代码：
+<span class="code-admin">OVERRIDE_998</span>
+
+
+
+如果你看见后台，
+就已经没有回头路了。
+                            </div>
+                        </div>
+
+                        <div class="code-section">
+                            <div class="code-toolbar">delete_log.txt (系统日志)</div>
+                            <div class="code-content">
+delete file: Roster_Real.xls
+<span class="log-status">status:</span> <span class="log-failed">failed</span>
+
+<span class="log-status">reason:</span> permission denied
+
+<span class="log-status">operator:</span> zhaoyu_local_cache
+
+<span class="log-status">timestamp:</span> 2026-03-15 03:14:22
+
+<span class="code-warning">(权限不足，无法完全删除。原副本已被转移至本地缓存)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; color: #999; font-size: 13px;">
+                    所有备份数据已在后台系统确认 | 记住代码保持活跃
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p26');
+            localStorage.setItem('hasAdminCode', 'true');
+            localStorage.setItem('adminEntryUnlocked', 'true');
+            Puzzle.recordClue('admin_override_code');
+
+            // 记录玩家已获得998编号
+            localStorage.setItem('has998Code', 'true');
+        });
+    </script>
+</body>
+</html>

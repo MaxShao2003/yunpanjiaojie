@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赵宇的个人微博</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .weibo-container { max-width: 600px; margin: 20px auto; background: var(--white); border-radius: 4px; overflow: hidden; }
+        .weibo-header { background: var(--primary-blue); color: white; padding: 20px; }
+        .weibo-avatar { width: 60px; height: 60px; background: #fff; border-radius: 50%; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; font-size: 30px; }
+        .weibo-name { font-size: 16px; font-weight: 600; }
+        .weibo-id { font-size: 13px; opacity: 0.9; }
+        .weibo-signature { font-size: 13px; opacity: 0.8; margin-top: 8px; font-style: italic; }
+        .weibo-posts { padding: 0; }
+        .post { padding: 16px; border-bottom: 1px solid var(--border-color); }
+        .post:last-child { border-bottom: none; }
+        .post:hover { background: var(--light-blue); }
+        .post-date { font-size: 12px; color: var(--gray-light); margin-bottom: 8px; }
+        .post-content { font-size: 14px; color: var(--gray-dark); line-height: 1.8; }
+        .post-content strong { color: #333; }
+        .back-btn { display: inline-block; margin-bottom: 20px; }
+        .back-btn a { padding: 8px 16px; background: var(--gray-bg); border: 1px solid var(--border-color); border-radius: 3px; color: var(--primary-blue); font-size: 14px; cursor: pointer; }
+        .back-btn a:hover { background: var(--light-blue); }
+        </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">社交媒体档案</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                    <li><a href="#" class="nav-link"><span class="sidebar-icon">👤</span> 个人档案</a></li>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div class="back-btn">
+                    <a href="home.html">← 返回主界面</a>
+                </div>
+
+                <div class="weibo-container">
+                    <div class="weibo-header">
+                        <div class="weibo-avatar">👨</div>
+                        <div class="weibo-name">赵宇_ZY剪刀手</div>
+                        <div class="weibo-id">@zhaoyufilms · 已离职</div>
+                        <div class="weibo-signature">剪片，养猫，少加班。</div>
+                    </div>
+
+                    <div class="weibo-posts">
+                        <div class="post">
+                            <div class="post-date">03-15</div>
+                            <div class="post-content">
+                                黑豆又把我的键盘线咬断了，这猫迟早把我电脑整废。
+                            </div>
+                        </div>
+
+                        <div class="post">
+                            <div class="post-date">03-13</div>
+                            <div class="post-content">
+                                公司空调有毛病，晚上总听见风管里有东西在磨。
+                            </div>
+                        </div>
+
+                        <div class="post">
+                            <div class="post-date">03-10</div>
+                            <div class="post-content">
+                                黑豆今天终于肯让我抱一下，拍糊了也得发。 📸
+                            </div>
+                        </div>
+
+                        <div class="post">
+                            <div class="post-date">03-08</div>
+                            <div class="post-content">
+                                又改稿到三点，这样下去真要猝死在工位上。
+                            </div>
+                        </div>
+
+                        <div class="post">
+                            <div class="post-date">03-05</div>
+                            <div class="post-content">
+                                黑豆的粮食快没了，这周得再买一袋。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--gray-light); font-size: 13px;">
+                    档案来源：离职员工社交媒体备份 | 赵宇已离职
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p20');
+            localStorage.setItem('viewedFakeWeibo', 'true');
+            localStorage.setItem('hasSeenWeibo', 'true');
+            Puzzle.recordClue('cat_name_heidou');
+        });
+    </script>
+</body>
+</html>

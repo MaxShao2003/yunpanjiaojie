@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>/public - 鼎铭文化企业云盘</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">公共文件夹</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                    <li><a href="public_folder.html" class="nav-link active"><span class="sidebar-icon">🔓</span> 公共资料</a></li>
+                    <li><a href="projects_folder.html" class="nav-link"><span class="sidebar-icon">📦</span> 交接项目</a></li>
+                    <li><a href="#" class="nav-link"><span class="sidebar-icon">🗑️</span> 回收站</a></li>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div class="breadcrumb">
+                    <a href="home.html">首页</a>
+                    <span>&gt;</span>
+                    <span>公共文件夹 /public</span>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">📁 公共文件夹 /public</div>
+                    </div>
+                    <div class="card-content">
+                        <p style="color: var(--gray-light); font-size: 14px;">最近由 HR-李姐 更新</p>
+                    </div>
+                </div>
+
+                <div class="file-list">
+                    <div class="file-item" style="cursor: pointer;" onclick="App.navigateTo('holiday_notice.html')">
+                        <div class="file-icon">📄</div>
+                        <div class="file-info">
+                            <div class="file-name">2026端午放假通知.pdf</div>
+                            <div class="file-meta">2024-06-01 • PDF 文件 • 245 KB</div>
+                        </div>
+                        <div class="file-action">
+                            <span class="tag tag-blue">PDF</span>
+                        </div>
+                    </div>
+
+                    <div class="file-item" style="cursor: pointer;" onclick="App.navigateTo('attendance_sheet.html')">
+                        <div class="file-icon">📊</div>
+                        <div class="file-info">
+                            <div class="file-name">03月考勤汇总.xlsx</div>
+                            <div class="file-meta">2024-04-01 • 表格文件 • 312 KB</div>
+                        </div>
+                        <div class="file-action">
+                            <span class="tag tag-blue">表格</span>
+                        </div>
+                    </div>
+
+                    <div class="file-item" style="cursor: pointer;" onclick="App.navigateTo('employee_handbook.html')">
+                        <div class="file-icon">📋</div>
+                        <div class="file-info">
+                            <div class="file-name">员工手册（明文版）.pdf</div>
+                            <div class="file-meta">2024-01-15 • PDF 文件 • 1.2 MB</div>
+                        </div>
+                        <div class="file-action">
+                            <span class="tag tag-blue">PDF</span>
+                        </div>
+                    </div>
+
+                    <div class="file-item" style="cursor: pointer;" onclick="App.navigateTo('directory.html')">
+                        <div class="file-icon">📞</div>
+                        <div class="file-info">
+                            <div class="file-name">部门通讯录.xlsx</div>
+                            <div class="file-meta">2024-03-18 • 表格文件 • 89 KB</div>
+                        </div>
+                        <div class="file-action">
+                            <span class="tag tag-blue">表格</span>
+                        </div>
+                    </div>
+
+                    <div class="file-item" style="cursor: pointer;" onclick="App.navigateTo('welcome_note.html')">
+                        <div class="file-icon">💌</div>
+                        <div class="file-info">
+                            <div class="file-name">新人欢迎辞.txt</div>
+                            <div class="file-meta">2024-03-18 • 文本文件 • 456 B</div>
+                        </div>
+                        <div class="file-action">
+                            <span class="tag tag-blue">TXT</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--gray-light); font-size: 13px;">
+                    公共资料均为已核验版本 • 5 个文件 • 总大小 2.3 MB
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p05');        });
+    </script>
+</body>
+</html>

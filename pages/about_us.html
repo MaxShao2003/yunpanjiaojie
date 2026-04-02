@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于鼎铭 - 鼎铭文化</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .banner { background: linear-gradient(135deg, var(--primary-blue) 0%, #2870c9 100%); color: white; padding: 60px 24px; text-align: center; }
+        .banner-title { font-size: 36px; font-weight: 700; margin-bottom: 16px; }
+        .banner-subtitle { font-size: 16px; opacity: 0.9; }
+        .content-section { margin: 40px 0; }
+        .section-title { font-size: 20px; font-weight: 600; color: #333; margin-bottom: 16px; border-bottom: 2px solid var(--primary-blue); padding-bottom: 12px; }
+        .section-text { font-size: 14px; color: var(--gray-dark); line-height: 2; }
+        .benefit-list { list-style: none; margin-top: 12px; }
+        .benefit-item { padding: 12px 0; font-size: 14px; color: var(--gray-dark); display: flex; align-items: center; }
+        .benefit-item::before { content: "✓"; color: var(--primary-blue); font-weight: 700; margin-right: 12px; }
+        .team-photo { background: #f4f4f4; text-align: center; color: var(--gray-light); border-radius: 4px; margin: 20px 0; border: 1px solid var(--border-color); overflow: hidden; }
+        .team-photo-img { width: 100%; max-height: 460px; object-fit: cover; display: block; }
+        .team-photo-caption { padding: 10px 14px; font-size: 13px; color: #777; background: #fafafa; border-top: 1px solid var(--border-color); }
+        .team-photo-fallback { padding: 80px 24px; font-size: 14px; }
+        .back-btn { display: inline-block; margin-top: 20px; padding: 8px 16px; background: var(--gray-bg); border: 1px solid var(--border-color); border-radius: 3px; color: var(--primary-blue); font-size: 14px; cursor: pointer; }
+        .back-btn:hover { background: var(--light-blue); }
+        .footer-info { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--gray-light); font-size: 13px; }
+    </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">企业信息</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                    <li><a href="about_us.html" class="nav-link active"><span class="sidebar-icon">🏢</span> 关于鼎铭</a></li>
+                    <li><a href="public_folder.html" class="nav-link"><span class="sidebar-icon">🔓</span> 公共资料</a></li>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div class="banner">
+                    <div class="banner-title">加入我们，成为组织的一部分</div>
+                    <div class="banner-subtitle">鼎铭文化传媒 企业文化介绍</div>
+                </div>
+
+                <div class="content-section">
+                    <div class="section-title">企业简介</div>
+                    <div class="section-text">
+                        鼎铭文化传媒致力于打造内容工业的闭环协作体系。<br><br>
+                        我们相信，优秀的人才不应只是被使用，更应被完整吸纳、长期转化，并沉淀为组织的一部分。<br><br>
+                        在这里，情绪会被评估，状态会被追踪，价值会被最大化留存。<br><br>
+                        鼎铭不鼓励短期离开，我们更相信深度融入。
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <div class="section-title">福利待遇</div>
+                    <ul class="benefit-list">
+                        <li class="benefit-item">免费三餐与高热量夜宵</li>
+                        <li class="benefit-item">年度深度体检与状态评估</li>
+                        <li class="benefit-item">心理状态追踪计划</li>
+                        <li class="benefit-item">优秀员工长期留存机制</li>
+                    </ul>
+                </div>
+
+                <div class="team-photo">
+                    <img
+                        class="team-photo-img"
+                        src="../media/team_group_photo.png"
+                        alt="鼎铭第4事业部月度合影"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                    >
+                    <div class="team-photo-fallback" style="display: none;">
+                        🖼️ 鼎铭第4事业部月度合影<br>
+                        图片未找到，请将生成图放入 ../media/team_group_photo.jpg
+                    </div>
+                    <div class="team-photo-caption">鼎铭第4事业部月度合影</div>
+                </div>
+
+                <div class="content-section">
+                    <a href="home.html" class="back-btn">← 返回主界面</a>
+                </div>
+
+                <div class="content-section">
+                    <div class="section-title">人才理念</div>
+                    <div class="section-text" style="font-size: 13px; line-height: 1.8;">
+                        <p>快步融入我们的团队，体验专业的职业发展通道。</p>
+                        <p style="margin-top: 12px;">逃离传统职场的无序状态，在系统化的流程中找到归属感。</p>
+                        <p style="margin-top: 12px;">别让宝贵的人生被碎片化消耗，我们提供完整的职业规划。</p>
+                        <p style="margin-top: 12px;">信任是我们与每位员工的核心契约，长期合作才是真正的价值。</p>
+                    </div>
+                </div>
+
+                <div class="footer-info">
+                    系统维护员：Admin / 工号：000
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p04');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>沟通记录_微信截图.jpg</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .wechat-container {
+            max-width: 500px;
+            margin: 20px auto;
+            background: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .wechat-header {
+            background: #eee;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #999;
+            text-align: center;
+        }
+
+        .wechat-chat {
+            background: white;
+            padding: 16px;
+            height: 600px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .message {
+            display: flex;
+            margin-bottom: 8px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.received {
+            justify-content: flex-start;
+        }
+
+        .message.sent {
+            justify-content: flex-end;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .message.received .message-bubble {
+            background: #e9e9e9;
+            color: #333;
+        }
+
+        .message.sent .message-bubble {
+            background: #95ec69;
+            color: #333;
+        }
+
+        .message-time {
+            font-size: 12px;
+            color: #999;
+            margin: 12px 0 4px 0;
+            text-align: center;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .back-btn a {
+            padding: 8px 16px;
+            background: var(--gray-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            color: var(--primary-blue);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .back-btn a:hover {
+            background: var(--light-blue);
+        }
+
+        .image-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .image-info {
+            background: var(--white);
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--gray-light);
+            font-size: 13px;
+        }
+
+        .page-indicator {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        .scroll-hint {
+            text-align: center;
+            color: #bbb;
+            font-size: 12px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .message.hidden {
+            display: none;
+        }
+        </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">图片预览</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                    <li><a href="projects_folder.html" class="nav-link"><span class="sidebar-icon">📦</span> 交接项目</a></li>
+                    <li><a href="#" class="nav-link"><span class="sidebar-icon">🗑️</span> 回收站</a></li>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div class="back-btn">
+                    <a href="projects_folder.html">← 返回项目文件夹</a>
+                </div>
+
+                <div class="image-container">
+                    <div class="wechat-container">
+                        <div class="wechat-header">
+                            赵宇与同事的聊天记录 | 2024-03-14
+                        </div>
+
+                        <div class="wechat-chat" id="chatBox">
+                            <div class="message-time">2024年3月14日 21:30</div>
+
+                            <div class="message sent">
+                                <div class="message-bubble">昨天又让我一个人改到三点。</div>
+                            </div>
+
+                            <div class="message received">
+                                <div class="message-bubble">先忍忍，这个月项目做完就好了。</div>
+                            </div>
+
+                            <div class="message sent">
+                                <div class="message-bubble">老王不是说回老家吗？工位上的外套怎么还在。</div>
+                            </div>
+
+                            <div class="message received">
+                                <div class="message-bubble">别提这个，李姐就在后面。</div>
+                            </div>
+
+                            <div class="message sent">
+                                <div class="message-bubble">这破公司我真是不想干了。</div>
+                            </div>
+
+                            <div class="message received">
+                                <div class="message-bubble">你小点声，都第几次了。</div>
+                            </div>
+
+                            <div class="message sent">
+                                <div class="message-bubble">说真的...我不想干了</div>
+                            </div>
+
+                            <div class="message received">
+                                <div class="message-bubble">别多想，咬牙坚持。</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="image-info">
+                        沟通记录_微信截图.jpg | 2024-03-14 | 892 KB
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p16');
+            localStorage.setItem('viewedWechatLog', 'true');
+            localStorage.setItem('hasSeenWechatLog', 'true');
+
+            const chatBox = document.getElementById('chatBox');
+            let currentPage = 0;
+            const messagesPerPage = 4;
+            const allMessages = chatBox.querySelectorAll('.message, .message-time');
+
+            // 初始显示所有消息（改为真正的无限滚动）
+            allMessages.forEach((msg) => {
+                msg.classList.remove('hidden');  // 移除hidden类，显示所有消息
+            });
+
+            // 添加分页指示器
+            const pageIndicator = document.createElement('div');
+            pageIndicator.className = 'page-indicator';
+            pageIndicator.id = 'pageIndicator';
+            pageIndicator.textContent = `共 ${allMessages.length} 条消息`;
+            chatBox.parentElement.insertBefore(pageIndicator, chatBox.nextSibling);
+
+            const scrollHint = document.createElement('div');
+            scrollHint.className = 'scroll-hint';
+            scrollHint.textContent = '↓ 滚动查看所有对话记录';
+            chatBox.parentElement.insertBefore(scrollHint, chatBox.nextSibling.nextSibling);
+
+            // 监听滚动 - 真正的无限滚动
+            chatBox.addEventListener('scroll', () => {
+                // 计算滚动进度
+                const scrollPercent = (chatBox.scrollTop + chatBox.clientHeight) / chatBox.scrollHeight;
+
+                // 当滚动到底部时，更新提示
+                if (scrollPercent > 0.95) {
+                    scrollHint.style.opacity = '0.3';
+                    scrollHint.textContent = '（已到底部）';
+                } else {
+                    scrollHint.style.opacity = '1';
+                    scrollHint.textContent = '↓ 继续滚动查看更多对话';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

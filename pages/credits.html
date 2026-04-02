@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>制作人员名单</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            color: #999;
+            font-family: 'Courier New', monospace;
+            overflow: auto;
+        }
+
+
+        .credits-container {
+            width: 100%;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            padding-top: 70px;
+        }
+
+        .credits-title {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #aaa;
+        }
+
+        .credits-content {
+            max-width: 500px;
+            text-align: center;
+            font-size: 15px;
+            line-height: 2.2;
+            margin-bottom: 80px;
+            color: #888;
+        }
+
+        .credits-item {
+            margin-bottom: 16px;
+        }
+
+        .credits-label {
+            color: #666;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .credits-value {
+            color: #aaa;
+            font-weight: normal;
+            font-size: 16px;
+        }
+
+        .credits-note {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.8;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #333;
+        }
+
+        .credits-button {
+            padding: 12px 24px;
+            background: rgba(170, 170, 170, 0.1);
+            border: 1px solid #444;
+            color: #999;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+            margin-top: 40px;
+        }
+
+        .credits-button:hover {
+            background: rgba(170, 170, 170, 0.2);
+            color: #aaa;
+        }
+
+        .social-media-section {
+            max-width: 600px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 60px auto 0;
+            padding: 40px 0;
+            border-top: 1px solid #333;
+        }
+
+        .social-media-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .social-label {
+            font-size: 16px;
+            color: #aaa;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .social-qr-code {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #444;
+            border-radius: 4px;
+            background: #0a0a0a;
+        }
+
+        .social-desc {
+            font-size: 13px;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .social-media-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+    <div class="progress-text">第 39 / 40 页</div>
+
+    <div class="credits-container">
+        <div class="credits-title">制作人员名单</div>
+
+        <div class="credits-content">
+            <div class="credits-item">
+                <div class="credits-label">策划与世界观</div>
+                <div class="credits-value">书墨清</div>
+            </div>
+
+            <div class="credits-item">
+                <div class="credits-label">文案</div>
+                <div class="credits-value">书墨清/Gemini/Codex/Claude Code</div>
+            </div>
+
+            <div class="credits-item">
+                <div class="credits-label">视觉设计</div>
+                <div class="credits-value">书墨清/Gemini/豆包</div>
+            </div>
+
+            <div class="credits-item">
+                <div class="credits-label">前端实现</div>
+                <div class="credits-value">书墨清/Claude Code</div>
+            </div>
+
+          
+
+            <div class="credits-note">
+                特别鸣谢所有在凌晨 03:14 还没有下班的人。<br>
+                档案维护：赵宇（已离线）
+            </div>
+        </div>
+
+        <div class="social-media-section">
+            <div class="social-media-item">
+                <div class="social-label">小红书</div>
+                <img src="../media/qr_xiaohongshu.jpg" alt="小红书二维码" class="social-qr-code">
+                <div class="social-desc">扫码关注</div>
+            </div>
+            <div class="social-media-item">
+                <div class="social-label">抖音</div>
+                <img src="../media/qr_douyin.png" alt="抖音二维码" class="social-qr-code">
+                <div class="social-desc">扫码关注</div>
+            </div>
+        </div>
+
+        <button class="credits-button" onclick="App.navigateTo('easter_egg.html');">
+            余波未尽……
+        </button>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p39');
+        });
+    </script>
+</body>
+</html>

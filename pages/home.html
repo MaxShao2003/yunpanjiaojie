@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鼎铭文化 - 企业云盘 / 交接资料库</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/theme.css">
+    <script src="../scripts/history.js"></script>
+    <style>
+        /* 增强的cloud hub风格 */
+        :root {
+            --hub-primary: #4a90e2;
+            --hub-bg-primary: #f9f9f9;
+            --hub-bg-secondary: #ffffff;
+            --hub-border: #e0e0e0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f9f9f9 0%, #f3f5f8 100%);
+        }
+
+        .notification-bar {
+            background: linear-gradient(90deg, #d1ecf1 0%, rgba(74, 144, 226, 0.08) 100%);
+            border-left: 4px solid #4a90e2;
+            border-radius: 4px;
+            padding: 14px 16px;
+            margin: 0;
+            font-size: 13px;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+            border-left: 4px solid #4a90e2;
+        }
+
+        /* 搜索栏增强 */
+        .search-card {
+            position: relative;
+        }
+
+        #searchInput {
+            background: white !important;
+            border: 2px solid #e0e0e0 !important;
+            padding: 13px 16px !important;
+            font-size: 14px !important;
+            transition: all 0.3s ease !important;
+        }
+
+        #searchInput:focus {
+            border-color: #4a90e2 !important;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1) !important;
+        }
+
+        /* 进度卡片增强 */
+        .progress-card .card-header {
+            background: linear-gradient(135deg, #e8f4fd 0%, rgba(74, 144, 226, 0.05) 100%);
+            border-bottom: 2px solid #4a90e2;
+        }
+
+        .progress-card .card-title {
+            color: #4a90e2;
+            font-weight: 700;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px 16px 16px;
+        }
+
+        .progress-stat {
+            font-size: 32px;
+            font-weight: 700;
+            color: #4a90e2;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+
+        .progress-stat-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* 文件列表增强 */
+        .file-list {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            background: white;
+            overflow: hidden;
+        }
+
+        .file-item {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .file-item:hover {
+            background: linear-gradient(90deg, #f0f8ff 0%, #f9f9f9 100%);
+            border-left: 3px solid #4a90e2;
+            padding-left: 13px;
+        }
+
+        .file-icon {
+            font-size: 24px;
+            min-width: 32px;
+            text-align: center;
+            opacity: 0.9;
+            transition: all 0.2s ease;
+        }
+
+        .file-item:hover .file-icon {
+            transform: scale(1.15);
+            opacity: 1;
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .file-meta {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .file-action {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .tag {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .tag-blue {
+            background: rgba(74, 144, 226, 0.12);
+            color: #4a90e2;
+        }
+
+        .tag-orange {
+            background: rgba(255, 122, 69, 0.12);
+            color: #ff7a45;
+        }
+
+        /* 底部文案 */
+        .footer-tip {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e8e8e8;
+            color: #999;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* 搜索结果样式 */
+        #searchResults {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        .search-result-item {
+            padding: 10px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 12px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .search-result-item:hover {
+            background: #f0f8ff;
+            color: #4a90e2;
+            padding-left: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .file-item {
+                padding: 12px;
+            }
+
+            .file-name {
+                font-size: 13px;
+            }
+
+            .file-meta {
+                font-size: 11px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body data-page-id="home" data-page-title="云盘主界面" data-page-type="system">
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <!-- Logo 有时拥有多于一种功能 -->
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">离职交接空间 / 赵宇</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info" id="userInfo">新员工</div>
+                <a href="../index.html" target="_blank" style="padding: 8px 16px; background: var(--light-blue); border: 1px solid var(--primary-blue); color: var(--primary-blue); border-radius: 3px; font-size: 12px; cursor: pointer; text-decoration: none; margin-right: 12px; transition: all 0.3s;" onmouseover="this.style.background='rgba(74, 144, 226, 0.2)'" onmouseout="this.style.background='var(--light-blue)'">交接首页</a>
+                <button class="logout-btn" onclick="App.logout()">登出</button>
+            </div>
+        </div>
+
+        <div class="notification-bar" style="margin: 0;">
+            <strong>系统通知：</strong>为保证业务连续性，请在今晚 24:00 前完成全部交接资料阅读，系统将自动验收。
+        </div>
+
+        <div class="main-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link active"><span class="sidebar-icon">📁</span> 最近使用</a></li>
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📂</span> 全部文件</a></li>
+                    <li><a href="public_folder.html" class="nav-link"><span class="sidebar-icon">🔓</span> 公共资料</a></li>
+                    <li><a href="projects_folder.html" class="nav-link"><span class="sidebar-icon">📦</span> 交接项目</a></li>
+                    <li><a href="#" class="nav-link"><span class="sidebar-icon">🗑️</span> 回收站</a></li>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+
+                <!-- 搜索栏 -->
+                <div class="card" style="margin-bottom: 20px;">
+                    <div class="card-content">
+                        <div style="position: relative;">
+                            <input
+                                type="text"
+                                id="searchInput"
+                                placeholder="搜索资料... (输入关键词，可以是名字，也可以是号码，还可以是……)"
+                                style="width: 100%; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 14px; box-sizing: border-box;"
+                                onkeypress="handleSearchKeypress(event)"
+                            >
+                            <span style="position: absolute; right: 12px; top: 12px; color: var(--gray-light); font-size: 14px;">🔍</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 搜索结果容器 -->
+                <div id="searchResults" style="display: none; margin-bottom: 20px;"></div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">交接资料库</div>
+                    </div>
+                    <div class="card-content">
+                        <p style="color: var(--gray-light); font-size: 14px; margin-bottom: 12px;">当前交接进度：<span id="progressText">12%</span></p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill" style="width: 12%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="file-list">
+                    <div class="file-item" style="cursor: pointer;" onclick="App.navigateTo('about_us.html')">
+                        <div class="file-icon">🏢</div>
+                        <div class="file-info">
+                            <div class="file-name">关于鼎铭</div>
+                            <div class="file-meta">企业介绍与文化</div>
+                        </div>
+                        <div class="file-action">
+                            <span class="tag tag-blue">文件夹</span>
+                        </div>
+                    </div>
+
+                    <div class="file-item" style="cursor: pointer;" onclick="App.navigateTo('public_folder.html')">
+                        <div class="file-icon">📁</div>
+                        <div class="file-info">
+                            <div class="file-name">公共文件夹 /public</div>
+                            <div class="file-meta">5 个文件</div>
+                        </div>
+                        <div class="file-action">
+                            <span class="tag tag-blue">文件夹</span>
+                        </div>
+                    </div>
+
+                    <div class="file-item" style="cursor: pointer;" onclick="App.navigateTo('projects_folder.html')">
+                        <div class="file-icon">📦</div>
+                        <div class="file-info">
+                            <div class="file-name">项目文件夹 /projects</div>
+                            <div class="file-meta">5 个文件 + 1 个加密文件夹</div>
+                        </div>
+                        <div class="file-action">
+                            <span class="tag tag-blue">文件夹</span>
+                        </div>
+                    </div>
+
+                    <div class="file-item" style="cursor: pointer;" onclick="App.navigateTo('private_lock.html')">
+                        <div class="file-icon">🔒</div>
+                        <div class="file-info">
+                            <div class="file-name">赵宇私密文件夹 /private_zy</div>
+                            <div class="file-meta">已加密 · 需要密码访问</div>
+                        </div>
+                        <div class="file-action">
+                            <span class="tag tag-orange">已加密</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--gray-light); font-size: 13px;">
+                    若资料存在异常，请勿惊慌，系统将于夜间统一修复。
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script src="../scripts/search.js"></script>
+    <script>
+        // 搜索功能处理
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value;
+            const resultsContainer = document.getElementById('searchResults');
+
+            if (!query.trim()) {
+                resultsContainer.style.display = 'none';
+                return;
+            }
+
+            resultsContainer.style.display = 'block';
+            const results = Search.search(query);
+            Search.renderResults(results, 'searchResults');
+        }
+
+        function handleSearchKeypress(event) {
+            if (event.key === 'Enter') {
+                handleSearch();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p02');
+
+            // 更新用户信息
+            document.getElementById('userInfo').textContent = App.getCurrentUser();
+
+            // 更新进度条
+            const progress = Puzzle.getProgress();
+            document.getElementById('progressText').textContent = progress + '%';
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            // 记录在主页上的访问（用于功能解锁）
+            // 不具体记录各个页面访问，但这里为全局追踪点
+        });
+    </script>
+</body>
+</html>

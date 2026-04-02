@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>真实员工手册.pdf</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        body {
+            background: #000;
+            position: relative;
+        }
+
+        /* 背景扫描线 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 0, 0, 0.02) 2px,
+                rgba(255, 0, 0, 0.02) 4px
+            );
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .text-viewer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            max-width: 900px;
+            margin: 0 auto;
+            border: 2px solid #d9534f;
+            border-radius: 2px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(217, 83, 79, 0.5), inset 0 0 20px rgba(217, 83, 79, 0.05);
+        }
+
+        .text-toolbar {
+            background: #2a2a2a;
+            padding: 12px 16px;
+            border-bottom: 2px solid #d9534f;
+            font-size: 11px;
+            color: #d9534f;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .text-content {
+            padding: 40px;
+            color: #ccc;
+            font-size: 14px;
+            line-height: 2;
+            font-family: 'Georgia', 'Microsoft YaHei', serif;
+            white-space: normal;
+            word-wrap: break-word;
+            position: relative;
+        }
+
+        .text-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 1px,
+                rgba(217, 83, 79, 0.02) 1px,
+                rgba(217, 83, 79, 0.02) 2px
+            );
+            pointer-events: none;
+        }
+
+        .doc-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #d9534f;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(217, 83, 79, 0.3);
+        }
+
+        .doc-intro {
+            background: linear-gradient(135deg, rgba(217, 83, 79, 0.15) 0%, rgba(217, 83, 79, 0.05) 100%);
+            border-left: 4px solid #d9534f;
+            border: 1px solid rgba(217, 83, 79, 0.3);
+            border-left: 4px solid #d9534f;
+            padding: 16px 16px 16px 20px;
+            margin-bottom: 28px;
+            border-radius: 2px;
+            box-shadow: inset 0 0 10px rgba(217, 83, 79, 0.05);
+        }
+
+        .intro-text {
+            color: #ff8888;
+            font-style: italic;
+            line-height: 1.9;
+            font-weight: 500;
+        }
+
+        .rule-item {
+            margin-bottom: 20px;
+            padding: 14px 14px 14px 22px;
+            border-left: 3px solid #d9534f;
+            background: rgba(217, 83, 79, 0.05);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .rule-item:hover {
+            background: rgba(217, 83, 79, 0.1);
+            box-shadow: inset 0 0 8px rgba(217, 83, 79, 0.1);
+        }
+
+        .rule-num {
+            color: #ff7a45;
+            font-weight: 700;
+            margin-right: 10px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .rule-text {
+            color: #ddd;
+            line-height: 1.9;
+            white-space: normal;
+        }
+
+        .doc-warning {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            padding: 16px;
+            border-top: 2px solid #d9534f;
+            color: #d9534f;
+            font-size: 12px;
+            font-style: italic;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: rgba(217, 83, 79, 0.08);
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .back-btn a {
+            padding: 8px 16px;
+            background: rgba(217, 83, 79, 0.2);
+            border: 1px solid #d9534f;
+            border-radius: 2px;
+            color: #d9534f;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .back-btn a:hover {
+            background: #d9534f;
+            color: #000;
+            transform: translateX(-2px);
+        }
+    </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container" style="background: #0a0a0a;">
+        <div class="header" style="background: #1a1a1a; border-bottom: 2px solid #d9534f;">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0" style="color: #d9534f;">鼎铭</div>
+                <div class="header-title" style="color: #ccc;">文件预览</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info" style="color: #999;">系统用户</div>
+                <button class="logout-btn" style="background: rgba(217, 83, 79, 0.2); border: 1px solid #d9534f; color: #d9534f;" onclick="window.history.back()">返回</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper" style="background: #0a0a0a;">
+            <aside class="sidebar" style="background: #1a1a1a; border-right: 1px solid #333;">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link" style="color: #999;"><span class="sidebar-icon">📁</span> 返回前台</a></li>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div class="back-btn">
+                    <a href="home.html">← 返回前台系统</a>
+                </div>
+
+                <div class="text-viewer">
+                    <div class="text-toolbar">
+                        ⚠️ &nbsp;&nbsp; 真实员工手册.pdf
+                    </div>
+
+                    <div class="text-content">
+                        <div class="doc-title">鼎铭文化员工生存守则（绝密）</div>
+
+                        <div class="doc-intro">
+                            <div class="intro-text">
+                                致看到这份文件的待验收员工：<br>
+                                <br>
+                                如果你想活到明早，请记住以下内容。
+                            </div>
+                        </div>
+
+                        <div class="rule-item">
+                            <span class="rule-num">1.</span>
+                            <span class="rule-text">公司只有 13 层。如果你在 22:00 后看到电梯亮起 14，请立刻闭眼面壁站立，直到数字熄灭。</span>
+                        </div>
+
+                        <div class="rule-item">
+                            <span class="rule-num">2.</span>
+                            <span class="rule-text">如果保洁正在擦你附近的地面，请先看抹布颜色。蓝色可继续工作，红色请夸她"今天也很干净"，然后屏住呼吸，直到她离开。</span>
+                        </div>
+
+                        <div class="rule-item">
+                            <span class="rule-num">3.</span>
+                            <span class="rule-text">茶水间咖啡机偶尔会流出暗红色液体。不要倒掉，慢慢喝完。那是系统提供的情绪稳定剂。</span>
+                        </div>
+
+                        <div class="rule-item">
+                            <span class="rule-num">4.</span>
+                            <span class="rule-text">若相邻工位同事的表情超过 30 分钟没有变化，请在 OA 提交报修，分类选择 <span style="color: #d9534f;">皮囊破损</span>。不要呼喊他的名字。</span>
+                        </div>
+
+                        <div class="rule-item">
+                            <span class="rule-num">5.</span>
+                            <span class="rule-text">如果内网消息提示"我看到你的屏幕了"，请理解为对方已经看到你本人。不要起身，不要回头。</span>
+                        </div>
+
+                        <div class="rule-item">
+                            <span class="rule-num">6.</span>
+                            <span class="rule-text">当交接进度达到 100% 时，绝对不要前往 HR 办公室。窗户永远比走廊安全。</span>
+                        </div>
+
+                        <div class="doc-warning">
+                            如果你已经读到这里，说明系统已经开始标记你。
+                        </div>
+
+                        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #333; color: #666; font-size: 12px; line-height: 1.8; font-style: italic;">
+                            ━━━━━━━━━━━━━━━━━━━━━━━━<br/>
+                            <br/>
+                            <span style="color: #999;">【这是一条隐藏的消息】</span><br/>
+                            <br/>
+                            赵宇在被转化之前，留下了一些数据。<br/>
+                            它们看起来很损坏，但功能完整。<br/>
+                            <br/>
+                            
+                            <br/>
+                            有些东西不会出现在列表里。<br/>
+                            <span style="color: #d9534f; opacity: 0.4;">你需要自己去找到它。</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p24');
+            localStorage.setItem('viewedTrueRules', 'true');
+            localStorage.setItem('hasReadRules', 'true');
+            Puzzle.recordClue('true_rules');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+===== 茶水间监控摄像头画面生成Prompt =====
+
+用途：替换 camera_pantry.html 中的模糊黑色像素动画
+
+生成指引：
+1. 使用支持高级Prompt的AI图像生成工具（推荐：Midjourney、DALL-E 3、Stable Diffusion XL）
+2. 将下面的Prompt完整复制粘贴
+3. 生成参数建议：
+   - 宽高比：16:12 或 4:3
+   - 分辨率：至少 1280x960 以上
+   - 风格：照片真实感
+4. 生成后保存为 PNG 格式，文件名为 camera_pantry_creature.png
+
+===== 完整生成Prompt =====
+
+Low-resolution surveillance camera footage of a dimly lit pantry room, grainy security feed with severe signal degradation, blurred amorphous creature-like silhouette barely visible in darkness, indistinct organic form with undefined edges, motion blur and compression artifacts, dark shadows, unsettling atmosphere, barely recognizable shape suggesting unknown entity, vintage CCTV quality, color banding and noise distortion, mysterious presence in the frame
+
+===== 翻译（仅供参考）=====
+
+低分辨率的监控摄像头画面，拍摄一个昏暗的茶水间，颗粒状的安全录像画质，严重的信号衰减，模糊的、非定形的、生物状轮廓在黑暗中几乎不可见，不清晰的有机形态，边缘不确定，运动模糊和压缩伪影，黑色阴影，令人不安的气氛，几乎无法辨认的形状暗示未知实体，复古CCTV画质，色带和噪点失真，神秘的存在于画面中
+
+===== 进阶调整选项 =====
+
+如果生成结果不理想，可以尝试以下变体：
+
+选项A（更诡异版本）：
+...creature-like silhouette, disturbing unidentifiable organic form, horrifying yet blurred entity, terrifying presence...
+
+选项B（更逼真版本）：
+...replace "barely visible" with "partially concealed by shadows and poor lighting"
+...shift focus to realistic CCTV degradation rather than horror elements...
+
+选项C（更抽象版本）：
+...remove "creature-like" and replace with "abstract amorphous shape"
+...emphasize grain, color separation, and technical artifacts over biological form...

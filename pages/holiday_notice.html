@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026端午放假通知.pdf</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .pdf-viewer {
+            background: var(--white);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pdf-page {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 60px 50px;
+            line-height: 1.8;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .pdf-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .pdf-content {
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+
+        .pdf-content p {
+            margin-bottom: 12px;
+        }
+
+        .pdf-signature {
+            margin-top: 40px;
+            text-align: right;
+        }
+
+        .pdf-signature-name {
+            margin-bottom: 4px;
+        }
+
+        .pdf-signature-date {
+            font-size: 14px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .back-btn a {
+            padding: 8px 16px;
+            background: var(--gray-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            color: var(--primary-blue);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .back-btn a:hover {
+            background: var(--light-blue);
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--divider-color);
+            margin: 30px 0;
+        }
+
+        @page {
+            margin: 20px;
+        }
+        </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- 顶部栏 -->
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">文件预览</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="main-wrapper">
+            <!-- 侧边栏 -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                    <li><a href="public_folder.html" class="nav-link"><span class="sidebar-icon">🔓</span> 公共资料</a></li>
+                    <li><a href="#" class="nav-link"><span class="sidebar-icon">📦</span> 交接项目</a></li>
+                    <li><a href="#" class="nav-link"><span class="sidebar-icon">🗑️</span> 回收站</a></li>
+                </nav>
+            </aside>
+
+            <!-- 主内容 -->
+            <main class="main-content">
+                <!-- 返回按钮 -->
+                <div class="back-btn">
+                    <a href="public_folder.html">← 返回公共文件夹</a>
+                </div>
+
+                <!-- PDF预览 -->
+                <div class="pdf-viewer">
+                    <div class="pdf-page">
+                        <div class="pdf-title">关于 2026 年端午节放假安排的通知</div>
+
+                        <div class="pdf-content">
+                            <p>各部门同事：</p>
+
+                            <p>根据公司统一安排，端午节放假时间为 6 月 8 日至 6 月 10 日，共三天。</p>
+
+                            <p>节前请各组妥善完成素材归档、项目同步与工位清理。</p>
+
+                            <p>如遇紧急生产任务，以部门通知为准，值守人员请配合夜间设备巡检。</p>
+
+                            <p>请大家提前做好工作与生活安排，节日期间注意安全。</p>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="pdf-signature">
+                            <div class="pdf-signature-name">行政人事中心</div>
+                            <div class="pdf-signature-date">2026年6月1日</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 页脚 -->
+                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--gray-light); font-size: 13px;">
+                    已离职人员资料系统保留副本
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p06');        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>/projects - 鼎铭文化企业云盘</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- 顶部栏 -->
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">项目文件夹</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="main-wrapper">
+            <!-- 侧边栏 -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                    <li><a href="public_folder.html" class="nav-link"><span class="sidebar-icon">🔓</span> 公共资料</a></li>
+                    <li><a href="projects_folder.html" class="nav-link active"><span class="sidebar-icon">📦</span> 交接项目</a></li>
+                    <li><a href="#" class="nav-link"><span class="sidebar-icon">🗑️</span> 回收站</a></li>
+                </nav>
+            </aside>
+
+            <!-- 主内容 -->
+            <main class="main-content">
+                <!-- 面包屑 -->
+                <div class="breadcrumb">
+                    <a href="home.html">首页</a>
+                    <span>&gt;</span>
+                    <span>项目文件夹 /projects</span>
+                </div>
+
+                <!-- 卡片标题 -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">📦 项目文件夹 /projects</div>
+                    </div>
+                    <div class="card-content">
+                        <p style="color: var(--gray-light); font-size: 14px;">负责人：赵宇</p>
+                    </div>
+                </div>
+
+                <!-- 文件列表 -->
+                <div class="file-list">
+                    <!-- 采访视频 -->
+                    <div class="file-item" style="cursor: pointer;" onclick="App.navigateTo('interview_video.html')">
+                        <div class="file-icon">🎬</div>
+                        <div class="file-info">
+                            <div class="file-name">城市人物访谈_终版.mp4</div>
+                            <div class="file-meta">2024-03-18 • 视频文件 • 2.4 GB</div>
+                        </div>
+                        <div class="file-action">
+                            <span class="tag tag-blue">视频</span>
+                        </div>
+                    </div>
+
+                    <!-- 报销清单 -->
+                    <div class="file-item" style="cursor: pointer;" onclick="App.navigateTo('reimbursement_sheet.html')">
+                        <div class="file-icon">💳</div>
+                        <div class="file-info">
+                            <div class="file-name">03月报销清单.xlsx</div>
+                            <div class="file-meta">2024-04-01 • 表格文件 • 156 KB</div>
+                        </div>
+                        <div class="file-action">
+                            <span class="tag tag-blue">表格</span>
+                        </div>
+                    </div>
+
+                    <!-- 脚本文档 -->
+                    <div class="file-item" style="cursor: pointer;" onclick="App.navigateTo('script_doc.html')">
+                        <div class="file-icon">📝</div>
+                        <div class="file-info">
+                            <div class="file-name">品牌短视频脚本.docx</div>
+                            <div class="file-meta">2024-03-15 • 文档 • 324 KB</div>
+                        </div>
+                        <div class="file-action">
+                            <span class="tag tag-blue">文档</span>
+                        </div>
+                    </div>
+
+                    <!-- 素材库（加锁） -->
+                    <div class="file-item" style="cursor: pointer;" onclick="App.navigateTo('assets_lock.html')">
+                        <div class="file-icon">🔒</div>
+                        <div class="file-info">
+                            <div class="file-name">素材归档 /assets</div>
+                            <div class="file-meta">已加密 • 2.1 GB</div>
+                        </div>
+                        <div class="file-action">
+                            <span class="tag tag-orange">已加密</span>
+                        </div>
+                    </div>
+
+                 
+                </div>
+
+                <!-- 页脚 -->
+                <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--gray-light); font-size: 13px;">
+                    部分素材被原负责人加密，需完成身份确认后查看
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p11');
+            localStorage.setItem('viewedProjectsFolder', 'true');
+        });
+    </script>
+</body>
+</html>

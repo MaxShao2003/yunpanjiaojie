@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>未归档内容</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #0f0f0f;
+            color: #999;
+            font-family: 'Courier New', monospace;
+            overflow: auto;
+        }
+
+
+        .easter-container {
+            width: 100%;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            padding-top: 70px;
+        }
+
+        .easter-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #888;
+        }
+
+        .easter-content {
+            max-width: 700px;
+            text-align: left;
+            font-size: 14px;
+            line-height: 2;
+            color: #888;
+            margin-bottom: 80px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #222;
+            border-radius: 4px;
+        }
+
+        .easter-signature {
+            text-align: right;
+            margin-top: 30px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .easter-footer {
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #222;
+            color: #666;
+            font-size: 12px;
+        }
+
+        .easter-credit {
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+
+        .easter-cta {
+            margin-top: 30px;
+            font-size: 13px;
+            color: #777;
+        }
+    </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+    <div class="progress-text">第 40 / 40 页</div>
+
+    <div class="easter-container">
+        <div class="easter-title">一封没被删干净的留言</div>
+
+        <div class="easter-content">
+            <p>如果你能看到这封信，说明至少有一次，他们没能把所有东西清干净。</p>
+
+            <p style="margin-top: 20px;">不要试图回去找那栋楼。真正危险的不是地点，是流程。</p>
+
+            <p style="margin-top: 20px;">只要还有人收到"离职交接"四个字，它就会换个名字继续开下去。</p>
+
+            <p style="margin-top: 20px;">如果你也做了一个故事，谢谢你替我们留了个出口。</p>
+
+            <div class="easter-signature">
+                —— 赵宇
+            </div>
+        </div>
+
+        <div class="easter-footer">
+            <div class="easter-credit">
+                <p style="margin-bottom: 10px;">这是一个故事。每个故事都有作者。</p>
+                <p style="margin-bottom: 10px;">如果你想要署名，把这一行替换成你的名字和工作室。</p>
+            </div>
+            <div class="easter-cta">
+                <p>下一个故事会在哪里开始呢？</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p40');
+        });
+    </script>
+</body>
+</html>

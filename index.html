@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【入职交接】赵宇项目资料与系统访问权限已开通</title>
+    <link rel="stylesheet" href="styles/responsive.css">
+    <link rel="stylesheet" href="styles/mobile.css">
+    <style>
+
+        :root {
+            --primary-blue: #4a90e2;
+            --light-blue: #e8f4fd;
+            --dark-gray: #333;
+            --medium-gray: #666;
+            --light-gray: #f5f5f5;
+            --border-color: #ddd;
+            --success-green: #5cb85c;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: #f9f9f9;
+            color: var(--dark-gray);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+
+        /* 邮件头部 */
+        .email-header {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .email-subject {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 12px;
+        }
+
+        .email-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 13px;
+            color: var(--medium-gray);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .email-meta-item {
+            display: flex;
+            gap: 8px;
+        }
+
+        .email-meta-label {
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        /* 主内容区域布局 */
+        .email-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        /* 邮件正文 */
+        .email-body {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .email-section {
+            margin-bottom: 28px;
+        }
+
+        .email-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .email-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-blue);
+            display: inline-block;
+        }
+
+        .email-content {
+            font-size: 14px;
+            color: var(--dark-gray);
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .email-content p {
+            margin-bottom: 12px;
+        }
+
+        .email-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 列表样式 */
+        .email-content ul {
+            margin-left: 24px;
+            margin-bottom: 12px;
+        }
+
+        .email-content li {
+            margin-bottom: 8px;
+        }
+
+        .email-signature {
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--medium-gray);
+        }
+
+        /* 右侧信息卡片 */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .card-subtitle {
+            font-size: 12px;
+            color: var(--medium-gray);
+            margin-bottom: 12px;
+        }
+
+        /* 凭证卡片 */
+        .credential-item {
+            margin-bottom: 12px;
+        }
+
+        .credential-label {
+            font-size: 12px;
+            color: var(--medium-gray);
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .credential-value {
+            background: var(--light-gray);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            word-break: break-all;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            user-select: all;
+            transition: all 0.2s;
+        }
+
+        .credential-value:hover {
+            background: #f0f0f0;
+            border-color: var(--primary-blue);
+        }
+
+        .credential-hint {
+            font-size: 12px;
+            color: var(--medium-gray);
+            margin-top: 12px;
+            padding: 8px 12px;
+            background: var(--light-blue);
+            border-left: 3px solid var(--primary-blue);
+            border-radius: 3px;
+        }
+
+        /* 公司介绍卡片 */
+        .company-intro {
+            font-size: 13px;
+            color: var(--dark-gray);
+            line-height: 1.7;
+        }
+
+        /* 最近访问卡片 */
+        .visit-history-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .visit-history-item {
+            padding: 10px;
+            margin-bottom: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            display: flex;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .visit-history-item:hover {
+            background: #f0f8ff;
+            border-color: var(--primary-blue);
+        }
+
+        .visit-icon {
+            font-size: 16px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .visit-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .visit-title {
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .visit-title a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .visit-title a:hover {
+            text-decoration: underline;
+        }
+
+        .visit-meta {
+            font-size: 11px;
+            color: var(--medium-gray);
+        }
+
+        .visit-history-empty {
+            padding: 20px 10px;
+            text-align: center;
+            color: var(--medium-gray);
+            font-size: 12px;
+        }
+
+        .visit-history-footer {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--light-gray);
+            text-align: center;
+        }
+
+        .visit-clear-btn {
+            padding: 6px 12px;
+            background: var(--light-gray);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--medium-gray);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .visit-clear-btn:hover {
+            background: #f0f0f0;
+            border-color: var(--primary-blue);
+        }
+
+        /* 主按钮 */
+        .action-button {
+            display: block;
+            width: 90%;
+            padding: 12px;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .action-button:hover {
+            background: #0052a3;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+
+        .action-button:active {
+            transform: scale(0.98);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 900px) {
+            .email-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .email-body {
+                padding: 20px;
+            }
+
+            .email-meta {
+                gap: 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .email-header {
+                padding: 15px;
+            }
+
+            .email-subject {
+                font-size: 16px;
+            }
+
+            .email-body {
+                padding: 15px;
+            }
+
+            .email-section-title {
+                font-size: 14px;
+            }
+
+            .email-content {
+                font-size: 13px;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .sidebar {
+                gap: 15px;
+            }
+        }
+
+        /* ========== 竖屏手机适配 ========== */
+        @media (max-width: 479px) {
+            .container {
+                padding: 12px;
+            }
+
+            .email-wrapper {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .email-header {
+                padding: 12px;
+            }
+
+            .email-subject {
+                font-size: 14px;
+            }
+
+            .email-meta {
+                flex-direction: column;
+                gap: 6px;
+                font-size: 11px;
+            }
+
+            .email-body {
+                padding: 12px;
+            }
+
+            .email-content {
+                font-size: 12px;
+            }
+
+            .card {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+
+            .card-title {
+                font-size: 13px;
+            }
+
+            .credential-value {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+
+            .action-button {
+                padding: 12px;
+                font-size: 13px;
+                min-height: 30px;
+            }
+
+            .visit-history-list {
+                max-height: 200px;
+            }
+
+            .sidebar {
+                gap: 12px;
+            }
+        }
+
+        /* ========== 平板竖屏适配 (480px - 768px) ========== */
+        @media (min-width: 480px) and (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+
+            .email-wrapper {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .email-header {
+                padding: 16px;
+            }
+
+            .email-meta {
+                gap: 12px;
+            }
+
+            .email-body {
+                padding: 16px;
+            }
+
+            .card {
+                padding: 14px;
+                margin-bottom: 16px;
+            }
+
+            .sidebar {
+                gap: 16px;
+            }
+        }
+
+        /* ========= 横屏模式优化 ========== */
+        @media (orientation: landscape) and (max-height: 600px) {
+            .email-meta {
+                font-size: 11px;
+                gap: 12px;
+            }
+
+            .email-content {
+                font-size: 12px;
+            }
+
+            .card {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 邮件头部 -->
+        <div class="email-header">
+            <div class="email-subject">【入职交接】赵宇项目资料与系统访问权限已开通</div>
+            <div class="email-meta">
+                <div class="email-meta-item">
+                    <span class="email-meta-label">发件人：</span>
+                    <span>HR 李姐 &lt;hr@dingming.local&gt;</span>
+                </div>
+                <div class="email-meta-item">
+                    <span class="email-meta-label">收件人：</span>
+                    <span>新入职后期编辑</span>
+                </div>
+                <div class="email-meta-item">
+                    <span class="email-meta-label">时间：</span>
+                    <span>2026-03-28 21:14</span>
+                </div>
+                <div class="email-meta-item">
+                    <span class="email-meta-label">抄送：</span>
+                    <span>行政人事中心 / 数据留存中心</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 邮件内容 + 右侧栏 -->
+        <div class="email-wrapper">
+            <!-- 邮件正文区域 -->
+            <div class="email-body">
+                <!-- 交接说明正文 -->
+                <div class="email-section">
+                    <h2 class="email-section-title">交接访问已开通</h2>
+                    <div class="email-content">
+                        <p>你好，</p>
+                        <p>欢迎加入鼎铭文化后期组。</p>
+                        <p>由于原后期剪辑师赵宇因个人健康原因暂时离岗修养，你将接手其现阶段项目及历史素材。为保证工作连续性，公司已为你开通临时交接访问权限，请你于今晚 24:00 前完成全部资料的初步阅读与验收。</p>
+                        <p><strong>本次交接的主要目标如下：</strong></p>
+                        <ul>
+                            <li>熟悉赵宇负责的项目内容、素材结构与命名习惯</li>
+                            <li>查阅其保留的工作记录、备注与交接说明</li>
+                            <li>识别需要继续推进的项目与可复用素材</li>
+                            <li>在系统验收前完成基础确认，避免夜间归档失败</li>
+                        </ul>
+                        <p>如在查看过程中发现命名异常、权限异常、音频损坏、越权文件或未标记资料，请不要自行删除，也不要尝试联系原负责人。系统会在夜间统一处理。</p>
+                        <p><strong>请务必留意：</strong></p>
+                        <ul>
+                            <li>今晚 24:00 后，当前交接访问权限将自动结束</li>
+                            <li>所有离岗人员资料都会按公司流程进行留存与归档</li>
+                            <li>如在阅读过程中出现不适、眩晕、误读、耳鸣或时间感混乱，请先关闭屏幕，稍后继续</li>
+                            <li>若系统提示"正在验收"或"已为你同步进度"，请不要中途退出</li>
+                        </ul>
+                        <p>感谢配合。</p>
+                        <div class="email-signature">
+                            <p>HR 李姐</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 游玩建议 -->
+                <div class="email-section">
+                    <h2 class="email-section-title">阅读建议</h2>
+                    <div class="email-content">
+                        <p>你的目标不是"把文件全都点开"，而是通过这些交接资料，逐步还原赵宇离岗的真实原因，并在系统验收完成前决定自己接下来该怎么做。</p>
+                        <p><strong>建议策略：</strong></p>
+                        <ul>
+                            <li>这是一个以网页浏览、文本观察、搜索引擎和信息拼接为核心的 ARG 解谜游戏</li>
+                            <li>谜题重点在文件名、时间、备注、批注、聊天记录和不同页面之间的对应关系</li>
+                            <li>建议使用电脑端游玩，以获得更完整的页面体验</li>
+                            <li>善于使用搜索引擎功能，搜不到？先找找其他东西再回头看吧</li>
+                            <li>如果卡住，优先回到主界面或本页的"最近访问"中重新梳理线索</li>
+                            <li>某些报错、越权提示、异常弹窗、页面风格突变并不是 bug，而是叙事的一部分</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧卡片区 -->
+            <div class="sidebar">
+                <!-- 首次登录凭证卡片 -->
+                <div class="card">
+                    <div class="card-title">首次登录凭证</div>
+                    <div class="credential-item">
+                        <div class="credential-label">账号</div>
+                        <div class="credential-value">zy_transfer@dingming.local</div>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-label">密码</div>
+                        <div class="credential-value">DMhandover0314</div>
+                    </div>
+                    <div class="credential-hint">这是系统为你临时分配的首次登录账号。登录后进入 OA 交接系统，继续查看赵宇留下的资料。</div>
+                    <a href="pages/login.html" target="_blank" class="action-button">进入 OA 交接系统</a>
+                </div>
+
+                <!-- 企业介绍卡片 -->
+                <div class="card">
+                    <div class="card-title">企业简介</div>
+                    <div class="company-intro">
+                        <p>鼎铭文化传媒致力于打造内容工业的闭环协作体系。我们相信，优秀的人才不应只是被使用，更应被完整吸纳、长期转化，并沉淀为组织的一部分。在这里，情绪会被评估，状态会被追踪，价值会被最大化留存。鼎铭不鼓励短期离开，我们更相信深度融入。</p>
+                    </div>
+                </div>
+
+                <!-- 最近访问卡片 -->
+                <div class="card">
+                    <div class="card-title">最近访问</div>
+                    <div class="card-subtitle">交接阅读记录</div>
+                    <div id="visitHistoryContainer">
+                        <div class="visit-history-empty">
+                            <p>你还没有打开任何交接资料。访问记录会显示在这里。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 进度统计卡片 -->
+                <div class="card" style="text-align: center; padding: 20px; background: linear-gradient(135deg, var(--light-blue) 0%, rgba(74, 144, 226, 0.05) 100%);">
+                    <div style="font-size: 32px; font-weight: 600; color: var(--primary-blue); margin-bottom: 8px;" id="progressNumber">0/42</div>
+                    <div style="font-size: 13px; color: var(--medium-gray); margin-bottom: 12px;">交接资料阅读进度</div>
+                    <div style="background: var(--light-gray); border-radius: 4px; height: 6px; overflow: hidden;">
+                        <div id="progressBar" style="height: 100%; background: var(--primary-blue); width: 0%; transition: width 0.3s ease;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/history.js"></script>
+    <script>
+        // 清理历史记录中的无效项（比如 undefined 或 index）
+        function cleanupHistory() {
+            try {
+                const historyKey = 'visitedPages';
+                const data = localStorage.getItem(historyKey);
+                if (data) {
+                    let history = JSON.parse(data);
+                    // 过滤掉不合法的项：href是undefined、null、空值，或者是index的
+                    history = history.filter(item => {
+                        return item.href &&
+                               item.href !== 'undefined' &&
+                               item.href !== 'null' &&
+                               item.href.trim() !== '' &&
+                               !item.id.toLowerCase().includes('index');
+                    });
+                    localStorage.setItem(historyKey, JSON.stringify(history));
+                }
+            } catch (e) {
+                // 忽略错误
+            }
+        }
+
+        // 更新进度条
+        function updateProgress() {
+            try {
+                const history = VisitHistory.getHistory();
+                const totalPages = 42;  // 总共42个内容页
+                const visitedCount = history.length;
+                const percentage = Math.round((visitedCount / totalPages) * 100);
+
+                const progressNumber = document.getElementById('progressNumber');
+                const progressBar = document.getElementById('progressBar');
+
+                if (progressNumber) {
+                    progressNumber.textContent = visitedCount + '/' + totalPages;
+                }
+                if (progressBar) {
+                    progressBar.style.width = percentage + '%';
+                }
+            } catch (e) {
+                // 忽略错误
+            }
+        }
+
+        // 页面加载时自动清理
+        cleanupHistory();
+
+        // 页面加载时初始化最近访问列表和进度
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('visitHistoryContainer');
+            container.innerHTML = VisitHistory.renderHistory();
+            updateProgress();
+
+            // 监听 localStorage 变化来实时更新进度
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'visitedPages') {
+                    updateProgress();
+                    container.innerHTML = VisitHistory.renderHistory();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

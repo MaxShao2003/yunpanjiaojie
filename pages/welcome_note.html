@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新人欢迎辞.txt</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .text-viewer { background: var(--white); max-width: 900px; margin: 0 auto; border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden; }
+        .text-toolbar { background: var(--gray-bg); padding: 12px 16px; border-bottom: 1px solid var(--border-color); font-size: 13px; color: var(--gray-medium); }
+        .text-content { padding: 40px 50px; color: #333; font-size: 14px; line-height: 2; font-family: "Courier New", monospace; white-space: pre-wrap; word-wrap: break-word; }
+        .back-btn { display: inline-block; margin-bottom: 20px; }
+        .back-btn a { padding: 8px 16px; background: var(--gray-bg); border: 1px solid var(--border-color); border-radius: 3px; color: var(--primary-blue); font-size: 14px; cursor: pointer; }
+        .back-btn a:hover { background: var(--light-blue); }
+        .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--gray-light); font-size: 13px; }
+        </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">文件预览</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                    <li><a href="public_folder.html" class="nav-link"><span class="sidebar-icon">🔓</span> 公共资料</a></li>
+                    <li><a href="#" class="nav-link"><span class="sidebar-icon">🗑️</span> 回收站</a></li>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div class="back-btn">
+                    <a href="public_folder.html">← 返回公共文件夹</a>
+                </div>
+
+                <div class="text-viewer">
+                    <div class="text-toolbar">
+                        📄 新人欢迎辞.txt
+                    </div>
+
+                    <div class="text-content">欢迎加入鼎铭文化后期组。
+
+赵宇的离职交接资料已全部整理至系统，请你尽快熟悉其项目素材、命名习惯与工作流程。
+
+为保证业务连续性，请于今晚 24:00 前完成全部阅读，系统将自动验收。
+
+如在阅读中发现命名错误、内容缺失、异常音频或越权文件，请不要自行删除。
+
+夜间会有统一清理流程，不必担心。
+
+祝你在鼎铭工作顺利。
+
+HR 李姐</div>
+                </div>
+
+                <div class="footer">
+                    创建时间：2024年03月18日 | UTF-8 编码
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Puzzle.recordVisit('p10');
+            localStorage.setItem('viewedWelcomeNote', 'true');
+        });
+    </script>
+</body>
+</html>

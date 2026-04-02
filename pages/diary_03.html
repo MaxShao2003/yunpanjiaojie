@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>diary_03.txt</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .text-viewer { background: var(--white); max-width: 800px; margin: 0 auto; border: 1px solid var(--border-color); border-radius: 4px; overflow: visible; }
+        .text-toolbar { background: var(--gray-bg); padding: 12px 16px; border-bottom: 1px solid var(--border-color); font-size: 13px; }
+        .text-content { padding: 40px; color: #333; font-size: 14px; line-height: 2; font-family: "Georgia", serif; white-space: pre-wrap; word-wrap: break-word; overflow: visible; }
+        .diary-date { font-size: 12px; color: var(--gray-light); margin-bottom: 20px; }
+        .diary-text { margin-bottom: 16px; }
+        .diary-warning { color: #d9534f; font-weight: 600; }
+        .code-hint { background: #f5f5f5; border-left: 3px solid #d9534f; padding: 8px 12px; margin: 12px 0; font-family: 'Courier New', monospace; font-size: 13px; }
+        .back-btn { display: inline-block; margin-bottom: 20px; }
+        .back-btn a { padding: 8px 16px; background: var(--gray-bg); border: 1px solid var(--border-color); border-radius: 3px; color: var(--primary-blue); font-size: 14px; cursor: pointer; }
+        .back-btn a:hover { background: var(--light-blue); }
+        .clickable-hint { cursor: help; border-bottom: 1px dotted var(--primary-blue); position: relative; transition: all 0.3s; }
+        .clickable-hint:hover { color: var(--primary-blue); font-weight: 600; }
+        .hint-tooltip { position: absolute; bottom: 100%; left: 0; background: rgba(0,0,0,0.9); color: #fff; padding: 8px 12px; border-radius: 3px; white-space: nowrap; font-size: 12px; margin-bottom: 8px; pointer-events: none; opacity: 0; transition: opacity 0.3s; z-index: 1000; }
+        .clickable-hint:hover .hint-tooltip { opacity: 1; }
+        #secretHints { transition: opacity 0.8s ease-in, max-height 0.8s ease-out; max-height: 0; opacity: 0; overflow: visible; }
+        #secretHints.visible { display: block !important; opacity: 1; max-height: 2000px; }
+        </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">文件预览</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div class="back-btn">
+                    <a href="home.html">← 返回主界面</a>
+                </div>
+
+                <div class="text-viewer">
+                    <div class="text-toolbar">
+                        📝 diary_03.txt
+                    </div>
+
+                    <div class="text-content">
+<span class="diary-date">2018年5月12日 00:26</span>
+
+<span class="diary-text"><span class="diary-warning">日期不对了。</span></span>
+
+<span class="diary-text">可能是系统在改，也可能是我已经分不清了。</span>
+
+<span class="diary-text">我知道他们把"材料"藏在哪了。</span>
+
+<span class="diary-text"><span class="clickable-hint" data-hint-type="backend">后台</span>里有真实名单，离职、休假、失联，全是假话。</span>
+
+<span class="diary-text">看到那些之后，你就不再是接替我的人了。</span>
+
+<span class="diary-text">你只是下一个。</span>
+
+<span class="diary-text"></span>
+
+<span class="diary-warning">别信 HR。</span>
+
+<span class="diary-warning">别去办公室。</span>
+
+<span class="diary-text"></span>
+
+<span class="diary-text">如果你真的想知道真相...
+
+
+
+                    </div>
+
+                    <!-- 隐藏的线索容器，只有在充分互动后才显示 -->
+                    <div id="secretHints" class="text-content" style="display: none; padding-top: 20px; border-top: 1px solid var(--border-color); margin-top: 20px;">
+                        <span class="diary-text" style="color: rgba(217, 83, 79, 0.6);">你还在这里吗？</span>
+
+                        <span class="diary-text">那就听我说。这个系统...它的核心操作不是那么简单。</span>
+
+                        <span class="diary-text">但<span class="clickable-hint" data-hint-type="interface">界面</span>的某处有一道暗门。</span>
+
+                        <span class="diary-text">似乎是在做夜间清理。</span>
+
+                        <span class="diary-text">一些无意的、反复的动作...可能会触发不同的东西。</span>
+
+                        <span class="diary-text">有人曾经这样做过。我听到了五声，咔...咔...咔...咔...咔...</span>
+
+                        <span class="diary-text"></span>
+
+                        <span class="diary-text">系统最初的防护似乎依赖于一个文本密码...那个数字...我在某个损坏的文件备份中看到过。</span>
+
+                        
+
+                        <span class="diary-text"></span>
+
+                        <span class="diary-text" style="color: rgba(217, 83, 79, 0.8);">如果你进去了，你会需要：</span>
+
+                        <span class="code-hint" id="startHint" style="opacity: 0.5;">➤ 一个身份：</span>
+
+                        <span class="code-hint" id="codeHint" style="opacity: 0.5; display: none;">➤ 一个代码</span>
+
+                        <span class="diary-text"></span>
+
+                        <span class="diary-text" style="color: rgba(217, 83, 79, 0.7); font-size: 13px; margin-top: 20px; border-left: 2px solid rgba(217, 83, 79, 0.3); padding-left: 12px;">
+                        在某个你已经访问过的地方，有赵宇留下的东西。<br/>
+                        看起来很<span style="text-decoration: underline; text-decoration-style: dotted;">损坏</span>，但还能用。<br/>
+                        <br/>
+                        文件的名字里... 有那个数字。<br/>
+                        
+                        <br/>
+                        
+                        </span>
+
+                        <span class="diary-warning" style="margin-top: 20px;">但你一旦进去，就没有回头路了。</span>
+
+                        
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script src="../scripts/secrets_tracker.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p23');
+            Puzzle.recordClue('diary_03');
+            localStorage.setItem('readDiary3', 'true');
+
+            // 初始化交互系统
+            initDiary3Interaction();
+        });
+
+        function initDiary3Interaction() {
+            const textContent = document.querySelector('.text-content');
+            const secretHints = document.getElementById('secretHints');
+            let interactionScore = 0;
+
+            // 1. 点击可交互的词语来激发线索
+            const clickableHints = document.querySelectorAll('.clickable-hint');
+            clickableHints.forEach(hint => {
+                const hintType = hint.getAttribute('data-hint-type');
+
+                // 添加提示工具提示
+                const tooltipText = {
+                    'backend': '在某个地方...',
+                    'interface': '试试看有什么特殊功能'
+                };
+
+                const tooltip = document.createElement('div');
+                tooltip.className = 'hint-tooltip';
+                tooltip.textContent = tooltipText[hintType] || '...';
+                hint.appendChild(tooltip);
+
+                // 记录点击
+                hint.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    interactionScore += 20;
+                    SecretsTracker.recordDiscovery(hintType + '_examined');
+                    checkAndUnlockSecrets();
+                });
+            });
+
+            // 2. 滚动追踪 - 读完整个日记内容
+            let hasScrolledToBottom = false;
+            window.addEventListener('scroll', () => {
+                if (!hasScrolledToBottom) {
+                    const scrollPercentage = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+                    if (scrollPercentage > 0.85) {
+                        hasScrolledToBottom = true;
+                        interactionScore += 30;
+                        localStorage.setItem('diary3FullyRead', 'true');
+                        SecretsTracker.recordDiscovery('diary3_read');
+                        checkAndUnlockSecrets();
+                    }
+                }
+            });
+
+            // 3. 等待用户检查（浏览器开发者工具、长时间阅读等）
+            // 50毫秒后显示部分线索（让用户有时间思考）
+            setTimeout(() => {
+                interactionScore += 15;
+                checkAndUnlockSecrets();
+            }, 2000);
+
+            function checkAndUnlockSecrets() {
+                const diary3Read = localStorage.getItem('diary3FullyRead') === 'true';
+                const hasInteracted = interactionScore >= 30;
+
+                // 如果用户充分互动了，显示更多线索
+                if (hasInteracted || diary3Read) {
+                    secretHints.classList.add('visible');
+                    SecretsTracker.recordDiscovery('diary3_secrets_unlocked');
+
+                    // 进一步的解锁：悬停或点击后显示更具体的信息
+                    showProgressiveHints();
+                }
+            }
+
+            function showProgressiveHints() {
+                const startHint = document.getElementById('startHint');
+                const codeHint = document.getElementById('codeHint');
+
+                // 延迟显示进一步的提示
+                setTimeout(() => {
+                    if (startHint) {
+                        startHint.style.opacity = '0.8';
+                        startHint.textContent = '➤ 一个身份...最简单的那种';
+                    }
+                }, 800);
+
+                setTimeout(() => {
+                    if (codeHint) {
+                        codeHint.style.display = 'block';
+                        codeHint.style.opacity = '0';
+                        codeHint.textContent = '➤ 一个代码...可能在帮助文档或其他地方';
+                        codeHint.style.transition = 'opacity 0.6s';
+                        setTimeout(() => {
+                            codeHint.style.opacity = '0.5';
+                        }, 100);
+                    }
+                }, 1600);
+            }
+
+            // 记录用户已读此日记
+            localStorage.setItem('hasReadDiary3', 'true');
+        }
+    </script>
+</body>
+</html>

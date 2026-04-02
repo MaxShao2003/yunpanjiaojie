@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>diary_01.txt</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .text-viewer { background: var(--white); max-width: 800px; margin: 0 auto; border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden; }
+        .text-toolbar { background: var(--gray-bg); padding: 12px 16px; border-bottom: 1px solid var(--border-color); font-size: 13px; }
+        .text-content { padding: 40px; color: #333; font-size: 14px; line-height: 2; font-family: "Georgia", serif; white-space: pre-wrap; word-wrap: break-word; }
+        .diary-date { font-size: 12px; color: var(--gray-light); margin-bottom: 20px; }
+        .diary-text { margin-bottom: 16px; }
+        .cat-name { font-weight: 600; color: #d9534f; background: rgba(217, 83, 79, 0.08); padding: 1px 4px; border-radius: 2px; }
+        .next-button { display: inline-block; margin-top: 20px; padding: 12px 24px; background: var(--primary-blue); color: white; border: none; border-radius: 3px; font-size: 14px; font-weight: 600; cursor: pointer; }
+        .next-button:hover { background: #0052a3; }
+        .back-btn { display: inline-block; margin-bottom: 20px; }
+        .back-btn a { padding: 8px 16px; background: var(--gray-bg); border: 1px solid var(--border-color); border-radius: 3px; color: var(--primary-blue); font-size: 14px; cursor: pointer; }
+        .back-btn a:hover { background: var(--light-blue); }
+        </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">文件预览</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div class="back-btn">
+                    <a href="home.html">← 返回主界面</a>
+                </div>
+
+                <div class="text-viewer">
+                    <div class="text-toolbar">
+                        📝 diary_01.txt
+                    </div>
+
+                    <div class="text-content">
+<span class="diary-date">5月12日 23:47</span>
+
+<span class="diary-text">今天王强没来。</span>
+
+<span class="diary-text">HR 说他情绪出了问题，回老家修养了。</span>
+
+<span class="diary-text">但他的水杯还在，外套还在，桌子下面那双拖鞋也没动。</span>
+
+<span class="diary-text">我下午去拿充电线的时候，甚至感觉他椅子还是热的。</span>
+
+<span class="diary-text">李姐让我别看，说离职交接会统一清理。</span>
+
+<span class="diary-text">她说"人走了，东西不重要"。</span>
+
+<span class="diary-text">这话听着太怪了。</span>
+
+<span class="diary-text">李姐最近经常加班，似乎有一套自己的工作习惯。我注意到她的值班记录里，常常用工号拼接一些重复出现的时间码来作为她的会话口令。好像是说，每一个员工的离岗都需要她来确认和处理。很规律的时间。每天都是那个时间。</span>
+
+<span class="diary-text">我不应该知道这些，但现在都 23:47 了，李姐还在楼下。</span>
+
+<span class="diary-text">13 层今晚的灯也没全灭。</span>
+
+
+
+                    </div>
+
+                    <!-- 删除了继续按钮，玩家必须通过搜索来发现下一篇日记 -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p21');
+            Puzzle.recordClue('diary_01');
+            localStorage.setItem('readDiary1', 'true');
+
+            // 多次访问增强
+            const visitCount = parseInt(localStorage.getItem('diary01_visits') || '0') + 1;
+            localStorage.setItem('diary01_visits', visitCount);
+
+            // 第二次及以后访问时，添加额外提示
+            if (visitCount >= 2) {
+                const afterContent = document.createElement('div');
+                afterContent.style.cssText = 'margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--border-color); color: #999; font-size: 13px; font-style: italic; line-height: 1.8;';
+                afterContent.innerHTML = '<p style="margin: 0 0 12px 0;">[后来回想起来，我意识到某些细节可能被我忽视了...]</p>';
+                document.querySelector('.text-content').appendChild(afterContent);
+            }
+        });
+    </script>
+</body>
+</html>

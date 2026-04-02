@@ -1,0 +1,227 @@
+《交接云盘》ARG 游戏 - 项目文件结构
+═════════════════════════════════
+
+./arg-jiaojie-yunpan-docs/
+│
+├── README.md                           (项目总文档)
+├── PROJECT_STRUCTURE.txt               (本文件)
+│
+├── styles/
+│   ├── main.css                        (前台系统样式，7.2 KB)
+│   │   └── 包含：卡片、文件列表、标签、通知栏、进度条、响应式设计
+│   │
+│   └── admin.css                       (后台系统样式，6.1 KB)
+│       └── 包含：黑红暗灰主题、危险状态提示、日志面板、统计盒子
+│
+├── scripts/
+│   ├── app.js                          (应用全局管理，3.3 KB)
+│   │   ├── 导航函数：navigateTo()
+│   │   ├── 登录管理：login()、logout()、isLoggedIn()
+│   │   └── Logo五连击检测（核心隐藏交互）
+│   │
+│   └── puzzle.js                       (谜题与状态管理，5.1 KB)
+│       ├── 访问追踪：recordVisit()、hasVisited()
+│       ├── 进度管理：updateProgress()、getProgress()
+│       ├── 密码系统：recordPassword()、checkPassword()
+│       └── 线索系统：recordClue()、hasClue()
+│
+├── pages/                              (所有游戏页面)
+│   │
+│   ├─── 第一阶段：登录与主界面
+│   ├── p01_login.html                  (登录页)
+│   │   └─ 特性：时间显示、HR留言、终端信息
+│   ├── p02_index.html                  (主界面Hub)
+│   │   └─ 特性：文件列表、进度条、通知栏
+│   ├── p03_404.html                    (404错误页)
+│   │   └─ 特性：异常文本闪现（快逃、别回头、它在看）
+│   ├── p04_about_us.html               (关于鼎铭)
+│   │   └─ 特性：双关恐怖文案、职位描述
+│   ├── p05_public_folder.html          (公共文件夹)
+│   │   └─ 特性：5个公共资料文件导航
+│   │
+│   ├─── 第二阶段：正常的公共资料（前期铺垫）
+│   ├── p06_holiday_notice.html         (放假通知)
+│   │   └─ 特性：PDF预览风格、正常文案
+│   ├── p07_attendance_sheet.html       (03月考勤汇总)
+│   │   └─ 特性：Excel表格、03:14时间戳 **关键线索**
+│   ├── p08_employee_handbook_public.html (员工手册)
+│   │   └─ 特性：第14条被涂黑 **隐藏内容**
+│   ├── p09_directory.html              (部门通讯录)
+│   │   └─ 特性：赵宇工号 DM-8975 **密码材料**
+│   ├── p10_welcome_note.html           (欢迎辞)
+│   │   └─ 特性：时间压力、系统验收提示
+│   │
+│   ├─── 第三阶段：项目文件与谜题主链（诡异物品→隐藏图片）
+│   ├── p11_projects_folder.html        (项目文件夹)
+│   │   └─ 特性：5个项目文件导航 + 1个加锁文件夹
+│   ├── p12_interview_video.html        (采访视频伪播放器)
+│   │   └─ 特性：假播放器、窗户反光闪现红衣人影 **视觉异常**
+│   ├── p13_reimbursement_sheet.html    (报销单)
+│   │   └─ 特性：诡异物品列表（隔音海绵、洗涤剂、冰柜维修）
+│   ├── p14_script_doc.html             (脚本文档)
+│   │   └─ 特性：恐怖台词、批注评论、修改建议
+│   ├── p15_assets_lock.html            (素材库锁页)
+│   │   └─ 特性：密码输入、抖动反馈、正确密码跳转P17
+│   │       密码：buxiangganle (来自P16 微信截图)
+│   ├── p16_wechat_log.html             (微信聊天截图)
+│   │   └─ 特性：聊天内容展示、密码线索"不想干了"
+│   ├── p17_hidden_pic_claw.html        (抓痕照片)
+│   │   └─ 特性：Canvas绘制墙面抓痕、03:14时间戳、赵宇备注
+│   ├── p18_hidden_pic_vent.html        (排风扇照片)
+│   │   └─ 特性：Canvas绘制排风扇、红布料视觉、下一步提示
+│   │
+│   ├─── 第四阶段：私密文件与真相线索（日记→后台凭证）
+│   ├── p19_private_lock.html           (赵宇私密文件夹)
+│   │   └─ 特性：密码输入、验证反馈、解锁P21日记
+│   │       密码：DM-8975heidou (赵宇工号+黑豆猫名)
+│   ├── p20_fake_weibo.html             (赵宇的个人微博)
+│   │   └─ 特性：微博列表、黑豆线索、离职状态
+│   ├── p21_diary_01.html               (日记1)
+│   │   └─ 特性：5月12日 23:47、怀疑阶段、王强异常
+│   ├── p22_diary_02.html               (日记2)
+│   │   └─ 特性：5月15日 03:14、确认阶段、**"地上是红的"**
+│   ├── p23_diary_03.html               (日记3)
+│   │   └─ 特性：日期混乱(2018年)、后台凭证直接给出
+│   │       - admin 账号
+│   │       - OVERRIDE_998 覆写代码
+│
+│   ├─── 待完成部分（P24-P40）
+│   ├── p24_true_rules.html             (≈ 真实员工手册)
+│   ├── p25_audio_log.html              (≈ 恢复的录音)
+│   ├── p26_key_and_delete_log.html     (≈ 覆写代码与删除失败日志)
+│   ├── p27_admin_login.html            (≈ 后台登录页)
+│   ├── p28_admin_dashboard.html        (≈ 后台总控台)
+│   ├── p29_roster_real.html            (≈ 真实名单)
+│   ├── p30_camera_pantry.html          (≈ 茶水间监控)
+│   ├── p31_camera_your_desk.html       (≈ 你的工位监控)
+│   ├── p32_your_profile.html           (≈ 玩家档案)
+│   ├── p33_system_alert.html           (≈ 系统警报)
+│   ├── p34_hr_message.html             (≈ HR消息)
+│   ├── p35_final_choice.html           (≈ 最终抉择)
+│   ├── p36_bad_end.html                (≈ 坏结局)
+│   ├── p37_normal_end.html             (≈ 普通结局)
+│   ├── p38_true_end.html               (≈ 真结局)
+│   ├── p39_credits.html                (≈ 制作名单)
+│   └── p40_easter_egg.html             (≈ 彩蛋页)
+│
+└── docs/
+    ├── 01_page_copy.md                 (40页完整文案)
+    ├── 02_puzzle_chains.md             (谜题链设计)
+    └── 03_cursor_prompt_pack.md        (Cursor提示词pack)
+
+
+核心交互流程
+═════════════
+
+[开始游戏]
+    ↓
+[P01 登录页] (任意账号密码)
+    ↓
+[P02 主界面] ← 五连击Logo检查点 (需要无效标记)
+    ↓
+[P05 公共文件夹] (5个文学资料)
+    │
+    ├→ [P06-P10] (正常的公共资料)
+    │
+[P11 项目文件夹] (关键谜题开始)
+    ├→ [P12] 采访视频 (红衣人影线索)
+    ├→ [P13] 报销单 (诡异物品)
+    ├→ [P14] 脚本文档 (台词)
+    ├→ [P16] 微信截图 ← 获得第一个密码
+    │
+[P15 素材库锁] (输入密码：buxiangganle)
+    ├→ [P17] 抓痕照片 (呼应03:14)
+    └→ [P18] 排风扇照片 (呼应红衣人)
+    ↓
+[P20 赵宇微博] ← 获得第二个密码要素(黑豆)
+    ↓
+[P19 私密文件夹锁] (输入密码：DM-8975heidou)
+    ├→ [P21] 日记1 (怀疑)
+    ├→ [P22] 日记2 (确认 - "地上是红的")
+    └→ [P23] 日记3 (后台凭证)
+    ↓
+[Logo 五连击检测] ← 任何页面
+    ↓
+[P27 后台登录页] (admin / OVERRIDE_998)
+    ↓
+[P28 后台总控台] (工业化真相)
+    ├→ [P29] 真实名单
+    ├→ [P30] 茶水间监控
+    ├→ [P31] 你的工位监控
+    └→ [P32] 你的档案
+    ↓
+[P35 最终抉择]
+    ├→ [P36] 坏结局 (被回收)
+    ├→ [P37] 普通结局 (逃出但后遗症)
+    └→ [P38] 真结局 (摧毁系统)
+
+
+关键数据存储（localStorage）
+════════════════════════════
+
+visitedPages        : ['p01', 'p02', 'p03', ...]         (访问追踪)
+progress            : 23                                  (当前进度%)
+clues               : ['cat_name_heidou', 'diary_01', ...] (线索集)
+passwords           : { assets: 'buxiangganle', ...}      (密码记录)
+assetsUnlocked      : true                                (素材库解锁)
+privateUnlocked     : true                                (私密文件解锁)
+hasSeenWechatLog    : true                                (微信已读)
+isLoggedIn          : true                                (登录状态)
+currentUser         : '账号名'                            (当前用户)
+
+
+支持的浏览器
+═════════════
+
+✓ Chrome 90+
+✓ Firefox 88+
+✓ Safari 14+
+✓ Edge 90+
+✓ 移动浏览器 (iOS Safari, Chrome Mobile)
+
+
+文件大小统计
+════════════
+
+styles/main.css       : 7.2 KB
+styles/admin.css      : 6.1 KB
+scripts/app.js        : 3.3 KB
+scripts/puzzle.js     : 5.1 KB
+────────────────────────────
+小计                  : 21.7 KB
+
+p01-p05 (入口)       : ~35 KB
+p06-p10 (资料)       : ~40 KB
+p11-p18 (谜题)       : ~65 KB
+p19-p23 (真相)       : ~45 KB
+────────────────────────────
+页面总计              : ~185 KB
+项目总计              : ~207 KB
+
+
+下一步优化建议
+═══════════
+
+1. 性能优化
+   - 图片懒加载（P12/P17/P18的Canvas）
+   - CSS压缩
+   - 脚本拆分异步加载
+
+2. 功能拓展
+   - 添加音频效果（P25录音页）
+   - 添加倒计时机制（P35最终抉择的120秒超时）
+   - 实现深度链接（保存游戏进度URL）
+
+3. 用户体验
+   - 添加声音选项
+   - 实现全屏模式
+   - 添加游戏重启功能
+
+4. 内容完善
+   - 完成P24-P40后台页面
+   - 添加更多视觉异常效果
+   - 扩充文案与台词
+
+─────────────────────────────
+制作：[你的名字]
+最后更新：2026-03-28

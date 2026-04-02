@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>监控通道 02 - 编辑区04</title>
+    <link rel="stylesheet" href="../styles/admin.css">
+    <style>
+    </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body style="background: #0a0a0a;">
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+    <div class="progress-text">第 31 / 40 页</div>
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <div class="admin-header-left">
+                <div class="admin-logo">鼎铭</div>
+                <div class="admin-title">监控系统 - 编辑区</div>
+            </div>
+            <div class="admin-header-right">
+                <button class="admin-logout-btn" onclick="App.navigateTo('admin_dashboard.html');">返回</button>
+            </div>
+        </div>
+
+        <div class="admin-main" style="padding: 20px;">
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <div class="admin-card-title">CAM 02 / Edit Bay 04</div>
+                </div>
+                <div class="admin-card-content">
+                    <div style="position: relative; width: 100%; padding-bottom: 75%; background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 50%, #1a2a2a 100%); border: 2px solid #333; border-radius: 4px; overflow: hidden;">
+                        <img src="../media/camera_desk_feed.png" alt="编辑区监控画面" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-card" style="margin-top: 20px;">
+                <div class="admin-card-header">
+                    <div class="admin-card-title" style="color: #d9534f;">实时监控信息</div>
+                </div>
+                <div class="admin-card-content">
+                    <div style="color: #d9534f; font-family: 'Courier New', monospace; font-size: 14px; line-height: 2.2;">
+                        <div>对象：当前交接人</div>
+                        <div style="color: #ff9800;">状态：待收割</div>
+                        <div style="color: #d9534f;">倒计时：<span id="countdown" style="font-size: 18px; font-weight: bold;">00:02:00</span></div>
+                        <div style="color: #888; font-size: 12px; margin-top: 8px;">系统初始化：03:14:22</div>
+                        <div>视线校准中</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-card" style="margin-top: 20px;">
+                <div class="admin-card-header">
+                    <div class="admin-card-title">系统评估</div>
+                </div>
+                <div class="admin-card-content">
+                    <div style="color: #999; font-size: 12px; line-height: 1.8;">
+                        <p>对象已完成 87% 验收。</p>
+                        <p>焦虑指数持续上升，适合在疲惫阶段进行接触。</p>
+                        <p>建议由 HR 发起最终引导。</p>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('adminLoggedIn') !== 'true') {
+                window.location.href = 'admin_login.html';
+                return;
+            }
+
+            localStorage.setItem('hasSeenYourDeskCam', 'true');
+            Puzzle.recordVisit('p31');
+
+            // 倒计时 - 改为120秒（2分钟），60秒时触发解锁
+            let seconds = 120; // 2分钟
+            const countdownEl = document.getElementById('countdown');
+
+            const interval = setInterval(() => {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                countdownEl.textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+
+                // 当倒计时到达60秒时，触发P32解锁（无声解锁，玩家不知道发生了什么）
+                if (seconds === 60) {
+                    localStorage.setItem('systemCountdownWarning', 'true');
+                    if (typeof SecretsTracker !== 'undefined') {
+                        SecretsTracker.recordDiscovery('countdown_danger_point');
+                    }
+                }
+
+                if (seconds > 0) {
+                    seconds--;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

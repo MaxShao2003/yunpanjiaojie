@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统后台 - 管理面板</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/admin.css">
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="admin-container">
+        <div class="container">
+            <!-- ========== 顶部栏 ========== -->
+            <div class="header">
+                <div class="header-left">
+                    <div class="logo" data-version="ADMIN">交接云盘.SYS</div>
+                    <div class="header-title">系统管理面板</div>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">root@system.local</div>
+                    <button class="logout-btn">退出登录</button>
+                </div>
+            </div>
+
+            <!-- ========== 主内容区 ========== -->
+            <div class="main-wrapper">
+                <!-- 侧边栏 -->
+                <aside class="sidebar">
+                    <nav class="sidebar-nav">
+                        <li><a href="admin-dashboard.html" class="nav-link"><span class="sidebar-icon">📊</span> 监控面板</a></li>
+                        <li><a href="admin-users.html" class="nav-link"><span class="sidebar-icon">👥</span> 用户管理</a></li>
+                        <li><a href="admin-files.html" class="nav-link"><span class="sidebar-icon">💾</span> 文件管理</a></li>
+                        <li><a href="admin-logs.html" class="nav-link"><span class="sidebar-icon">📝</span> 系统日志</a></li>
+                        <li><a href="admin-security.html" class="nav-link"><span class="sidebar-icon">🔐</span> 安全设置</a></li>
+                        <li><a href="admin-settings.html" class="nav-link"><span class="sidebar-icon">⚙️</span> 系统设置</a></li>
+                    </nav>
+                </aside>
+
+                <!-- 主内容 -->
+                <main class="main-content">
+                    <!-- 警告横幅 -->
+                    <div class="admin-banner warning">
+                        ⚠️ 您正在访问系统管理后台。所有操作均被记录并监控。未经授权的访问将被追踪。
+                    </div>
+
+                    <!-- 页面标题与面包屑 -->
+                    <div class="breadcrumb">
+                        <a href="admin-dashboard.html">首页</a>
+                        <span>&gt;</span>
+                        <span>页面标题</span>
+                    </div>
+
+                    <!-- 页面内容区域 - 在子页面中替换 -->
+                    <div class="content-area">
+                        <!-- 监控数据 -->
+                        <div class="data-monitor">
+                            <div class="monitor-item">
+                                <div class="monitor-label">在线用户</div>
+                                <div class="monitor-value">0</div>
+                            </div>
+                            <div class="monitor-item">
+                                <div class="monitor-label">系统状态</div>
+                                <div class="monitor-value" style="color: #4caf50;">正常</div>
+                            </div>
+                            <div class="monitor-item">
+                                <div class="monitor-label">CPU占用</div>
+                                <div class="monitor-value">0%</div>
+                            </div>
+                            <div class="monitor-item">
+                                <div class="monitor-label">内存占用</div>
+                                <div class="monitor-value">0%</div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">页面标题</div>
+                            </div>
+                            <div class="card-content">
+                                <p>这是一个后台通用模板。在创建具体的管理页面时，替换 .content-area 内的内容。</p>
+                                <p>所有后台页面使用统一的黑红暗灰色系主题。</p>
+                            </div>
+                        </div>
+
+                        <!-- 系统日志示例 -->
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">系统日志</div>
+                            </div>
+                            <div class="system-log">
+                                <div class="log-item">
+                                    <div class="log-time">2024-03-28 12:00:00</div>
+                                    <div class="log-level info">INFO</div>
+                                    <div class="log-message">系统启动成功</div>
+                                </div>
+                                <div class="log-item">
+                                    <div class="log-time">2024-03-28 12:01:00</div>
+                                    <div class="log-level success">PASS</div>
+                                    <div class="log-message">数据库连接已建立</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 脚本加载 ========== -->
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <!-- 后台页面特定脚本在这里加载 -->
+</body>
+</html>

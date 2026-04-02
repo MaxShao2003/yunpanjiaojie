@@ -1,0 +1,951 @@
+/* ========================================
+   《交接云盘》响应式设计系统 - 竖屏适配
+   ========================================
+
+   本文件处理所有响应式设计，确保在：
+   - 桌面 (1200px+)
+   - 平板横屏 (768px - 1200px)
+   - 平板竖屏 (480px - 768px)
+   - 手机竖屏 (小于 480px)
+
+   都能正常显示所有功能，不改动游戏逻辑。
+   ======================================== */
+
+/* ========== 基础断点变量 ========== */
+:root {
+    --breakpoint-mobile-sm: 360px;      /* 最小手机 */
+    --breakpoint-mobile: 480px;         /* 标准手机 */
+    --breakpoint-tablet: 768px;         /* 平板 */
+    --breakpoint-desktop: 1024px;       /* 桌面 */
+    --breakpoint-wide: 1440px;          /* 宽屏 */
+
+    --touch-target-min: 44px;           /* 触屏最小点击区域 */
+    --spacing-mobile: 12px;             /* 手机端间距 */
+    --spacing-tablet: 16px;             /* 平板端间距 */
+    --spacing-desktop: 20px;            /* 桌面端间距 */
+}
+
+/* ========== 横屏模式优化 ========== */
+@media (orientation: landscape) {
+    /* 横屏时限制表单宽度，不应该100% */
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    textarea,
+    select,
+    .form-input {
+        width: auto !important;
+        max-width: 100%;
+    }
+
+    button,
+    input[type="submit"],
+    input[type="button"],
+    .login-btn,
+    .btn,
+    .action-button {
+        width: auto !important;
+        padding: 8px 20px !important;
+        min-height: 40px !important;
+    }
+}
+
+/* 确保竖屏时不出现水平滚动 */
+@media (orientation: portrait) {
+    html, body {
+        overflow-x: hidden;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    /* 竖屏时隐藏水平滚动条 */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+/* ========== 响应式容器 ========== */
+
+/*
+   平板及以下设备：sidebar变为水平导航或折叠
+   手机：完全单列布局
+*/
+@media (max-width: 1023px) {
+    .main-wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100% !important;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 0;
+        min-height: auto;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        gap: 0;
+        flex-wrap: nowrap;
+    }
+
+    .sidebar-nav li {
+        flex: 0 0 auto;
+        min-width: 90px;
+        border-right: 1px solid var(--border-color);
+    }
+
+    .sidebar-nav li:last-child {
+        border-right: none;
+    }
+
+    .nav-link {
+        padding: 12px 8px;
+        font-size: 12px;
+        justify-content: center;
+        flex-direction: column;
+        gap: 4px;
+        white-space: nowrap;
+    }
+
+    .sidebar-icon {
+        font-size: 18px;
+    }
+}
+
+/* ========== 手机竖屏 (480px 以下) ========== */
+@media (max-width: 479px) and (orientation: portrait) {
+    .container {
+        padding: 12px;
+    }
+
+    /* 表单元素全宽适配 */
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    textarea,
+    select {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+    }
+
+    .form-input,
+    .form-group,
+    .login-form,
+    .login-btn {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    button,
+    input[type="submit"],
+    input[type="button"] {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        min-height: 44px !important;
+    }
+
+    .header {
+        padding: 12px 16px;
+        height: auto;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .header-left,
+    .header-right {
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .logo {
+        font-size: 16px;
+        padding: 6px 8px;
+    }
+
+    .header-title {
+        font-size: 14px;
+    }
+
+    .user-info {
+        font-size: 12px;
+    }
+
+    .logout-btn {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    /* 主内容区域 */
+    .main-content {
+        padding: 12px;
+        max-width: 100%;
+    }
+
+    /* 卡片调整 */
+    .card {
+        margin-bottom: 12px;
+    }
+
+    .card-header {
+        padding: 12px;
+    }
+
+    .card-title {
+        font-size: 14px;
+    }
+
+    .card-content {
+        padding: 12px;
+    }
+
+    /* 文件列表项调整为单列 */
+    .file-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .file-icon {
+        margin-right: 0;
+    }
+
+    .file-info {
+        width: 100%;
+    }
+
+    .file-action {
+        width: 100%;
+        flex-direction: row;
+        margin-top: 0;
+        gap: 6px;
+    }
+
+    .file-action button {
+        flex: 1;
+        min-height: 44px;
+    }
+
+    /* 按钮最小点击区域 */
+    .btn, .action-button {
+        min-height: 44px;
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+
+    /* 模态框调整 */
+    .modal-content {
+        width: 95%;
+        padding: 16px;
+    }
+
+    .modal-title {
+        font-size: 16px;
+    }
+
+    .modal-body {
+        font-size: 13px;
+        margin-bottom: 16px;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .modal-footer .btn {
+        width: 100%;
+    }
+}
+
+/* ========== 平板竖屏 (480px - 768px) ========== */
+@media (min-width: 480px) and (max-width: 767px) and (orientation: portrait) {
+    .container {
+        padding: 14px;
+    }
+
+    .header {
+        padding: 14px 18px;
+    }
+
+    .header-left,
+    .header-right {
+        gap: 12px;
+    }
+
+    .logo {
+        font-size: 16px;
+    }
+
+    .header-title {
+        font-size: 15px;
+    }
+
+    .main-content {
+        padding: 16px;
+        max-width: 100%;
+    }
+
+    .card {
+        margin-bottom: 16px;
+    }
+
+    .card-header {
+        padding: 14px;
+    }
+
+    .card-content {
+        padding: 14px;
+    }
+
+    .file-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 14px;
+    }
+
+    .file-action {
+        width: 100%;
+    }
+
+    .btn, .action-button {
+        min-height: 44px;
+        font-size: 13px;
+    }
+}
+
+/* ========== 平板横屏 (768px - 1023px) ========== */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .main-wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        min-height: auto;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+        width: 100%;
+    }
+
+    .sidebar-nav li {
+        flex: 1;
+        border-right: 1px solid var(--border-color);
+    }
+
+    .sidebar-nav li:last-child {
+        border-right: none;
+    }
+
+    .nav-link {
+        flex-direction: column;
+        gap: 4px;
+        padding: 12px 8px;
+        min-height: 60px;
+    }
+
+    .main-content {
+        padding: 18px;
+        max-width: 100%;
+    }
+
+    .container {
+        padding: 16px;
+    }
+}
+
+/* ========== 文档查看器响应式 ========== */
+@media (max-width: 767px) {
+    .document-viewer {
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .document-content {
+        padding: 16px;
+        max-height: calc(100vh - 160px);
+        font-size: 13px;
+    }
+
+    .document-heading {
+        font-size: 16px;
+    }
+
+    .document-section-title {
+        font-size: 14px;
+    }
+}
+
+/* ========== 图片查看器响应式 ========== */
+@media (max-width: 767px) {
+    .image-viewer {
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .image-viewer-wrapper {
+        padding: 12px;
+    }
+
+    .image-display {
+        max-height: 400px;
+    }
+
+    .image-info {
+        padding: 12px;
+    }
+
+    .image-title {
+        font-size: 14px;
+    }
+
+    .image-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+/* ========== 表格响应式 ========== */
+@media (max-width: 767px) {
+    .data-table {
+        font-size: 12px;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+
+    /* 手机端表格横向滚动 */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table-responsive table {
+        min-width: 100%;
+    }
+}
+
+/* ========== 音频播放器响应式 ========== */
+@media (max-width: 767px) {
+    .audio-player {
+        max-width: 100%;
+        margin: 0;
+        padding: 16px;
+        border-radius: 0;
+    }
+
+    .audio-title {
+        font-size: 14px;
+    }
+
+    audio {
+        width: 100%;
+        height: 44px;
+    }
+}
+
+/* ========== 日志查看器响应式 ========== */
+@media (max-width: 767px) {
+    .log-viewer {
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .log-content {
+        padding: 16px;
+        max-height: 400px;
+        font-size: 12px;
+    }
+}
+
+/* ========== 邮件视图响应式 ========== */
+@media (max-width: 767px) {
+    .email-wrapper {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .email-header {
+        padding: 16px;
+        border-radius: 0;
+    }
+
+    .email-subject {
+        font-size: 16px;
+    }
+
+    .email-meta {
+        flex-direction: column;
+        gap: 8px;
+        font-size: 11px;
+    }
+
+    .email-body {
+        border-radius: 0;
+        padding: 16px;
+    }
+
+    .email-section-title {
+        font-size: 14px;
+    }
+
+    .email-content {
+        font-size: 13px;
+    }
+
+    .sidebar {
+        gap: 12px;
+    }
+
+    .card {
+        padding: 12px;
+    }
+}
+
+/* ========== 登录页面响应式 ========== */
+@media (max-width: 767px) {
+    .login-container {
+        width: 95%;
+        padding: 32px 20px;
+        margin: 0 auto;
+        max-width: 100%;
+        border-radius: 4px;
+    }
+
+    .login-logo-text {
+        font-size: 24px;
+    }
+
+    .login-form-group {
+        margin-bottom: 12px;
+    }
+
+    .login-form-input {
+        padding: 10px;
+        font-size: 16px; /* 防止iOS自动缩放 */
+    }
+
+    .login-submit {
+        padding: 12px;
+        font-size: 14px;
+        min-height: 44px;
+    }
+
+    .progress-text {
+        top: 10px;
+        right: 12px;
+        font-size: 10px;
+        padding: 6px 10px;
+    }
+}
+
+/* ========== 管理后台响应式 ========== */
+@media (max-width: 767px) {
+    .admin-container {
+        flex-direction: column;
+    }
+
+    .admin-header {
+        flex-direction: column;
+        height: auto;
+        gap: 12px;
+    }
+
+    .admin-header-left,
+    .admin-header-right {
+        width: 100%;
+    }
+
+    .admin-main {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--admin-border);
+        padding: 0;
+    }
+
+    .admin-sidebar-nav {
+        display: flex;
+        overflow-x: auto;
+        flex-direction: row;
+    }
+
+    .admin-sidebar-nav li {
+        flex: 0 0 auto;
+        min-width: 80px;
+        border-right: 1px solid var(--admin-border);
+    }
+
+    .admin-content {
+        padding: 16px;
+    }
+}
+
+/* ========== 竖屏专用优化 ========== */
+@media (orientation: portrait) {
+    /* 确保交互元素足够大便于触摸 */
+    button, a.btn, .action-button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* 竖屏时调整间距 */
+    .card {
+        margin-bottom: 12px;
+    }
+
+    .file-item:hover {
+        background: var(--light-blue);
+    }
+
+    /* 触屏友好的列表 */
+    .sidebar-nav li:active,
+    .file-item:active {
+        background: rgba(74, 144, 226, 0.1);
+    }
+
+    /* 竖屏时禁用hover视觉反馈（因为触屏没有hover） */
+    @media (hover: none) {
+        .nav-link:hover,
+        .file-item:hover,
+        .card:hover {
+            background: auto;
+            border-color: auto;
+        }
+    }
+}
+
+/* ========== 竖屏模式下强制单列布局 ========== */
+@media (orientation: portrait) and (min-width: 768px) {
+    /* 竖屏模式下，即使是桌面宽度也要转换为单列 */
+
+    /* 网格布局 */
+    .hr-menu {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* 两列卡片布局 */
+    .grid-2-col,
+    .card-grid-2,
+    .stats-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* 邮件和消息布局 */
+    .email-wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    /* 管理后台网格 */
+    .admin-dashboard {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* 两列flex布局 */
+    .flex-2-col {
+        flex-direction: column !important;
+    }
+
+    /* 宽度限制容器 */
+    .container,
+    .main-content {
+        width: 100% !important;
+        padding: 16px !important;
+    }
+
+    /* 管理后台卡片内容的网格调整 */
+    .admin-card-content > div[style*="grid"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* 4列网格强制转为1列 */
+    [style*="grid-template-columns: repeat(4"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* 2列网格强制转为1列 */
+    [style*="grid-template-columns: repeat(2"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* 通用grid强制转为1列 */
+    [style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    [style*="grid-template-columns: 1fr 340px"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* 按钮和卡片在竖屏时的居中和宽度 */
+    .action-button {
+        width: 100% !important;
+        margin: 16px auto !important;
+        display: block !important;
+    }
+
+    .card {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    /* Sidebar在竖屏下转为水平导航 */
+    .sidebar {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+        height: auto !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--border-color) !important;
+    }
+
+    .sidebar-nav {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 0 !important;
+        padding: 0 !important;
+        overflow-x: auto !important;
+        flex-wrap: nowrap !important;
+    }
+
+    .sidebar-nav li {
+        flex: 0 0 auto !important;
+        min-width: 90px !important;
+        border-right: 1px solid var(--border-color) !important;
+    }
+
+    .sidebar-nav li:last-child {
+        border-right: none !important;
+    }
+}
+
+/* ========== 超小屏手机优化 (320px - 359px) ========== */
+@media (max-width: 359px) {
+    .header {
+        padding: 10px 12px;
+    }
+
+    .logo {
+        font-size: 14px;
+    }
+
+    .main-content {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .card {
+        margin-bottom: 10px;
+    }
+
+    .card-header {
+        padding: 10px;
+    }
+
+    .card-content {
+        padding: 10px;
+    }
+
+    .btn, .action-button {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    .sidebar-nav li {
+        min-width: 70px;
+    }
+}
+
+/* ========== 桌面版本宽度优化 (1024px - 1440px) ========== */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .main-content {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+}
+
+/* ========== 大屏桌面优化 (1440px+) ========== */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    .main-content {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .document-viewer,
+    .image-viewer,
+    .log-viewer,
+    .audio-player {
+        max-width: 1000px;
+    }
+}
+
+/* ========== 竖屏容器宽度修复 ========== */
+/* 修复各类特殊容器在竖屏下被限制导致的显示问题 */
+@media (max-width: 768px) {
+    /* 登录页面容器修复 */
+    .login-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 32px 20px !important;
+    }
+
+    /* 所有卡片/面板修复 */
+    .card,
+    .panel-frontend,
+    .panel-admin,
+    .panel-anomaly {
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
+    }
+
+    /* 内容查看器修复 */
+    .document-viewer,
+    .image-viewer,
+    .log-viewer,
+    .audio-player,
+    .text-viewer {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    /* 模态框修复 */
+    .modal-content {
+        width: 95% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    /* 表格容器修复 */
+    .table-wrapper,
+    .file-list {
+        max-width: 100% !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    /* 确保按钮组全宽 */
+    .modal-footer,
+    .button-group {
+        width: 100% !important;
+    }
+
+    .modal-footer .btn,
+    .button-group button {
+        width: 100% !important;
+    }
+}
+
+/* ========== 超小屏手机优化 (320px - 359px) ========== */
+@media (max-width: 359px) {
+    .login-container {
+        padding: 20px 12px !important;
+    }
+
+    .modal-content {
+        width: 90% !important;
+        padding: 12px !important;
+    }
+}
+
+/* ========== 打印样式 ========== */
+@media print {
+    .header,
+    .sidebar,
+    .action-button,
+    .modal-footer,
+    .progress-bar {
+        display: none;
+    }
+
+    .main-content {
+        padding: 0;
+        margin: 0;
+    }
+
+    .document-viewer,
+    .image-viewer,
+    .log-viewer {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}
+
+/* ========== 高分辨率屏幕优化 ========== */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* 1px边框在高分屏显示更清晰 */
+    .card,
+    .divider,
+    .modal-content {
+        border-width: 0.5px;
+    }
+}
+
+/* ========== 暗色模式支持 ========== */
+@media (prefers-color-scheme: dark) {
+    /* 如果有暗色模式，可以在这里添加调整 */
+}
+
+/* ========== 动画减少模式 ========== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ========== 竖屏导航友好提示 ========== */
+@media (orientation: portrait) and (max-width: 767px) {
+    /* 为竖屏导航项添加可滚动提示 */
+    .sidebar-nav {
+        scrollbar-width: none;
+    }
+
+    .sidebar-nav::-webkit-scrollbar {
+        display: none;
+    }
+}

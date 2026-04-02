@@ -1,0 +1,541 @@
+:root {
+    --admin-bg: #0a0a0a;
+    --admin-panel: #1a1a1a;
+    --admin-border: #333;
+    --admin-text: #ccc;
+    --admin-text-light: #999;
+    --admin-danger: #d9534f;
+    --admin-warning: #ff7a45;
+    --admin-success: #5cb85c;
+}
+
+body.admin-mode {
+    background: var(--admin-bg);
+    color: var(--admin-text);
+}
+
+.admin-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--admin-bg);
+}
+
+.admin-header {
+    background: #1a1a1a;
+    border-bottom: 2px solid var(--admin-danger);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.admin-header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.admin-logo {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--admin-danger);
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.3s;
+    user-select: none;
+}
+
+.admin-logo:hover {
+    background: rgba(217, 83, 79, 0.2);
+}
+
+.admin-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--admin-text);
+}
+
+.admin-header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.admin-user-info {
+    font-size: 14px;
+    color: var(--admin-text-light);
+}
+
+.admin-logout-btn {
+    padding: 8px 16px;
+    background: rgba(217, 83, 79, 0.2);
+    border: 1px solid var(--admin-danger);
+    border-radius: 3px;
+    color: var(--admin-danger);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.admin-logout-btn:hover {
+    background: var(--admin-danger);
+    color: white;
+}
+
+.admin-main {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    background: var(--admin-bg);
+}
+
+.admin-sidebar {
+    width: 200px;
+    background: var(--admin-panel);
+    border-right: 1px solid var(--admin-border);
+    padding: 20px 0;
+    min-height: 100%;
+    flex-shrink: 0;
+}
+
+.admin-main:has(.admin-sidebar) {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.admin-sidebar-nav {
+    list-style: none;
+}
+
+.admin-sidebar-nav li {
+    margin: 0;
+}
+
+.admin-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: var(--admin-text-light);
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.admin-nav-link:hover {
+    background: rgba(217, 83, 79, 0.2);
+    color: var(--admin-danger);
+}
+
+.admin-nav-link.active {
+    background: rgba(217, 83, 79, 0.3);
+    color: var(--admin-danger);
+    font-weight: 600;
+    border-left: 3px solid var(--admin-danger);
+    padding-left: 13px;
+}
+
+.admin-content {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.admin-card {
+    background: var(--admin-panel);
+    border: 1px solid var(--admin-border);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    max-width: 900px;
+    width: 100%;
+}
+
+.admin-card-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--admin-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.admin-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--admin-text);
+}
+
+.admin-card-content {
+    padding: 16px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--admin-panel);
+}
+
+.admin-table thead {
+    background: #0a0a0a;
+}
+
+.admin-table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--admin-danger);
+    border: 1px solid var(--admin-border);
+    font-size: 14px;
+}
+
+.admin-table td {
+    padding: 12px;
+    border: 1px solid var(--admin-border);
+    font-size: 14px;
+    color: var(--admin-text);
+}
+
+.admin-table tbody tr:hover {
+    background: #222;
+}
+
+.admin-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.admin-status.active {
+    background: rgba(92, 184, 92, 0.2);
+    color: var(--admin-success);
+}
+
+.admin-status.warning {
+    background: rgba(255, 122, 69, 0.2);
+    color: var(--admin-warning);
+}
+
+.admin-status.danger {
+    background: rgba(217, 83, 79, 0.2);
+    color: var(--admin-danger);
+}
+
+.admin-log {
+    background: #000;
+    border: 1px solid var(--admin-border);
+    padding: 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #0f0;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.admin-log-line {
+    margin-bottom: 4px;
+}
+
+.admin-log-time {
+    color: #666;
+    margin-right: 8px;
+}
+
+.admin-input {
+    background: var(--admin-panel);
+    border: 1px solid var(--admin-border);
+    color: var(--admin-text);
+    padding: 10px 12px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-family: 'Courier New', monospace;
+}
+
+.admin-input:focus {
+    outline: none;
+    border-color: var(--admin-danger);
+    box-shadow: 0 0 0 3px rgba(217, 83, 79, 0.1);
+}
+
+.admin-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.admin-btn-primary {
+    background: var(--admin-danger);
+    color: white;
+}
+
+.admin-btn-primary:hover {
+    background: #c9302c;
+}
+
+.admin-btn-secondary {
+    background: var(--admin-panel);
+    color: var(--admin-text);
+    border: 1px solid var(--admin-border);
+}
+
+.admin-btn-secondary:hover {
+    border-color: var(--admin-danger);
+    color: var(--admin-danger);
+}
+
+.admin-alert {
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.admin-alert.danger {
+    background: rgba(217, 83, 79, 0.2);
+    border: 1px solid var(--admin-danger);
+    color: var(--admin-danger);
+}
+
+.admin-alert.warning {
+    background: rgba(255, 122, 69, 0.2);
+    border: 1px solid var(--admin-warning);
+    color: var(--admin-warning);
+}
+
+.admin-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.admin-stat-box {
+    background: var(--admin-panel);
+    border: 1px solid var(--admin-border);
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+}
+
+.admin-stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--admin-danger);
+    margin: 16px 0;
+}
+
+.admin-stat-label {
+    font-size: 12px;
+    color: var(--admin-text-light);
+    text-transform: uppercase;
+}
+
+/* ========== 管理后台响应式设计 ========== */
+
+/* 平板及以下设备 */
+@media (max-width: 768px) {
+    .admin-header {
+        height: auto;
+        padding: 12px 16px;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .admin-header-left,
+    .admin-header-right {
+        width: 100%;
+        gap: 8px;
+    }
+
+    .admin-logo {
+        font-size: 16px;
+    }
+
+    .admin-title {
+        font-size: 14px;
+    }
+
+    .admin-main {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--admin-border);
+        padding: 0;
+        min-height: auto;
+    }
+
+    .admin-sidebar-nav {
+        display: flex;
+        gap: 0;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .admin-sidebar-nav li {
+        flex: 1;
+        min-width: 80px;
+        border-right: 1px solid var(--admin-border);
+    }
+
+    .admin-sidebar-nav li:last-child {
+        border-right: none;
+    }
+
+    .admin-nav-link {
+        padding: 12px 6px;
+        font-size: 11px;
+        flex-direction: column;
+        gap: 2px;
+        justify-content: center;
+        align-items: center;
+        min-height: 50px;
+    }
+
+    .admin-nav-link.active {
+        padding-left: 6px;
+    }
+
+    .admin-content {
+        padding: 14px;
+        max-width: 100%;
+    }
+
+    .admin-card {
+        max-width: 100%;
+        margin-bottom: 12px;
+    }
+
+    .admin-table {
+        font-size: 12px;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        padding: 10px 8px;
+        font-size: 11px;
+    }
+
+    .admin-btn {
+        padding: 8px 14px;
+        font-size: 12px;
+        min-height: 40px;
+    }
+
+    .admin-dashboard {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+    }
+
+    .admin-stat-value {
+        font-size: 24px;
+    }
+}
+
+/* 手机竖屏 */
+@media (max-width: 479px) {
+    .admin-header {
+        padding: 10px 12px;
+    }
+
+    .admin-logo {
+        font-size: 14px;
+    }
+
+    .admin-logout-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .admin-sidebar-nav li {
+        min-width: 60px;
+    }
+
+    .admin-nav-link {
+        padding: 10px 4px;
+        font-size: 10px;
+        min-height: 44px;
+    }
+
+    .admin-content {
+        padding: 12px;
+    }
+
+    .admin-card {
+        margin-bottom: 10px;
+    }
+
+    .admin-card-header {
+        padding: 12px;
+    }
+
+    .admin-card-content {
+        padding: 12px;
+    }
+
+    .admin-btn {
+        padding: 10px 12px;
+        font-size: 12px;
+        min-height: 44px;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        padding: 8px 6px;
+        font-size: 10px;
+    }
+
+    .admin-log {
+        max-height: 250px;
+        font-size: 11px;
+    }
+
+    .admin-dashboard {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .admin-stat-value {
+        font-size: 20px;
+    }
+}
+
+/* 横屏优化 */
+@media (orientation: landscape) and (max-height: 600px) {
+    .admin-header {
+        padding: 8px 12px;
+        height: auto;
+    }
+
+    .admin-content {
+        padding: 12px;
+    }
+
+    .admin-card {
+        margin-bottom: 8px;
+    }
+
+    .admin-nav-link {
+        min-height: 40px;
+        padding: 8px 4px;
+    }
+}

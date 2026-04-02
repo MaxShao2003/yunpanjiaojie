@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鼎铭饲养场 - 维护终端</title>
+    <link rel="stylesheet" href="../styles/admin.css">
+    <style>
+        body {
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 背景扫描线效果 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 255, 255, 0.03) 2px,
+                rgba(255, 255, 255, 0.03) 4px
+            );
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .login-container {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 2px solid #d9534f;
+            border-radius: 2px;
+            box-shadow: 0 0 30px rgba(217, 83, 79, 0.6), inset 0 0 20px rgba(217, 83, 79, 0.1);
+            width: 100%;
+            max-width: 460px;
+            padding: 48px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid rgba(217, 83, 79, 0.3);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 36px;
+            position: relative;
+        }
+
+        .login-logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            color: #d9534f;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(217, 83, 79, 0.5);
+        }
+
+        .login-subtitle {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        .login-card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ff9999;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* 警告提示框 */
+        .admin-alert {
+            background: rgba(217, 83, 79, 0.15);
+            border: 1px solid #d9534f;
+            border-left: 4px solid #d9534f;
+            padding: 12px 14px;
+            border-radius: 2px;
+            margin-bottom: 28px;
+            font-size: 11px;
+            color: #ff8888;
+            line-height: 1.8;
+            font-family: 'Courier New', monospace;
+            box-shadow: inset 0 0 10px rgba(217, 83, 79, 0.1);
+        }
+
+        .admin-alert strong {
+            color: #d9534f;
+            font-weight: 700;
+        }
+
+        /* 表单 */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #999;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input {
+            padding: 11px 12px;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 2px;
+            font-size: 13px;
+            color: #ccc;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input:hover {
+            border-color: #555;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #d9534f;
+            background: #1a1a1a;
+            box-shadow: 0 0 10px rgba(217, 83, 79, 0.3), inset 0 0 5px rgba(217, 83, 79, 0.1);
+            color: #ff8888;
+        }
+
+        .form-input::placeholder {
+            color: #555;
+        }
+
+        /* 登陆按钮 */
+        .login-btn {
+            padding: 12px;
+            background: #d9534f;
+            color: #000;
+            border: none;
+            border-radius: 2px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #ff7a45;
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .login-btn:hover {
+            background: #ff7a45;
+            box-shadow: 0 0 20px rgba(217, 83, 79, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .login-btn:active {
+            transform: scale(0.98);
+        }
+
+        .login-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* 错误提示 */
+        .error-msg {
+            color: #d9534f;
+            font-size: 11px;
+            margin-top: 8px;
+            padding: 8px 10px;
+            background: rgba(217, 83, 79, 0.15);
+            border-left: 2px solid #d9534f;
+            border-radius: 2px;
+            display: none;
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+        }
+
+        .error-msg.show {
+            display: block;
+            animation: slideInError 0.3s ease;
+        }
+
+        @keyframes slideInError {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 页脚 */
+        .login-footer {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 10px;
+            color: #555;
+            border-top: 1px solid #333;
+            padding-top: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* 系统信息 */
+        .system-info {
+            margin-top: 16px;
+            padding: 10px 12px;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 2px;
+            font-size: 10px;
+            color: #666;
+            line-height: 1.6;
+            font-family: 'Courier New', monospace;
+        }
+
+        .system-info-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .system-info-line:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 二次确认模态 */
+        .confirm-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .confirm-modal.show {
+            display: flex;
+        }
+
+        .confirm-modal-content {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 2px solid #d9534f;
+            border-radius: 2px;
+            padding: 40px;
+            max-width: 420px;
+            box-shadow: 0 0 40px rgba(217, 83, 79, 0.8);
+            position: relative;
+            z-index: 1001;
+        }
+
+        .confirm-modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid rgba(217, 83, 79, 0.3);
+            border-radius: 2px;
+            pointer-events: none;
+        }
+
+        .confirm-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ff9999;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .confirm-content {
+            font-size: 12px;
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 28px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+        }
+
+        .confirm-content p {
+            margin-bottom: 10px;
+        }
+
+        .confirm-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .confirm-buttons {
+            display: flex;
+            gap: 12px;
+            position: relative;
+            z-index: 1002;
+        }
+
+        .confirm-btn-primary {
+            flex: 1;
+            padding: 12px;
+            background: #d9534f;
+            color: #000;
+            border: none;
+            border-radius: 2px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-btn-primary:hover {
+            background: #ff7a45;
+            box-shadow: 0 0 20px rgba(217, 83, 79, 0.6);
+        }
+
+        .confirm-btn-secondary {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            color: #999;
+            border: 1px solid #666;
+            border-radius: 2px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-btn-secondary:hover {
+            border-color: #d9534f;
+            color: #d9534f;
+        }
+    </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-logo">
+            <div class="login-logo-text">◆ 鼎铭 ◆</div>
+            <div class="login-subtitle">内部维护终端 v3.2.1</div>
+        </div>
+
+        <div>
+            <div class="login-card-title">► 管理员认证</div>
+
+            <div class="admin-alert">
+                <strong>⚠ 警告</strong><br>
+                未授权访问将被记录。当前会话已纳入夜间清理队列。
+            </div>
+
+            <form class="login-form" id="adminLoginForm">
+                <div class="form-group">
+                    <label class="form-label">>>> 管理员账号</label>
+                    <input type="text" id="adminAccount" class="form-input" placeholder="SYSTEM_ROOT" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">>>> 覆写代码</label>
+                    <input type="password" id="adminCode" class="form-input" placeholder="••••••••••" autocomplete="off">
+                </div>
+
+                <button type="submit" class="login-btn">→ 进入维护后台</button>
+                <div class="error-msg" id="errorMsg">权限校验失败。当前对象已被标记。</div>
+            </form>
+
+            <div class="system-info">
+                <div class="system-info-line">
+                    <span>TERMINAL:</span>
+                    <span>MAINTENANCE-04</span>
+                </div>
+                <div class="system-info-line">
+                    <span>STATUS:</span>
+                    <span style="color: #ff7a45;">● ONLINE</span>
+                </div>
+                <div class="system-info-line">
+                    <span>SECURITY:</span>
+                    <span style="color: #d9534f;">⚠ CRITICAL</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-footer">
+            鼎铭饲养场系统 | 内部使用 | 版本 3.2.1
+        </div>
+    </div>
+
+    <!-- 二次确认模态 -->
+    <div class="confirm-modal" id="confirmModal">
+        <div class="confirm-modal-content">
+            <div class="confirm-title">► 接管确认</div>
+            <div class="confirm-content">
+                <p style="font-weight: 600; color: #ff9999;">你确认接管第4号舱资料吗？</p>
+                <p style="margin-top: 16px;">该操作将记录当前接管者身份。</p>
+                <p>继续后，前台会话将进入不可逆状态。</p>
+                <p>请确认你已完成交接验收。</p>
+            </div>
+            <div class="confirm-buttons">
+                <button class="confirm-btn-primary" onclick="confirmAccess(true)">接 管</button>
+                <button class="confirm-btn-secondary" onclick="confirmAccess(false)">取 消</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script src="../scripts/secrets_tracker.js"></script>
+    <script>
+        let failedAttempts = parseInt(localStorage.getItem('adminLoginFailures') || '0');
+        let credentialsVerified = false;
+        const form = document.getElementById('adminLoginForm');
+        const errorMsg = document.getElementById('errorMsg');
+        const confirmModal = document.getElementById('confirmModal');
+        const ADMIN_ACCOUNT = 'admin';
+        const ADMIN_CODE = 'OVERRIDE_998';
+
+        function confirmAccess(confirmed) {
+            if (confirmed) {
+                localStorage.setItem('adminLoggedIn', 'true');
+                localStorage.setItem('adminAccount', 'admin');
+                localStorage.removeItem('adminLoginFailures');
+                Puzzle.recordEvent('admin_login_confirmed', { account: 'admin', timestamp: new Date().toISOString() });
+                App.navigateTo('admin_dashboard.html');
+            } else {
+                confirmModal.classList.remove('show');
+                credentialsVerified = false;
+                document.getElementById('adminCode').value = '';
+                document.getElementById('adminCode').focus();
+            }
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const account = document.getElementById('adminAccount').value.trim();
+            const code = document.getElementById('adminCode').value.trim();
+
+            if (!account || !code) {
+                errorMsg.textContent = '请输入完整的账号和代码';
+                errorMsg.classList.add('show');
+                return;
+            }
+
+            // 记录尝试
+            SecretsTracker.recordDiscovery('admin_login_attempted');
+
+            if (account === ADMIN_ACCOUNT && code === ADMIN_CODE) {
+                errorMsg.classList.remove('show');
+                credentialsVerified = true;
+                Puzzle.recordEvent('admin_credentials_verified', { account: account, timestamp: new Date().toISOString() });
+                confirmModal.classList.add('show');
+            } else {
+                failedAttempts++;
+                localStorage.setItem('adminLoginFailures', failedAttempts);
+
+                // 渐进式提示
+                if (account !== ADMIN_ACCOUNT) {
+                    if (failedAttempts < 3) {
+                        errorMsg.textContent = '权限校验失败。当前对象已被标记。';
+                    } else if (failedAttempts < 6) {
+                        errorMsg.textContent = '账号不符。系统管理员通常用最简单的身份标识。';
+                    } else {
+                        errorMsg.textContent = '账号错误。再想想...最普通的用户名是什么？';
+                    }
+                } else {
+                    // 账号正确，代码错误
+                    if (failedAttempts < 3) {
+                        errorMsg.textContent = '权限校验失败。当前对象已被标记。';
+                    } else {
+                        errorMsg.textContent = '账号已识别。继续寻找覆写代码...';
+                    }
+                }
+
+                errorMsg.classList.add('show');
+                document.getElementById('adminCode').value = '';
+                document.getElementById('adminCode').focus();
+            }
+        });
+
+        document.getElementById('adminCode').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                form.dispatchEvent(new Event('submit'));
+            }
+        });
+    </script>
+</body>
+</html>

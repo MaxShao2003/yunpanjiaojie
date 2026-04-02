@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03月考勤汇总.xlsx</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .excel-viewer { background: var(--white); max-width: 1000px; margin: 0 auto; border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden; }
+        .excel-toolbar { background: var(--gray-bg); padding: 12px 16px; border-bottom: 1px solid var(--border-color); font-size: 13px; }
+        .excel-table { width: 100%; border-collapse: collapse; }
+        .excel-table thead { background: #d9d9d9; }
+        .excel-table th { padding: 12px; text-align: left; font-weight: 600; color: #333; border: 1px solid #bfbfbf; font-size: 14px; }
+        .excel-table td { padding: 12px; border: 1px solid #d9d9d9; font-size: 14px; color: #333; }
+        .excel-table tbody tr:nth-child(odd) { background: #fff; }
+        .excel-table tbody tr:nth-child(even) { background: #f2f2f2; }
+        .excel-table tbody tr:hover { background: #e8f0ff; }
+        .highlight-time { font-weight: 600; color: #ff4d4f; background: #fff2f0; padding: 2px 4px; border-radius: 2px; }
+        .remarks { background: var(--white); padding: 20px 16px; border-top: 1px solid var(--border-color); font-size: 13px; color: var(--gray-dark); line-height: 1.8; }
+        .remarks p { margin-bottom: 8px; }
+        .back-btn { display: inline-block; margin-bottom: 20px; }
+        .back-btn a { padding: 8px 16px; background: var(--gray-bg); border: 1px solid var(--border-color); border-radius: 3px; color: var(--primary-blue); font-size: 14px; cursor: pointer; }
+        .back-btn a:hover { background: var(--light-blue); }
+        </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">文件预览</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                    <li><a href="public_folder.html" class="nav-link"><span class="sidebar-icon">🔓</span> 公共资料</a></li>
+                    <li><a href="#" class="nav-link"><span class="sidebar-icon">🗑️</span> 回收站</a></li>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div class="back-btn">
+                    <a href="public_folder.html">← 返回公共文件夹</a>
+                </div>
+
+                <div class="excel-viewer">
+                    <div class="excel-toolbar">
+                        📊 03月考勤汇总.xlsx
+                    </div>
+
+                    <table class="excel-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%;">姓名</th>
+                                <th style="width: 15%;">工号</th>
+                                <th style="width: 20%;">上班时间</th>
+                                <th style="width: 20%;">下班时间</th>
+                                <th style="width: 30%;">备注</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>赵宇</td>
+                                <td>DM-8975</td>
+                                <td>09:11</td>
+                                <td><span class="highlight-time">03:14</span></td>
+                                <td>项目冲刺</td>
+                            </tr>
+                            <tr>
+                                <td>赵宇</td>
+                                <td>DM-8975</td>
+                                <td>09:08</td>
+                                <td><span class="highlight-time">03:14</span></td>
+                                <td>项目冲刺</td>
+                            </tr>
+                            <tr>
+                                <td>赵宇</td>
+                                <td>DM-8975</td>
+                                <td>09:15</td>
+                                <td><span class="highlight-time">03:14</span></td>
+                                <td>项目冲刺</td>
+                            </tr>
+                            <tr>
+                                <td>王强</td>
+                                <td>DM-9012</td>
+                                <td>09:03</td>
+                                <td>22:48</td>
+                                <td>无</td>
+                            </tr>
+                            <tr>
+                                <td>王强</td>
+                                <td>DM-9012</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>离岗已处理</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="remarks">
+                        <p><strong>注：</strong>夜间异常加班记录已由部门负责人统一确认，勿重复申诉。</p>
+                        <p><strong>注：</strong>离岗员工相关物品由 HR 统一接管，请勿擅自接触。</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--gray-light); font-size: 13px;">
+                    统计周期：2024年03月01日 - 2024年03月31日
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Puzzle.recordVisit('p07');
+            localStorage.setItem('viewedAttendanceSheet', 'true');
+        });
+    </script>
+</body>
+</html>

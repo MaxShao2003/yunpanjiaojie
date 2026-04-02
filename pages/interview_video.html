@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>城市人物访谈_终版.mp4 - 媒资预览</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/theme.css">
+    <style>
+        /* 视频播放器容器 */
+        .video-container {
+            background: #000;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            border: 1px solid #333;
+            margin-bottom: 24px;
+        }
+
+        .video-player {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+        }
+
+        /* 视频信息卡片 */
+        .video-meta-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            padding: 20px;
+        }
+
+        .video-meta-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            word-break: break-all;
+        }
+
+        .video-meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            font-size: 11px;
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            border: 1px solid transparent;
+        }
+
+        .tag-blue {
+            background: rgba(74, 144, 226, 0.12);
+            color: #4a90e2;
+            border-color: rgba(74, 144, 226, 0.25);
+        }
+
+        .tag-gray {
+            background: #f5f5f5;
+            color: #666;
+            border-color: #e0e0e0;
+        }
+
+        .tag-green {
+            background: rgba(92, 184, 92, 0.12);
+            color: #5cb85c;
+            border-color: rgba(92, 184, 92, 0.25);
+        }
+
+        /* 元数据分栏 */
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e8e8e8;
+        }
+
+        .metadata-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metadata-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .metadata-value {
+            font-size: 14px;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .metadata-value-mono {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            background: #f5f5f5;
+            padding: 6px 8px;
+            border-radius: 3px;
+            color: #666;
+            border: 1px solid #e0e0e0;
+            margin-top: 4px;
+        }
+
+        /* 项目备注区 */
+        .project-notes {
+            background: linear-gradient(135deg, #e8f4fd 0%, rgba(74, 144, 226, 0.05) 100%);
+            border-left: 4px solid #4a90e2;
+            padding: 14px 16px;
+            border-radius: 4px;
+            margin-top: 20px;
+            border: 1px solid rgba(74, 144, 226, 0.2);
+            border-left: 4px solid #4a90e2;
+        }
+
+        .notes-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #4a90e2;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .notes-content {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* 返回导航 */
+        .back-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            color: #4a90e2;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+
+        .back-nav:hover {
+            background: #e8f4fd;
+            border-color: #4a90e2;
+            transform: translateX(-2px);
+        }
+
+        /* 页脚说明 */
+        .video-footer {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px solid #e8e8e8;
+            color: #999;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .metadata-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .video-meta-title {
+                font-size: 16px;
+            }
+
+            .video-meta-card {
+                padding: 16px;
+            }
+        }
+    </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- 顶部栏 -->
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">媒资预览</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="main-wrapper">
+            <!-- 侧边栏 -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                    <li><a href="projects_folder.html" class="nav-link active"><span class="sidebar-icon">📦</span> 交接项目</a></li>
+                    <li><a href="#" class="nav-link"><span class="sidebar-icon">🗑️</span> 回收站</a></li>
+                </nav>
+            </aside>
+
+            <!-- 主内容 -->
+            <main class="main-content">
+                <!-- 返回导航 -->
+                <a href="projects_folder.html" class="back-nav">
+                    <span>←</span> 返回项目文件夹
+                </a>
+
+                <!-- 视频播放器 -->
+                <div class="video-container">
+                    <div class="video-player" id="videoPlayer">
+                        <video id="videoElement" controls controlsList="nodownload" style="width: 100%; height: 100%; background: #000;">
+                            <source src="../media/city.mp4" type="video/mp4">
+                            你的浏览器不支持视频播放
+                        </video>
+                    </div>
+
+                    <!-- 视频元数据 -->
+                    <div class="video-meta-card">
+                        <div class="video-meta-title">城市人物访谈_终版.mp4</div>
+
+                        <div class="video-meta-tags">
+                            <span class="tag tag-green">✓ 已验收</span>
+                            <span class="tag tag-blue">1080p</span>
+                            <span class="tag tag-gray">8分34秒</span>
+                            <span class="tag tag-gray">2024-03-18</span>
+                        </div>
+
+                        <!-- 技术元数据 -->
+                        <div class="metadata-grid">
+                            <div class="metadata-section">
+                                <span class="metadata-label">分辨率</span>
+                                <span class="metadata-value">1920 × 1080</span>
+                            </div>
+                            <div class="metadata-section">
+                                <span class="metadata-label">比例</span>
+                                <span class="metadata-value">16:9</span>
+                            </div>
+                            <div class="metadata-section">
+                                <span class="metadata-label">帧率</span>
+                                <span class="metadata-value">29.97 fps</span>
+                            </div>
+                            <div class="metadata-section">
+                                <span class="metadata-label">编码</span>
+                                <span class="metadata-value">H.264</span>
+                            </div>
+                            <div class="metadata-section">
+                                <span class="metadata-label">音频</span>
+                                <span class="metadata-value">AAC 48kHz 立体声</span>
+                            </div>
+                            <div class="metadata-section">
+                                <span class="metadata-label">色深</span>
+                                <span class="metadata-value">8-bit</span>
+                            </div>
+                        </div>
+
+                        <!-- 项目备注 -->
+                        <div class="project-notes">
+                            <div class="notes-title">项目备注</div>
+                            <div class="notes-content">
+                                <p style="margin: 0 0 8px 0;">✓ 客户要求：整体气质温暖、真实、有人情味<br/>
+                                ✓ 后期处理：去噪声、色温调校、细节修补<br/>
+                                ✓ 审核状态：已通过客户最终验收</p>
+                            </div>
+                        </div>
+
+                        <!-- 后期说明 -->
+                        <div style="background: #f9f9f9; border: 1px solid #e8e8e8; padding: 12px 14px; border-radius: 4px; margin-top: 14px;">
+                            <div style="font-size: 12px; color: #666; line-height: 1.6;">
+                                <strong style="color: #1a1a1a;">编辑说明：</strong> 采访全程约 28 分钟，已编辑至 8:34。色调调整以及音量均衡已完成。可用于直播或短视频二次剪裁。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 页脚 -->
+                <div class="video-footer">
+                    <p>该视频已获客户正式验收，可用于播出或备份存档</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p12');
+
+            // 获取视频元素
+            const videoElement = document.getElementById('videoElement');
+
+            // 处理视频加载错误
+            videoElement.addEventListener('error', (e) => {
+                console.error('视频加载失败:', e);
+                const playerDiv = document.getElementById('videoPlayer');
+                playerDiv.innerHTML = '<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #999; background: #000; font-family: monospace;">视频文件未找到<br/>../media/city.mp4</div>';
+            });
+        });
+    </script>
+</body>
+</html>

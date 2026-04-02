@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>/assets - 访问受限</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .lock-container {
+            max-width: 600px;
+            margin: 60px auto;
+            text-align: center;
+        }
+
+        .lock-icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        .lock-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .lock-subtitle {
+            font-size: 16px;
+            color: var(--gray-dark);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .lock-hint {
+            background: #e8f4fd;
+            border-left: 3px solid var(--primary-blue);
+            padding: 12px 16px;
+            text-align: left;
+            margin-bottom: 30px;
+            border-radius: 3px;
+            font-size: 13px;
+            color: var(--gray-dark);
+        }
+
+        .password-input-box {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            font-size: 14px;
+            box-sizing: border-box;
+            margin-bottom: 12px;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .unlock-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 3px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .unlock-btn:hover {
+            background: #0052a3;
+        }
+
+        .unlock-btn:active {
+            transform: scale(0.98);
+        }
+
+        .error-message {
+            color: #d9534f;
+            font-size: 13px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .success-message {
+            color: #5cb85c;
+            font-size: 13px;
+            margin-top: 12px;
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+
+        .back-btn a {
+            padding: 8px 16px;
+            background: var(--gray-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            color: var(--primary-blue);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .back-btn a:hover {
+            background: var(--light-blue);
+        }
+        </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">文件预览</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                    <li><a href="projects_folder.html" class="nav-link"><span class="sidebar-icon">📦</span> 交接项目</a></li>
+                    <li><a href="#" class="nav-link"><span class="sidebar-icon">🗑️</span> 回收站</a></li>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div class="back-btn">
+                    <a href="projects_folder.html">← 返回项目文件夹</a>
+                </div>
+
+                <div class="lock-container">
+                    <div class="lock-icon">🔒</div>
+                    <div class="lock-title">素材归档 /assets</div>
+                    <div class="lock-subtitle">该文件夹已由原负责人加密。<br>请输入访问密码。</div>
+
+                    <div class="lock-hint">
+                        <strong>提示：</strong>他在聊天记录中反复说的那句话（全拼）
+                    </div>
+
+                    <div class="password-input-box">
+                        <input 
+                            type="password" 
+                            class="password-input" 
+                            id="passwordInput" 
+                            placeholder="请输入密码"
+                            autocomplete="off"
+                        >
+                        <button class="unlock-btn" id="unlockBtn">解密并进入</button>
+                        <div class="error-message" id="errorMessage">密码错误。你似乎还不够了解上一位同事。</div>
+                        <div class="success-message" id="successMessage">密码正确，正在解密素材...</div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        const passwordInput = document.getElementById('passwordInput');
+        const unlockBtn = document.getElementById('unlockBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        const passwordBox = document.querySelector('.password-input-box');
+        const CORRECT_PASSWORD = 'buxiangganle';
+
+        unlockBtn.addEventListener('click', () => {
+            const password = passwordInput.value.trim().toLowerCase();
+            
+            if (password === CORRECT_PASSWORD) {
+                successMessage.classList.add('show');
+                passwordInput.disabled = true;
+                unlockBtn.disabled = true;
+                
+                setTimeout(() => {
+                    localStorage.setItem('assetsUnlocked', 'true');
+                    Puzzle.recordVisit('p15_unlocked');                    App.navigateTo('hidden_pic_claw.html');
+                }, 1000);
+            } else {
+                errorMessage.classList.add('show');
+                passwordBox.classList.add('shake');
+                passwordInput.value = '';
+                passwordInput.focus();
+                
+                setTimeout(() => {
+                    passwordBox.classList.remove('shake');
+                }, 400);
+            }
+        });
+
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                unlockBtn.click();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p15');
+            localStorage.setItem('viewedAssetsLock', 'true');
+        });
+    </script>
+</body>
+</html>

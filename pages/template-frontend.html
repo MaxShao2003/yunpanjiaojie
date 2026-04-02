@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交接云盘 - 前台模板</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- ========== 顶部栏 ========== -->
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">交接云盘</div>
+                <div class="header-title">文件管理系统</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工 赵宇</div>
+                <button class="logout-btn">登出</button>
+            </div>
+        </div>
+
+        <!-- ========== 主内容区 ========== -->
+        <div class="main-wrapper">
+            <!-- 侧边栏 -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="pages/home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                    <li><a href="pages/handover.html" class="nav-link"><span class="sidebar-icon">📋</span> 交接资料</a></li>
+                    <li><a href="pages/announcements.html" class="nav-link"><span class="sidebar-icon">📢</span> 公司公告</a></li>
+                    <li><a href="pages/documents.html" class="nav-link"><span class="sidebar-icon">📄</span> 制度文档</a></li>
+                    <li><a href="pages/profile.html" class="nav-link"><span class="sidebar-icon">👤</span> 个人中心</a></li>
+                </nav>
+            </aside>
+
+            <!-- 主内容 -->
+            <main class="main-content">
+                <!-- 页面标题与面包屑 -->
+                <div class="breadcrumb">
+                    <a href="home.html">首页</a>
+                    <span>&gt;</span>
+                    <span>页面标题</span>
+                </div>
+
+                <!-- 页面内容区域 - 在子页面中替换 -->
+                <div class="content-area">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">页面标题</div>
+                        </div>
+                        <div class="card-content">
+                            <p>这是一个前台通用模板。在创建具体页面时，替换 .content-area 内的内容。</p>
+                            <p>所有页面共享相同的顶部栏、侧边栏和样式。</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- ========== 脚本加载 ========== -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/puzzle.js"></script>
+    <!-- 页面特定脚本在这里加载 -->
+</body>
+</html>

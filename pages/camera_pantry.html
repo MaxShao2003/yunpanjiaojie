@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>监控通道 01 - 茶水间</title>
+    <link rel="stylesheet" href="../styles/admin.css">
+    <style>
+    </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body style="background: #0a0a0a;">
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+    <div class="progress-text">第 30 / 40 页</div>
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <div class="admin-header-left">
+                <div class="admin-logo">鼎铭</div>
+                <div class="admin-title">监控系统 - 茶水间</div>
+            </div>
+            <div class="admin-header-right">
+                <button class="admin-logout-btn" onclick="App.navigateTo('admin_dashboard.html');">返回</button>
+            </div>
+        </div>
+
+        <div class="admin-main" style="padding: 20px;">
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <div class="admin-card-title">CAM 01 / Pantry</div>
+                </div>
+                <div class="admin-card-content">
+                    <div style="position: relative; width: 100%; padding-bottom: 75%; background: #0a0a0a; border: 2px solid #333; border-radius: 4px; overflow: hidden;">
+                        <img id="cameraFeed" src="../media/camera_pantry_creature.png" alt="茶水间监控画面" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-card" style="margin-top: 20px;">
+                <div class="admin-card-header">
+                    <div class="admin-card-title" style="color: #ff7a45;">监控状态</div>
+                </div>
+                <div class="admin-card-content">
+                    <div style="color: #ff7a45; font-family: 'Courier New', monospace; font-size: 14px; line-height: 2;">
+                        <div>信号受损</div>
+                        <div>时间戳：03:14:22</div>
+                        <div>移动目标：1</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-card" style="margin-top: 20px;">
+                <div class="admin-card-header">
+                    <div class="admin-card-title">操作建议</div>
+                </div>
+                <div class="admin-card-content">
+                    <div style="color: #999; font-size: 12px; line-height: 1.8;">
+                        <p>饲养舱投喂后 10 分钟内，请勿直接进入茶水间。</p>
+                        <p>如需清理，请等待对象自行离开残留区域。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('adminLoggedIn') !== 'true') {
+                window.location.href = 'admin_login.html';
+                return;
+            }
+
+            // 权限检查 - P30需要10秒延迟激活
+            if (localStorage.getItem('adminViewedSystemLogs') !== 'true') {
+                alert('访问被拒：您无权查看此监控通道');
+                window.location.href = 'admin_dashboard.html';
+                return;
+            }
+
+            Puzzle.recordVisit('p30');
+        });
+    </script>
+</body>
+</html>

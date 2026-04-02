@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roster_Real.xls</title>
+    <link rel="stylesheet" href="../styles/admin.css">
+    <style>
+    </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body style="background: #0a0a0a;">
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+    <div class="progress-text">第 29 / 40 页</div>
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <div class="admin-header-left">
+                <div class="admin-logo">鼎铭</div>
+                <div class="admin-title">真实名单 - 后台档案库</div>
+            </div>
+            <div class="admin-header-right">
+                <button class="admin-logout-btn" onclick="App.navigateTo('admin_dashboard.html');">返回</button>
+            </div>
+        </div>
+
+        <div class="admin-main" style="padding: 20px; background: #0a0a0a;">
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <div class="admin-card-title">对象清单 - 批次统计</div>
+                </div>
+                <div class="admin-card-content">
+                    <table style="width: 100%; border-collapse: collapse; font-family: 'Courier New', monospace; color: #00ff00;">
+                        <thead>
+                            <tr style="background: #1a1a1a; border-bottom: 2px solid #333;">
+                                <th style="padding: 12px; text-align: left; border-right: 1px solid #333;">姓名</th>
+                                <th style="padding: 12px; text-align: left; border-right: 1px solid #333;">批次</th>
+                                <th style="padding: 12px; text-align: left; border-right: 1px solid #333;">当前状态</th>
+                                <th style="padding: 12px; text-align: left;">备注</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #222; background: rgba(0, 255, 0, 0.02);">
+                                <td style="padding: 12px; border-right: 1px solid #333;">赵宇</td>
+                                <td style="padding: 12px; border-right: 1px solid #333;">Batch-04</td>
+                                <td style="padding: 12px; border-right: 1px solid #333; color: #ff7a45;">已作为饲料消耗</td>
+                                <td style="padding: 12px;">情绪稳定</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #222; background: rgba(0, 255, 0, 0.01);">
+                                <td style="padding: 12px; border-right: 1px solid #333;">王强</td>
+                                <td style="padding: 12px; border-right: 1px solid #333;">Batch-04</td>
+                                <td style="padding: 12px; border-right: 1px solid #333; color: #d9534f;">肉体转化中</td>
+                                <td style="padding: 12px;">不建议接触</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #222; background: rgba(0, 255, 0, 0.02);">
+                                <td style="padding: 12px; border-right: 1px solid #333;">李媛</td>
+                                <td style="padding: 12px; border-right: 1px solid #333;">Batch-03</td>
+                                <td style="padding: 12px; border-right: 1px solid #333; color: #5cb85c;">皮囊维护中</td>
+                                <td style="padding: 12px;">可继续前台使用</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #222; background: rgba(0, 255, 0, 0.01);">
+                                <td style="padding: 12px; border-right: 1px solid #333;">当前交接人</td>
+                                <td style="padding: 12px; border-right: 1px solid #333;">Batch-05</td>
+                                <td style="padding: 12px; border-right: 1px solid #333; color: #ff9800;">待收割</td>
+                                <td style="padding: 12px;">焦虑指数优秀</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="admin-card" style="margin-top: 20px;">
+                <div class="admin-card-header">
+                    <div class="admin-card-title">档案须知</div>
+                </div>
+                <div class="admin-card-content">
+                    <div style="color: #999; font-size: 12px; line-height: 1.6;">
+                        <p>员工编号仅用于前台识别，后台请使用批次状态。</p>
+                        <p>交接流程本质为驯化流程的一部分。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('adminLoggedIn') !== 'true') {
+                window.location.href = 'admin_login.html';
+                return;
+            }
+
+            // 密码验证
+            if (localStorage.getItem('rosterPasswordVerified') !== 'true') {
+                alert('访问被拒：未提供有效的档案库密码');
+                window.location.href = 'admin_dashboard.html';
+                return;
+            }
+
+            Puzzle.recordVisit('p29');
+        });
+    </script>
+</body>
+</html>

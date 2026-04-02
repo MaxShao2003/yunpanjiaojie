@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>audio.wav</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        body { background: #000; }
+        .audio-container { max-width: 800px; margin: 40px auto; }
+        .audio-viewer { background: #1a1a1a; border: 2px solid #d9534f; border-radius: 4px; overflow: hidden; box-shadow: 0 0 20px rgba(217, 83, 79, 0.3); }
+        .audio-toolbar { background: #2a2a2a; padding: 12px 16px; border-bottom: 1px solid #333; font-size: 13px; color: #d9534f; }
+        .audio-player { padding: 30px 20px; background: linear-gradient(135deg, #1a1a1a 0%, #222 100%); }
+        .player-title { font-size: 16px; font-weight: 600; color: #ccc; margin-bottom: 20px; }
+        .player-info { background: #0a0a0a; border: 1px solid #333; border-radius: 4px; padding: 16px; margin-bottom: 20px; }
+        .info-label { font-size: 12px; color: #666; margin-bottom: 4px; }
+        .info-value { font-size: 13px; color: #999; font-family: "Courier New", monospace; }
+        .waveform { background: #0a0a0a; border: 1px solid #333; height: 60px; border-radius: 4px; margin: 16px 0; display: flex; align-items: center; justify-content: space-around; padding: 10px; }
+        .wave-bar { width: 3px; background: linear-gradient(to top, #d9534f, #ff7a45); border-radius: 2px; }
+        .controls { display: flex; gap: 12px; margin: 16px 0; }
+        .play-btn { flex: 1; padding: 12px; background: #d9534f; color: #000; border: none; border-radius: 3px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .play-btn:hover { background: #ff7a45; }
+        .subtitles { background: #0a0a0a; border: 1px solid #333; border-radius: 4px; padding: 20px; margin-top: 20px; }
+        .subtitle-title { font-size: 13px; font-weight: 600; color: #d9534f; margin-bottom: 12px; }
+        .subtitle-line { font-size: 13px; color: #999; margin-bottom: 8px; font-family: "Courier New", monospace; line-height: 1.8; }
+        .subtitle-time { color: #666; margin-right: 12px; }
+        .subtitle-content { color: #ccc; }
+        .back-btn { display: inline-block; margin-bottom: 20px; }
+        .back-btn a { padding: 8px 16px; background: rgba(217, 83, 79, 0.2); border: 1px solid #d9534f; border-radius: 3px; color: #d9534f; font-size: 14px; cursor: pointer; }
+        .back-btn a:hover { background: #d9534f; color: #000; }
+        </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container" style="background: #0a0a0a;">
+        <div class="header" style="background: #1a1a1a; border-bottom: 2px solid #d9534f;">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0" style="color: #d9534f;">鼎铭</div>
+                <div class="header-title" style="color: #ccc;">音频文件</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info" style="color: #999;">系统用户</div>
+                <button class="logout-btn" style="background: rgba(217, 83, 79, 0.2); border: 1px solid #d9534f; color: #d9534f;" onclick="window.history.back()">返回</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper" style="background: #0a0a0a;">
+            <main class="main-content">
+                <div class="back-btn">
+                    <a href="home.html">返回前台系统</a>
+                </div>
+
+                <div class="audio-container">
+                    <div class="audio-viewer">
+                        <div class="audio-toolbar">
+                            audio.wav
+                        </div>
+
+                        <div class="audio-player">
+                            <div class="player-title">恢复的录音片段</div>
+
+                            <div class="player-info">
+                                <div class="info-label">文件状态</div>
+                                <div class="info-value">原始音频似乎受到了什么外界干扰，已经不可信了，仅保留部分字幕</div>
+                                <div class="info-label" style="margin-top: 12px;">恢复编号</div>
+                                <div class="info-value" style="font-weight: 600; color: #d9534f;">998</div>
+                            </div>
+
+                            <!-- 隐藏的音频元素 -->
+                            <audio id="audioPlayer" style="display: none;">
+                                <source src="../audio/recovered_fragment.mp3" type="audio/mpeg">
+                                你的浏览器不支持音频播放
+                            </audio>
+
+                            <div class="waveform" id="waveform">
+                                <div class="wave-bar" style="height: 40%;"></div>
+                                <div class="wave-bar" style="height: 60%;"></div>
+                                <div class="wave-bar" style="height: 80%;"></div>
+                                <div class="wave-bar" style="height: 50%;"></div>
+                                <div class="wave-bar" style="height: 70%;"></div>
+                            </div>
+
+                            <!-- 进度条 -->
+                            <div style="margin: 16px 0; background: #0a0a0a; border: 1px solid #333; border-radius: 4px; padding: 8px; display: none;" id="progressContainer">
+                                <div style="display: flex; gap: 12px; align-items: center;">
+                                    <span id="currentTime" style="color: #666; font-size: 12px; min-width: 40px;">00:00</span>
+                                    <div style="flex: 1; background: #333; height: 4px; border-radius: 2px; cursor: pointer;" id="progressBar">
+                                        <div id="progressFill" style="background: #d9534f; height: 100%; width: 0%; border-radius: 2px;"></div>
+                                    </div>
+                                    <span id="duration" style="color: #666; font-size: 12px; min-width: 40px;">00:00</span>
+                                </div>
+                            </div>
+
+                            <div class="controls">
+                                <button class="play-btn" id="playBtn">播放</button>
+                            </div>
+
+                            <div class="subtitles">
+                                <div class="subtitle-title">字幕轨道</div>
+                                <div class="subtitle-line"><span class="subtitle-time">[00:02]</span><span class="subtitle-content">持续电流声</span></div>
+                                <div class="subtitle-line"><span class="subtitle-time">[00:07]</span><span class="subtitle-content">赵宇：谁在外面？</span></div>
+                                <div class="subtitle-line"><span class="subtitle-time">[00:11]</span><span class="subtitle-content">赵宇：李姐？</span></div>
+                                <div class="subtitle-line"><span class="subtitle-time">[00:13]</span><span class="subtitle-content">赵宇：不对，你不是李姐……</span></div>
+                                <div class="subtitle-line"><span class="subtitle-time">[00:16]</span><span class="subtitle-content">门外传来拖拽声</span></div>
+                                <div class="subtitle-line"><span class="subtitle-time">[00:19]</span><span class="subtitle-content" style="color: #ff9999;">赵宇：别过来，别碰门！</span></div>
+                                <div class="subtitle-line"><span class="subtitle-time">[00:22]</span><span class="subtitle-content">尖锐噪声</span></div>
+                                <div class="subtitle-line"><span class="subtitle-time">[00:29]</span><span class="subtitle-content" style="color: #d9534f;">录音中断</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        const playBtn = document.getElementById('playBtn');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const waveform = document.getElementById('waveform');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const progressContainer = document.getElementById('progressContainer');
+
+        // 格式化时间为 mm:ss
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '00:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        // 音频元数据加载
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            durationEl.textContent = formatTime(audioPlayer.duration);
+            // 显示进度条（如果音频成功加载）
+            if (audioPlayer.duration > 0) {
+                progressContainer.style.display = 'block';
+            }
+        });
+
+        // 播放/暂停按钮
+        playBtn.addEventListener('click', () => {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playBtn.textContent = '暂停';
+                playBtn.style.background = '#ff7a45';
+                // 记录已播放音频
+                localStorage.setItem('playedAudioLog', 'true');
+            } else {
+                audioPlayer.pause();
+                playBtn.textContent = '播放';
+                playBtn.style.background = '#d9534f';
+            }
+        });
+
+        // 更新进度条
+        audioPlayer.addEventListener('timeupdate', () => {
+            const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+            progressFill.style.width = percent + '%';
+            currentTimeEl.textContent = formatTime(audioPlayer.currentTime);
+
+            // 波形动画
+            const bars = waveform.querySelectorAll('.wave-bar');
+            bars.forEach((bar, index) => {
+                const baseHeight = [40, 60, 80, 50, 70][index];
+                if (audioPlayer.paused) {
+                    bar.style.height = baseHeight + '%';
+                } else {
+                    const variation = Math.sin(audioPlayer.currentTime * 3 + index) * 10;
+                    bar.style.height = (baseHeight + variation) + '%';
+                }
+            });
+        });
+
+        // 点击进度条跳转
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            audioPlayer.currentTime = percent * audioPlayer.duration;
+        });
+
+        // 音频播放结束
+        audioPlayer.addEventListener('ended', () => {
+            playBtn.textContent = '播放';
+            playBtn.style.background = '#d9534f';
+        });
+
+        // 处理音频文件不存在的情况
+        audioPlayer.addEventListener('error', () => {
+            console.warn('音频文件未找到: ../audio/recovered_fragment.mp3');
+            playBtn.textContent = '▶ 文件未找到';
+            playBtn.disabled = true;
+            playBtn.style.opacity = '0.5';
+            playBtn.style.cursor = 'not-allowed';
+            // 显示提示information
+            const infoVal = document.querySelector('.info-value');
+            infoVal.textContent = '⚠️ 音频文件未找到，请确保文件已放在 audio/ 目录下';
+            infoVal.style.color = '#ff7a45';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p25');
+            Puzzle.recordClue('audio_log');
+
+            // 检查是否仅通过查看页面就算"查看了音频"（现在需要播放）
+            // 但为了满足前置条件，我们在加载时自动标记为已播放（或者等等，实际需要用户点击）
+            // 根据需求，应该是用户必须点击播放才能解锁654页面
+            // 所以这里不自动标记，而是在播放时标记
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>diary_02.txt</title>
+    <!-- 有些东西被隐藏了。不是被删除，只是被转移。指挥者知道位置。 -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .text-viewer { background: var(--white); max-width: 800px; margin: 0 auto; border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden; }
+        .text-toolbar { background: var(--gray-bg); padding: 12px 16px; border-bottom: 1px solid var(--border-color); font-size: 13px; }
+        .text-content { padding: 40px; color: #333; font-size: 14px; line-height: 2; font-family: "Georgia", serif; white-space: pre-wrap; word-wrap: break-word; }
+        .diary-date { font-size: 12px; color: var(--gray-light); margin-bottom: 20px; }
+        .diary-text { margin-bottom: 16px; }
+        .diary-warning { color: #d9534f; font-weight: 600; }
+        .next-button { display: inline-block; margin-top: 20px; padding: 12px 24px; background: var(--primary-blue); color: white; border: none; border-radius: 3px; font-size: 14px; font-weight: 600; cursor: pointer; }
+        .next-button:hover { background: #0052a3; }
+        .back-btn { display: inline-block; margin-bottom: 20px; }
+        .back-btn a { padding: 8px 16px; background: var(--gray-bg); border: 1px solid var(--border-color); border-radius: 3px; color: var(--primary-blue); font-size: 14px; cursor: pointer; }
+        .back-btn a:hover { background: var(--light-blue); }
+        </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">文件预览</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div class="back-btn">
+                    <a href="home.html">← 返回主界面</a>
+                </div>
+
+                <div class="text-viewer">
+                    <div class="text-toolbar">
+                        📝 diary_02.txt
+                    </div>
+
+                    <div class="text-content">
+<span class="diary-date">5月15日 03:14</span>
+
+<span class="diary-text">又加班到三点。</span>
+
+<span class="diary-text" style="color: #555;">我数了一遍...办公区只有五盏灯还亮着</span>
+
+
+<span class="diary-text" style="color: #666;">通风管里有咀嚼声，停一阵，响一阵，像牙齿在磨什么硬东西。</span>
+
+<span class="diary-text" style="color: #777;">我买的隔音海绵没用，贴完墙还是能听见。</span>
+
+<span class="diary-text" style="color: #888;">茶水间门口多了个黑色垃圾袋，一直在滴水，拖出很长一条印子。</span>
+
+<span class="diary-text" style="color: #aa5555;">我问保洁阿姨去哪了，前台说公司根本没有保洁。</span>
+
+<span class="diary-text" style="color: #bb7777;">可我明明见过一个人半夜拖地。</span>
+
+<span class="diary-text" style="color: #d9534f;">她没抬头。</span>
+
+<span class="diary-warning" style="color: #ff5555; font-size: 16px; letter-spacing: 2px;">地上是红的。</span>
+
+
+<span class="diary-text">回家时黑豆在窝里蜷缩成一团，好像能感受到什么。</span>
+
+<span class="diary-text">那声音像麻将洗牌的声音，咔咔咔，很快，没完没了。但没有人在打麻将。</span>
+
+                    </div>
+
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); color: #999; font-size: 12px; font-style: italic; line-height: 1.8;" class="text-content" style="padding: 20px 0;">
+<p style="margin: 0 0 10px 0;">[后记：重读这段日记时，我发现自己在描述什么。那不是比喻。]</p>
+<p style="margin: 0;">我不记得写过最后那句话。但笔迹...是我的。</p>
+<p style="margin: 0;">黑豆那天的举动...也许不是偶然。它能感受到什么。</p>
+                    </div>
+
+                    <!-- 删除了继续按钮，玩家必须通过搜索来发现下一篇日记 -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p22');
+            Puzzle.recordClue('diary_02');
+            localStorage.setItem('readDiary2', 'true');
+        });
+    </script>
+</body>
+</html>

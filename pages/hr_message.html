@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内网消息 - HR 李姐</title>
+    <link rel="stylesheet" href="../styles/admin.css">
+    <style>
+        .message-box {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .message {
+            padding: 12px 16px;
+            border-radius: 4px;
+            background: rgba(217, 83, 79, 0.1);
+            border-left: 3px solid #d9534f;
+            color: #fff;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .message-sender {
+            font-weight: bold;
+            color: #d9534f;
+            margin-bottom: 4px;
+        }
+
+        .message-content {
+            color: #ddd;
+        }
+    </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body style="background: #0a0a0a;">
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+    <div class="progress-text">第 34 / 40 页</div>
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <div class="admin-header-left">
+                <div class="admin-logo">鼎铭</div>
+                <div class="admin-title">内网消息 - HR 李姐</div>
+            </div>
+            <div class="admin-header-right">
+                <button class="admin-logout-btn" onclick="localStorage.removeItem('adminLoggedIn'); App.navigateTo('home.html');">离线</button>
+            </div>
+        </div>
+
+        <div class="admin-main" style="padding: 20px;">
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <div class="admin-card-title">消息记录</div>
+                </div>
+                <div class="admin-card-content">
+                    <div class="message-box">
+                        <div class="message">
+                            <div class="message-sender">李姐</div>
+                            <div class="message-content">小李，资料都看完了吗？</div>
+                        </div>
+
+                        <div class="message">
+                            <div class="message-sender">李姐</div>
+                            <div class="message-content">辛苦你啦，来我办公室一趟吧。</div>
+                        </div>
+
+                        <div class="message">
+                            <div class="message-sender">李姐</div>
+                            <div class="message-content">不用找路，我知道你现在在哪。</div>
+                        </div>
+
+                        <div class="message">
+                            <div class="message-sender">李姐</div>
+                            <div class="message-content">我看到你的屏幕了哦 :)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <button onclick="App.navigateTo('final_choice.html');" style="padding: 12px 24px; background: rgba(217, 83, 79, 0.2); border: 2px solid #d9534f; color: #d9534f; border-radius: 4px; cursor: pointer; font-size: 14px; width: 100%; transition: all 0.3s;">
+                    继续
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p34');
+        });
+    </script>
+</body>
+</html>

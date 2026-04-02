@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统警报</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            background: #d9534f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Courier New', monospace;
+            animation: redFlash 0.8s ease-in-out infinite;
+        }
+
+        @keyframes redFlash {
+            0%, 100% { background: #d9534f; }
+            50% { background: #c8403f; }
+        }
+
+
+        .alert-container {
+            text-align: center;
+            color: #fff;
+            z-index: 1000;
+        }
+
+        .alert-container h1 {
+            font-size: 48px;
+            line-height: 1.4;
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .alert-small {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 40px;
+        }
+
+        .warning-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: pulse 1.2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+    </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+
+
+    <div class="alert-container">
+        <div class="warning-icon">⚠️</div>
+        <h1>
+            检测到待收割对象发生自我认知异常<br>
+            清理程序已启动<br>
+            请对象停留原地，等待 HR 接管
+        </h1>
+        <div class="alert-small">本窗口不可关闭</div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        // 禁止关闭窗口
+        window.onbeforeunload = function() {
+            return false;
+        };
+
+        // 禁止后退
+        history.pushState(null, null, window.location.href);
+        window.onpopstate = function() {
+            history.pushState(null, null, window.location.href);
+        };
+
+        // 禁止通常的关闭方式
+        document.addEventListener('keydown', (e) => {
+            // F4, Alt+F4
+            if ((e.key === 'F4') || (e.altKey && e.key === 'F4')) {
+                e.preventDefault();
+            }
+            // Alt+左箭头（浏览器后退）
+            if (e.altKey && e.key === 'ArrowLeft') {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p33');
+
+            // 3-5秒后自动跳转
+            const delay = 3500 + Math.random() * 2000; // 3.5-5.5秒
+            setTimeout(() => {
+                window.location.href = 'hr_message.html';
+            }, delay);
+        });
+    </script>
+</body>
+</html>

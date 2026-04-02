@@ -1,0 +1,596 @@
+/* ========================================
+   《交接云盘》视觉主题系统 v2.0
+   ========================================
+
+   分四个叙事阶段的色系演进：
+   A. 前台企业阶段 (入职交接)
+   B. 项目资料阶段 (信息污染开始)
+   C. 私密备份阶段 (真相逼近)
+   D. 后台系统阶段 (工业化真相)
+   E. 结局阶段 (收束)
+
+   ======================================== */
+
+:root {
+    /* ========== 前台企业色系 (A 阶段) ========== */
+    /* 来源：正式、可信、克制、专业 */
+    --phase-a-primary: #4a90e2;        /* 清爽专业蓝 */
+    --phase-a-light: #e8f4fd;
+    --phase-a-accent: #5cb85c;         /* 绿色确认 */
+    --phase-a-warning: #ff7a45;        /* 橙色警告 */
+    --phase-a-bg: #f9f9f9;
+
+    /* ========== 项目资料色系 (B 阶段) ========== */
+    /* 来源：设计更精细、开始显现材料库的冷感 */
+    --phase-b-primary: #466b99;        /* 稍深的蓝，更工业 */
+    --phase-b-light: #e0e8f5;
+    --phase-b-accent: #d4b859;         /* 金色质感 - 媒资/素材库 */
+    --phase-b-warning: #d97706;        /* 更深的橙，更紧张 */
+    --phase-b-bg: #f0f2f7;
+
+    /* ========== 私密备份色系 (C 阶段) ========== */
+    /* 来源：更压抑、孤立、像离线备份、缓存 */
+    --phase-c-primary: #5a6b7f;        /* 灰蓝，冷 */
+    --phase-c-light: #d8dce5;
+    --phase-c-accent: #c4814a;         /* 褐色，旧纸感 */
+    --phase-c-warning: #c41e3a;        /* 深红，危险 */
+    --phase-c-bg: #e8e8e8;
+
+    /* ========== 后台工业色系 (D 阶段) ========== */
+    /* 来源：暗红、石墨灰、监控感、批次化 */
+    --phase-d-primary: #8b3a3a;        /* 暗红，血这一般的工业色 */
+    --phase-d-light: #2d2d30;
+    --phase-d-accent: #3d3d40;         /* 石墨灰 */
+    --phase-d-bg: #1a1a1a;
+    --phase-d-border: #404040;
+    --phase-d-warning: #ff4444;        /* 警报红 */
+    --phase-d-success: #00aa44;        /* 冷绿 */
+
+    /* ========== 结局色系 (E 阶段) ========== */
+    /* 根据结局不同而变化，此处为虚拟基准 */
+    --phase-e-primary: #2a2a2a;
+    --phase-e-light: #1a1a1a;
+    --phase-e-accent: #666666;
+    --phase-e-bg: #0d0d0d;
+
+    /* ========== 通用文本和边界 ========== */
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --text-tertiary: #999999;
+    --border-subtle: #ddd;
+    --border-solid: #b3b3b3;
+
+    /* ========== 标签色 ========== */
+    --tag-info: #e8f4fd;
+    --tag-info-text: #0066cc;
+    --tag-warning: #fff3cd;
+    --tag-warning-text: #ff7a45;
+    --tag-success: #d4edda;
+    --tag-success-text: #155724;
+    --tag-danger: #f8d7da;
+    --tag-danger-text: #721c24;
+
+    /* ========== 页面特殊标记 ========== */
+    --anomaly-border: #d97706;         /* 异常页面边框 */
+    --anomaly-glow: rgba(217, 119, 6, 0.1);
+    --timestamp-error: #c41e3a;        /* 时间戳异常 */
+    --text-corruption: #5a6b7f;        /* 损坏文本 */
+}
+
+/* ========================================
+   排版层级系统
+   ======================================== */
+
+/* 标题层级 */
+.heading-1 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+}
+
+.heading-2 {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.heading-3 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.heading-4 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.heading-5 {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+/* 正文层级 */
+.text-body-lg {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-primary);
+}
+
+.text-body {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.text-body-sm {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+
+/* 批注和辅助文本 */
+.text-caption {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text-tertiary);
+}
+
+.text-meta {
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--text-tertiary);
+}
+
+/* ========================================
+   文件类型图标与样式
+   ======================================== */
+
+/* 文件夹 */
+.file-type-folder {
+    color: var(--phase-a-primary);
+}
+
+.file-type-folder-admin {
+    color: var(--phase-d-primary);
+}
+
+/* 文档类型 */
+.file-type-pdf {
+    color: #d9534f;
+}
+
+.file-type-txt {
+    color: var(--text-secondary);
+}
+
+.file-type-doc {
+    color: #0066cc;
+}
+
+.file-type-excel {
+    color: #107c10;
+}
+
+/* 媒体类型 */
+.file-type-image {
+    color: #ff7a45;
+}
+
+.file-type-audio {
+    color: #8934ba;
+}
+
+.file-type-video {
+    color: #d97706;
+}
+
+/* 系统文件 */
+.file-type-system {
+    color: var(--phase-d-primary);
+}
+
+.file-type-log {
+    color: var(--text-tertiary);
+}
+
+/* ========================================
+   容器与面板质感
+   ======================================== */
+
+/* 前台面板 (A/B 阶段) */
+.panel-frontend {
+    background: white;
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.panel-frontend:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-color: var(--phase-a-primary);
+}
+
+/* 后台面板 (D 阶段) */
+.panel-admin {
+    background: #252526;
+    border: 1px solid var(--phase-d-border);
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.panel-admin:hover {
+    border-color: var(--phase-d-primary);
+    box-shadow: 0 0 12px rgba(139, 58, 58, 0.2);
+}
+
+/* 异常页面面板 */
+.panel-anomaly {
+    background: #faf8f3;
+    border: 2px dashed var(--anomaly-border);
+    border-radius: 4px;
+    padding: 16px;
+    background: linear-gradient(135deg, #faf8f3 0%, rgba(217, 119, 6, 0.02) 100%);
+}
+
+/* ========================================
+   互动与微交互
+   ======================================== */
+
+/* 前台按钮 */
+.btn-frontend {
+    padding: 10px 20px;
+    background: var(--phase-a-primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-frontend:hover {
+    background: #0052a3;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.btn-frontend:active {
+    transform: scale(0.98);
+}
+
+/* 后台按钮 */
+.btn-admin {
+    padding: 8px 16px;
+    background: var(--phase-d-primary);
+    color: #ffffff;
+    border: 1px solid #5a5a5a;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-admin:hover {
+    background: #a04747;
+    border-color: var(--phase-d-primary);
+    box-shadow: 0 0 8px rgba(139, 58, 58, 0.4);
+}
+
+/* 警报按钮 */
+.btn-alert {
+    animation: pulse-alert 2s infinite;
+}
+
+@keyframes pulse-alert {
+    0%, 100% {
+        box-shadow: 0 0 8px rgba(255, 68, 68, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 16px rgba(255, 68, 68, 0.6);
+    }
+}
+
+/* 链接与文本交互 */
+.link-frontend {
+    color: var(--phase-a-primary);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.link-frontend:hover {
+    color: #0052a3;
+    text-decoration: underline;
+}
+
+.link-admin {
+    color: var(--phase-d-primary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.link-admin:hover {
+    color: var(--phase-d-warning);
+    text-decoration: underline;
+}
+
+/* ========================================
+   异常与压迫感设计
+   ======================================== */
+
+/* 时间戳异常 */
+.timestamp-anomaly {
+    color: var(--timestamp-error);
+    text-decoration: line-through;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+}
+
+/* 文本损坏 */
+.text-corrupted {
+    color: var(--text-corruption);
+    background: linear-gradient(90deg,
+        rgba(90, 107, 127, 0) 0%,
+        rgba(90, 107, 127, 0.1) 50%,
+        rgba(90, 107, 127, 0) 100%);
+    letter-spacing: 2px;
+}
+
+/* 越权提示 */
+.access-violation {
+    border-left: 4px solid var(--phase-d-warning);
+    background: rgba(255, 68, 68, 0.05);
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 3px;
+}
+
+/* 倒计时 */
+.countdown-timer {
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    letter-spacing: 2px;
+    animation: countdown-pulse 1s infinite;
+    color: var(--phase-d-warning);
+}
+
+@keyframes countdown-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* ========================================
+   状态与标签
+   ======================================== */
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-active {
+    background: rgba(92, 184, 92, 0.15);
+    color: #5cb85c;
+}
+
+.status-locked {
+    background: rgba(217, 119, 6, 0.15);
+    color: #ff7a45;
+}
+
+.status-error {
+    background: rgba(196, 30, 58, 0.15);
+    color: var(--phase-c-warning);
+}
+
+.status-system {
+    background: rgba(139, 58, 58, 0.15);
+    color: var(--phase-d-primary);
+}
+
+.status-new {
+    background: rgba(74, 144, 226, 0.15);
+    color: var(--phase-a-primary);
+}
+
+/* ========================================
+   表格与数据展示
+   ======================================== */
+
+.table-header {
+    background: var(--phase-a-light);
+    border-bottom: 2px solid var(--phase-a-primary);
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table-row:hover {
+    background: rgba(74, 144, 226, 0.05);
+    transition: background 0.2s ease;
+}
+
+.table-row-anomaly:hover {
+    background: rgba(217, 119, 6, 0.08);
+}
+
+.table-cell {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 13px;
+}
+
+/* ========================================
+   表单与输入
+   ======================================== */
+
+.form-input {
+    padding: 10px 12px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: white;
+    color: var(--text-primary);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--phase-a-primary);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.form-input:disabled {
+    background: var(--phase-a-light);
+    color: var(--text-tertiary);
+    cursor: not-allowed;
+}
+
+.form-input-error {
+    border-color: var(--phase-c-warning);
+    box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
+}
+
+/* ========================================
+   滚动条美化
+   ======================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--phase-a-light);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--phase-a-primary);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0052a3;
+}
+
+/* 后台滚动条 */
+body[data-page-type="admin"] ::-webkit-scrollbar-track {
+    background: #2d2d30;
+}
+
+body[data-page-type="admin"] ::-webkit-scrollbar-thumb {
+    background: var(--phase-d-primary);
+}
+
+body[data-page-type="admin"] ::-webkit-scrollbar-thumb:hover {
+    background: var(--phase-d-warning);
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+
+@media (max-width: 768px) {
+    .heading-1 {
+        font-size: 22px;
+    }
+
+    .heading-2 {
+        font-size: 18px;
+    }
+
+    .heading-3 {
+        font-size: 16px;
+    }
+
+    .text-body-lg {
+        font-size: 15px;
+    }
+
+    .text-body {
+        font-size: 13px;
+    }
+}
+
+/* ========== 手机竖屏额外优化 ========== */
+@media (max-width: 479px) {
+    .heading-1 {
+        font-size: 20px;
+        line-height: 1.3;
+    }
+
+    .heading-2 {
+        font-size: 16px;
+    }
+
+    .heading-3 {
+        font-size: 14px;
+    }
+
+    .heading-4 {
+        font-size: 13px;
+    }
+
+    .text-body-lg {
+        font-size: 14px;
+    }
+
+    .text-body {
+        font-size: 12px;
+    }
+
+    .text-body-sm {
+        font-size: 11px;
+    }
+
+    .text-caption {
+        font-size: 10px;
+    }
+
+    .text-meta {
+        font-size: 9px;
+    }
+}
+
+/* ========== 横屏优化 ========== */
+@media (orientation: landscape) and (max-height: 600px) {
+    .heading-1 {
+        font-size: 18px;
+    }
+
+    .heading-2 {
+        font-size: 16px;
+    }
+
+    .heading-3 {
+        font-size: 14px;
+    }
+
+    .text-body {
+        font-size: 12px;
+    }
+}

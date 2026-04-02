@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>员工手册（明文版）.pdf</title>
+    <!-- 一些系统单词往往包含特定的模式。这个制度很老，但仍在运作。 -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .pdf-viewer { background: var(--white); max-width: 900px; margin: 0 auto; }
+        .pdf-page { background: #fff; border: 1px solid var(--border-color); padding: 60px 50px; line-height: 1.8; color: #333; font-size: 15px; }
+        .pdf-title { text-align: center; font-size: 18px; font-weight: 600; margin-bottom: 30px; }
+        .pdf-content { margin-bottom: 20px; }
+        .pdf-content ol { margin-left: 20px; }
+        .pdf-content li { margin-bottom: 16px; line-height: 1.8; }
+        .item-redacted { background: #000; color: #000; padding: 4px 8px; border-radius: 2px; display: inline-block; min-width: 300px; font-weight: 600; }
+        .back-btn { display: inline-block; margin-bottom: 20px; }
+        .back-btn a { padding: 8px 16px; background: var(--gray-bg); border: 1px solid var(--border-color); border-radius: 3px; color: var(--primary-blue); font-size: 14px; cursor: pointer; }
+        .back-btn a:hover { background: var(--light-blue); }
+        .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--gray-light); font-size: 13px; }
+        </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">文件预览</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                    <li><a href="public_folder.html" class="nav-link"><span class="sidebar-icon">🔓</span> 公共资料</a></li>
+                    <li><a href="#" class="nav-link"><span class="sidebar-icon">🗑️</span> 回收站</a></li>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div class="back-btn" style="display: flex; gap: 12px; align-items: center;">
+                    <a href="public_folder.html">← 返回公共文件夹</a>
+                    <a href="javascript:void(0)" onclick="toggleHistoryPanel()" style="color: #999; font-size: 13px; padding: 8px 12px; background: transparent; border: 1px solid #ccc; border-radius: 3px; cursor: pointer;">📋 查看历史版本</a>
+                </div>
+
+                <!-- 历史版本侧面板 -->
+                <div id="historyPanel" style="display: none; position: fixed; right: 0; top: 60px; height: calc(100vh - 60px); width: 320px; background: #fff; border-left: 1px solid var(--border-color); box-shadow: -2px 0 8px rgba(0,0,0,0.08); z-index: 999; overflow-y: auto; padding: 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                        <h3 style="font-size: 14px; font-weight: 600; color: #333;">版本历史</h3>
+                        <button onclick="toggleHistoryPanel()" style="background: none; border: none; font-size: 16px; cursor: pointer; color: #999;">✕</button>
+                    </div>
+
+                    <div style="border: 1px solid #e8e8e8; border-radius: 3px; padding: 16px; background: #fafafa; margin-bottom: 12px;">
+                        <div style="font-size: 12px; font-weight: 600; color: #333; margin-bottom: 8px;">v3.2-public</div>
+                        <div style="font-size: 12px; color: #666; margin-bottom: 8px;">状态: <span style="color: var(--primary-blue); font-weight: 600;">当前公开版本</span></div>
+                        <div style="font-size: 12px; color: #999; margin-bottom: 12px;">修订时间: 2023-11-15</div>
+                        <div style="border-top: 1px solid #ddd; padding-top: 12px; font-size: 12px; color: #555; line-height: 1.6;">
+                            <strong style="color: #333;">修订摘要:</strong><br>
+                            夜间清理流程归档至内部版
+                        </div>
+                    </div>
+
+                    <div style="border: 1px solid #e8e8e8; border-radius: 3px; padding: 16px; background: #f5f5f5; opacity: 0.6;">
+                        <div style="font-size: 12px; font-weight: 600; color: #999; margin-bottom: 8px;">v3.1-internal</div>
+                        <div style="font-size: 12px; color: #999; margin-bottom: 8px;">状态: 归档</div>
+                        <div style="font-size: 12px; color: #999;">修订时间: 2023-10-28</div>
+                    </div>
+                </div>
+
+                <div class="pdf-viewer">
+                    <div class="pdf-page">
+                        <div class="pdf-title">鼎铭文化员工手册（公开版）</div>
+
+                        <div class="pdf-content">
+                            <ol>
+                                <li>员工应按时到岗，不得擅自迟到早退。</li>
+                                <li>茶水间设备使用后请及时断电并保持台面整洁。</li>
+                                <li>夜间值守期间，如需离岗请向直属主管报备。</li>
+                                <li>公司资料未经批准不得外传、删除或私自备份。</li>
+                                <li>如发现同事状态异常，请第一时间联系 HR，不建议私下处理。</li>
+                                <li>所有离职交接资料须于系统规定时间内验收完毕。</li>
+                                <li style="margin-bottom: 32px;">员工若因个人原因离职，所有个人用品应在一周内带离。</li>
+                                <li style="margin-bottom: 32px;">办公设备归还清单需由双方签字确认，不得有遗留。</li>
+                                <li style="margin-bottom: 32px;">公司对离职员工信息保留 30 日，供相关部门查阅。</li>
+                                <li style="margin-bottom: 32px;">员工在公司期间产生的所有数据归公司所有权。</li>
+                                <li style="margin-bottom: 32px;">未经管理层批准，不得私自录制或传播公司内部信息。</li>
+                                <li style="margin-bottom: 32px;">员工应配合公司定期的健康检查和状态评估。</li>
+                                <li style="margin-bottom: 32px;">违反上述条款将面临警告、罚款或直接开除处分。</li>
+                                
+                                <li style="position: relative;">
+                                    <span class="item-redacted" title="本条款已被涂黑，无法查看"></span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    公开版文件已由行政人事中心校对
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        function toggleHistoryPanel() {
+            const panel = document.getElementById('historyPanel');
+            if (panel.style.display === 'none') {
+                panel.style.display = 'block';
+                localStorage.setItem('viewedHandbookHistory', 'true');
+            } else {
+                panel.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            Puzzle.recordVisit('p08');
+            localStorage.setItem('viewedEmployeeHandbook', 'true');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>离岗交接列表 - 人事系统</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        body {
+            background: #f5f5f5;
+        }
+
+        .hr-header {
+            background: #333;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hr-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hr-header-title {
+            font-size: 14px;
+            color: #ddd;
+        }
+
+        .hr-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #4a90e2;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .hr-card {
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .hr-card-header {
+            padding: 16px;
+            border-bottom: 1px solid #e8e8e8;
+            background: #fafafa;
+        }
+
+        .hr-card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+
+        .hr-card-body {
+            padding: 16px;
+            overflow-x: auto;
+        }
+
+        .handover-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .handover-table thead {
+            background: #f9f9f9;
+        }
+
+        .handover-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .handover-table td {
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #666;
+        }
+
+        .handover-table tbody tr:hover {
+            background: #f9f9f9;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-processing {
+            background: #fff8e1;
+            color: #f57c00;
+        }
+
+        .status-completed {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .remark-text {
+            font-size: 12px;
+            color: #666;
+            font-family: 'Courier New', monospace;
+            padding: 3px 6px;
+            background: #f5f5f5;
+            border-radius: 2px;
+        }
+
+        .hr-notice {
+            background: #e3f2fd;
+            border-left: 3px solid #2196f3;
+            padding: 12px;
+            border-radius: 2px;
+            margin-bottom: 16px;
+            font-size: 12px;
+            color: #1565c0;
+        }
+
+        .hr-logout-btn {
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .hr-logout-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+    <div class="hr-header">
+        <div class="hr-header-content">
+            <div class="hr-header-title">离岗交接列表</div>
+            <button class="hr-logout-btn" onclick="App.logout()">退出</button>
+        </div>
+    </div>
+
+    <div class="hr-container">
+        <a href="hr_console.html" class="back-link">← 返回工作台</a>
+
+        <div class="hr-card">
+            <div class="hr-card-header">
+                <h2 class="hr-card-title">待处理离岗名单</h2>
+            </div>
+            <div class="hr-card-body">
+                <div class="hr-notice">
+                    ℹ️ 显示本月待处理的员工离岗交接记录
+                </div>
+
+                <table class="handover-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 12%;">姓名</th>
+                            <th style="width: 12%;">工号</th>
+                            <th style="width: 15%;">部门</th>
+                            <th style="width: 18%;">交接类型</th>
+                            <th style="width: 12%;">处理人</th>
+                            <th style="width: 15%;">当前状态</th>
+                            <th style="width: 16%;">备注</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>赵宇</td>
+                            <td>DM-8975</td>
+                            <td>后期剪辑</td>
+                            <td>资料归档</td>
+                            <td>李姐</td>
+                            <td><span class="status-badge status-processing">处理中</span></td>
+                            <td><span class="remark-text">个人备份：统一口径加密</span></td>
+                        </tr>
+                        <tr>
+                            <td>王强</td>
+                            <td>DM-9012</td>
+                            <td>摄影执行</td>
+                            <td>资料销毁</td>
+                            <td>李姐</td>
+                            <td><span class="status-badge status-completed">已完成</span></td>
+                            <td>无特殊要求</td>
+                        </tr>
+                        <tr>
+                            <td>陈默</td>
+                            <td>IT-000</td>
+                            <td>系统维护</td>
+                            <td>权限注销</td>
+                            <td>李姐</td>
+                            <td><span class="status-badge status-completed">已完成</span></td>
+                            <td>终端access已清空</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('liJieSessionUnlocked') !== 'true') {
+                App.navigateTo('login.html');
+                return;
+            }
+
+            localStorage.setItem('viewedHrQueue', 'true');
+            Puzzle.recordVisit('p_hr_queue');
+        });
+    </script>
+</body>
+</html>

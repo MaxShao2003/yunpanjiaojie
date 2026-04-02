@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>/private_zy - 赵宇私密文件夹</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        .folder-info { background: #f0f0f0; padding: 16px; border-radius: 4px; margin-bottom: 20px; font-size: 13px; color: var(--gray-dark); line-height: 1.8; }
+    </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo" data-version="v1.0">鼎铭</div>
+                <div class="header-title">赵宇私密文件夹</div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">新员工</div>
+                <button class="logout-btn" onclick="App.navigateTo('login.html')">登出</button>
+            </div>
+        </div>
+
+        <div class="main-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <li><a href="home.html" class="nav-link"><span class="sidebar-icon">📁</span> 我的文件</a></li>
+                    <li><a href="#" class="nav-link"><span class="sidebar-icon">🗑️</span> 回收站</a></li>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <div style="display: inline-block; margin-bottom: 20px;">
+                    <a href="home.html" style="padding: 8px 16px; background: var(--gray-bg); border: 1px solid var(--border-color); border-radius: 3px; color: var(--primary-blue); font-size: 14px; text-decoration: none;">← 返回主界面</a>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">私密文件夹 /private_zy</div>
+                    </div>
+                    <div class="card-content">
+                        <p style="color: var(--gray-light); font-size: 14px; margin-bottom: 12px;">此文件夹已解密，包含赵宇的离线备份。</p>
+                    </div>
+                </div>
+
+                <div class="file-list">
+                    <div class="file-item" style="cursor: pointer;" id="diaryFileItem">
+                        <div class="file-icon">📝</div>
+                        <div class="file-info">
+                            <div class="file-name">最后备份_赵宇.txt</div>
+                            <div class="file-meta">最后一次同步备份</div>
+                        </div>
+                        <div class="file-action">
+                            <span class="tag tag-gray">备份</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 二次解锁对话框 -->
+                <div id="secondUnlockModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+                    <div style="background: white; border-radius: 6px; padding: 30px; max-width: 400px; width: 90%; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
+                        <div style="font-size: 18px; font-weight: 600; color: #333; margin-bottom: 12px;">归档口令</div>
+                        <div style="font-size: 13px; color: #666; margin-bottom: 20px; line-height: 1.6;">
+                            该备份文件受额外保护。<br>
+                            请输入归档口令以继续访问。
+                        </div>
+                        <input type="password" id="secondUnlockPassword" placeholder="请输入口令" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 3px; font-size: 14px; box-sizing: border-box; margin-bottom: 12px;">
+                        <div id="secondUnlockError" style="color: #c41e3a; font-size: 12px; margin-bottom: 12px; display: none;">口令错误</div>
+                        <div style="display: flex; gap: 10px;">
+                            <button onclick="document.getElementById('secondUnlockModal').style.display = 'none'; document.getElementById('secondUnlockPassword').value = '';" style="flex: 1; padding: 10px; background: #f0f0f0; border: 1px solid #ddd; border-radius: 3px; color: #333; font-size: 13px; cursor: pointer;">取消</button>
+                            <button onclick="verifySecondUnlock()" style="flex: 1; padding: 10px; background: #4a90e2; border: none; border-radius: 3px; color: white; font-size: 13px; font-weight: 600; cursor: pointer;">验证</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="folder-info">
+                    <strong>文件夹说明：</strong><br>
+                    其余记录未能完成同步，当前仅保留最后一次备份。
+                </div>
+
+                <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--gray-light); font-size: 13px;">
+                    已加密访问 · 权限验证完成
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Puzzle.recordVisit('p19_unlocked');
+            localStorage.setItem('privateUnlocked', 'true');
+
+            // 点击日记文件时显示二次解锁对话框
+            document.getElementById('diaryFileItem').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('secondUnlockModal').style.display = 'flex';
+                document.getElementById('secondUnlockPassword').focus();
+            });
+
+            // 回车键验证
+            document.getElementById('secondUnlockPassword').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    verifySecondUnlock();
+                }
+            });
+        });
+
+        function verifySecondUnlock() {
+            const password = document.getElementById('secondUnlockPassword').value.trim();
+            const errorMsg = document.getElementById('secondUnlockError');
+            const correctPassword = 'huilaojia';
+
+            if (password === correctPassword) {
+                errorMsg.style.display = 'none';
+                localStorage.setItem('unlockedDiary3File', 'true');
+                localStorage.setItem('readDiary3', 'true');
+                Puzzle.recordVisit('p35');
+                setTimeout(() => {
+                    App.navigateTo('diary_03.html');
+                }, 300);
+            } else {
+                errorMsg.style.display = 'block';
+                document.getElementById('secondUnlockPassword').value = '';
+                document.getElementById('secondUnlockPassword').focus();
+            }
+        }
+    </script>
+</body>
+</html>

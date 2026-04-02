@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>未发送草稿 - 人事系统</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <style>
+        body {
+            background: #f5f5f5;
+        }
+
+        .hr-header {
+            background: #333;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hr-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hr-header-title {
+            font-size: 14px;
+            color: #ddd;
+        }
+
+        .hr-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #4a90e2;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .email-viewer {
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .email-header {
+            background: #fafafa;
+            padding: 16px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .email-field {
+            display: flex;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .email-label {
+            min-width: 80px;
+            font-weight: 600;
+            color: #333;
+            margin-right: 12px;
+        }
+
+        .email-value {
+            color: #666;
+            flex: 1;
+            word-break: break-all;
+        }
+
+        .email-body {
+            padding: 20px;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .email-status {
+            background: #fff3e0;
+            border-left: 3px solid #ff9800;
+            padding: 12px;
+            margin: 16px;
+            border-radius: 2px;
+            font-size: 13px;
+            color: #e65100;
+        }
+
+        .hr-logout-btn {
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .hr-logout-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+    <script src="../scripts/history.js"></script>
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+</head>
+<body>
+    <div class="hr-header">
+        <div class="hr-header-content">
+            <div class="hr-header-title">未发送草稿</div>
+            <button class="hr-logout-btn" onclick="App.logout()">退出</button>
+        </div>
+    </div>
+
+    <div class="hr-container">
+        <a href="hr_console.html" class="back-link">← 返回工作台</a>
+
+        <div class="email-viewer">
+            <div class="email-header">
+                <div class="email-field">
+                    <span class="email-label">发件人</span>
+                    <span class="email-value">李姐 (HR-014)</span>
+                </div>
+                <div class="email-field">
+                    <span class="email-label">收件人</span>
+                    <span class="email-value">赵宇</span>
+                </div>
+                <div class="email-field">
+                    <span class="email-label">主题</span>
+                    <span class="email-value">离岗说明模板（统一口径）</span>
+                </div>
+                <div class="email-field">
+                    <span class="email-label">保存时间</span>
+                    <span class="email-value">2024-03-14 23:47</span>
+                </div>
+            </div>
+
+            <div class="email-status">
+                📌 这是一份未发送的草稿。您可以编辑或删除。
+            </div>
+
+            <div class="email-body">亲爱的赵宇，
+
+感谢你在鼎铭文化的贡献。根据你的申请，现确认如下事项：
+
+你的离岗申请已批准。理由：回老家。
+
+离岗期间，你的工作已由团队妥善交接。所有个人物品和数据将按照公司规定进行整理归档。
+
+基于公司保密协议，请不要向外界透露任何工作相关的细节和内容。鼎铭文化对此有严格的保密要求和监督机制。
+
+如有疑问，欢迎咨询。
+
+此致敬礼
+李姐
+HR-014
+人事行政部</div>
+        </div>
+    </div>
+
+    <script src="../scripts/app.js"></script>
+    <script src="../scripts/puzzle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('liJieSessionUnlocked') !== 'true') {
+                App.navigateTo('login.html');
+                return;
+            }
+
+            localStorage.setItem('viewedHrDraft', 'true');
+            Puzzle.recordVisit('p_hr_draft');
+        });
+    </script>
+</body>
+</html>
