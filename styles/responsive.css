@@ -27,6 +27,18 @@
 
 /* ========== 横屏模式优化 ========== */
 @media (orientation: landscape) {
+    /* 横屏时确保主容器和内容区域充分扩展 */
+    .main-wrapper {
+        width: 100%;
+    }
+
+    .main-content {
+        width: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
     /* 横屏时限制表单宽度，不应该100% */
     input[type="text"],
     input[type="password"],
@@ -47,6 +59,21 @@
         width: auto !important;
         padding: 8px 20px !important;
         min-height: 40px !important;
+    }
+
+    /* 横屏时重置内容容器的max-width限制 */
+    .banner,
+    .content-section,
+    .card,
+    .panel-frontend,
+    .panel-admin,
+    .document-viewer,
+    .image-viewer,
+    .log-viewer,
+    .audio-player,
+    .text-viewer {
+        max-width: none !important;
+        width: 100% !important;
     }
 }
 
@@ -604,30 +631,18 @@
     }
 }
 
-/* ========== 桌面版本宽度优化 (1024px - 1440px) ========== */
-@media (min-width: 1024px) and (max-width: 1439px) {
-    .main-content {
-        max-width: 1000px;
-        margin: 0 auto;
-    }
-}
-
-/* ========== 大屏桌面优化 (1440px+) ========== */
-@media (min-width: 1440px) {
-    .container {
-        max-width: 1400px;
-    }
-
-    .main-content {
-        max-width: 1100px;
-        margin: 0 auto;
-    }
-
+/* ========== 桌面版本宽度优化 (1024px+) ========== */
+/* 注意：不限制 .main-content 的 max-width，让内容自然填充可用空间 */
+@media (min-width: 1024px) {
+    /* 内容查看器等特定组件可以有最大宽度限制，提高可读性 */
     .document-viewer,
     .image-viewer,
     .log-viewer,
-    .audio-player {
-        max-width: 1000px;
+    .audio-player,
+    .text-viewer {
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
